@@ -32,9 +32,36 @@
     </section>
     <button>Show more</button>
     <subscriptionForm>
-        <headerForm>With one click, you can order easily and conveniently</headerForm>
+        <heading2>You can order just in one click!</heading2>
+        <formList>
         <input placeholder="type your email address"/>
         <buttonForm>Send</buttonForm>
+        </formList>
     </subscriptionForm>
+
+    <footer>
+        <footerLogo>
+            <footerText>Grab</footerText>
+            <footerHighlight>&amp;go</footerHighlight>
+        </footerLogo>
+        <footerData>
+            <links>
+                <link><name>About us</name><url>#about</url></link>
+                <link><name>Contact us</name><url>#contact</url></link>
+                <link><name>Blog</name><url>#blog</url></link>
+                <link><name>FAQ</name><url>#faq</url></link>
+            </links>
+            <social>
+                <network><name>Facebook</name><url>https://facebook.com</url></network>
+                <network><name>Instagram</name><url>https://instagram.com</url></network>
+                <network><name>LinkedIn</name><url>https://linkedin.com</url></network>
+            </social>
+            <policies>
+                <policy><name>Terms and conditions</name><url>#terms</url></policy>
+                <policy><name>Privacy Policy</name><url>#privacy</url></policy>
+                <policy><name>Cookie Policy</name><url>#cookies</url></policy>
+            </policies>
+        </footerData>
+    </footer>
 </restaurants>
 

@@ -15,7 +15,7 @@
                     .navbar {
                     display: flex;
                     align-items: center;
-                    justify-content: space-between; /* Разпределя пространството между менюто и логото */
+                    justify-content: space-between;
                     background:#E6AF2E;
                     padding: 10px;
                     }
@@ -85,6 +85,7 @@
                     line-height: 31px;
                     cursor: pointer;
                     margin-top: 10px;
+                    margin: 10px 0 35px 0;
                     }
 
                     .subscription-form {
@@ -92,8 +93,9 @@
                     justify-content: center;
                     gap: 30px;
                     background: rgb(242, 217, 135);
-                    padding: 30px;
+                    padding: 70px;
                     }
+
 
                     input {
                     padding: 10px;
@@ -115,7 +117,49 @@
 
                     .buttonForm:hover {
                     background-color: #ff7700;
+                    color: black;
                     }
+
+                    .footer {
+                    padding: 20px;
+                    overflow: hidden;
+                    }
+
+                    .column {
+                    float: left;
+                    width: 30%;
+                    }
+
+                    .column h3 {
+                    font-size: 1.2em;
+                    margin-bottom: 10px;
+                    }
+
+                    .column ul {
+                    list-style-type: none;
+                    padding: 0;
+                    }
+
+                    .column li {
+                    margin-bottom: 5px;
+                    }
+
+                    .copyright {
+                    position: absolute;
+                    width: 190px;
+                    height: 31px;
+                    left: 625px;
+                    top: 983px;
+
+                    font-family: 'Alike';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 17px;
+                    line-height: 31px;
+
+                    color: #000000;
+                    }
+
 
 
                 </style>
@@ -153,16 +197,52 @@
                 <!-- Бутон -->
                 <button class="button"><xsl:value-of select="restaurants/button"/></button>
 
+                <!-- Емейл за бърза поръчка-->
                 <div class="subscription-form">
-                    <h1>
-                        <xsl:value-of select="subscriptionForm/headerForm" />
-                    </h1>
-                    <form>
-                        <input type="text" placeholder="{subscriptionForm/input/@placeholder}" />
-                        <buttonForm type="submit" class="buttonForm">
+                    <xsl:value-of select="subscriptionForm/heading2"/>
+                    <formList>
+                        <input type="text" placeholder="type your email address" />
+                        <buttonForm type="submit" class="buttonForm">Send
                             <xsl:value-of select="subscriptionForm/buttonForm" />
                         </buttonForm>
-                    </form>
+                    </formList>
+                </div>
+
+                <!-- фуутър -->
+                <div class="footer-logo">
+                    <xsl:value-of select="footer/footerLogo/footerText"/>
+                    <span><xsl:value-of select="footer/footerLogo/footerHighlight"/></span>
+                </div>
+
+                <!-- данни за фуутъра -->
+                <div class="footer">
+                    <div class="column">
+                        <h3>Useful links</h3>
+                        <ul>
+                            <xsl:for-each select="Footer/UsefulLinks/Link">
+                                <li><xsl:value-of select="."/></li>
+                            </xsl:for-each>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3>Follow us on:</h3>
+                        <ul>
+                            <xsl:for-each select="Footer/FollowUsOn/Link">
+                                <li><xsl:value-of select="."/></li>
+                            </xsl:for-each>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3>Policies</h3>
+                        <ul>
+                            <xsl:for-each select="Footer/Policies/Link">
+                                <li><xsl:value-of select="."/></li>
+                            </xsl:for-each>
+                        </ul>
+                    </div>
+                    <div class="copyright">
+                        <xsl:value-of select="Footer/Copyright"/>© 2025 Grab&amp;Go
+                    </div>
                 </div>
             </body>
         </html>
