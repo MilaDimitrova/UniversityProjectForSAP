@@ -14,22 +14,25 @@
     </nav>
     <title>Gash&amp;Go – Order Fast, Enjoy Faster!</title>
     <logoImage>
-        <name>Grab&amp;go</name>
+        <!--<name>Grab&amp;go</name>-->
         <title>Who We Are</title>
         <text>Grab&amp;Go – Your Ultimate Food Delivery Experience! At Grab&amp;Go, we bring your favorite meals right to your doorstep with just a few clicks. Whether you're craving local flavors or international cuisine, we’ve got you covered. Fast, reliable, and hassle-free – because good food should always be within reach. Order now and let us handle the rest!</text>
     </logoImage>
     <Stats>
-        <firstStats>
-            <name></name>
+        <allStats>
+            <firtsName>23K</firtsName>
+            <secondName>Food sales</secondName>
             <image></image>
-        </firstStats>
-        <secondStats>
-            <name></name>
+        </allStats>
+        <allStats>
+            <firtsName>10K</firtsName>
+            <secondName>Delivered food</secondName>
             <image></image>
-        </secondStats>
-        <thirdStats>
-            <name></name>
+        </allStats>
+        <allStats>
+            <firtsName>2K</firtsName>
+            <secondName>Happy customers</secondName>
             <image></image>
-        </thirdStats>
+        </allStats>
     </Stats>
 </aboutus>

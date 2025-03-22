@@ -84,9 +84,43 @@
                     font-size: 25px;
                     line-height: 31px;
                     }
+
+                    .container-first {
+                    display: flex;
+                    justify-content: center;
+                    gap: 20px;
+                    background: rgb(242, 217, 135);
+                    padding: 20px;
+                    }
+
+                    .container-second {
+                    display: flex;
+                    justify-content: center;
+                    gap: 20px;
+                    background: rgb(242, 217, 135);
+                    padding: 20px;
+                    }
+
+                    .container-third {
+                    display: flex;
+                    justify-content: center;
+                    gap: 20px;
+                    background: rgb(242, 217, 135);
+                    padding: 20px;
+                    }
+
+                    .stats{
+                    border: 1px solid rgb(242, 217, 135);
+                    padding: 10px;
+                    background: rgb(242, 217, 135);
+                    text-align: center;
+                    }
+
                 </style>
 
                 <body>
+
+                    <!-- navigation-->
                     <div class="navbar">
                         <div class="logo">
                             <xsl:value-of select="aboutus/logo/text"/>
@@ -103,9 +137,9 @@
                         <xsl:value-of select="aboutus/title"/>
                     </div>
 
+                    <!-- logo information -->
                     <div class="logoImage">
                         <img src="logo.png" alt="{name}"/>
-
                     </div>
                     <div class="logoTitle">
                         <xsl:value-of select="aboutus/logoImage/title"/>
@@ -113,6 +147,27 @@
                     <div class="logoText">
                         <xsl:value-of select="aboutus/logoImage/text"/>
                     </div>
+
+
+                    <!-- section for statistics-->
+                    <div class="container-first" select="aboutus/Stats/allStats">
+                            <div class="stats">
+                                <img src="salat.png" alt="{name}"/>
+                                <p><xsl:value-of select="name"/>23K</p>
+                                <p><xsl:value-of select="name"/>Food sales</p>
+                            </div>
+                            <div class="stats">
+                                <img src="airplane.png" alt="{name}"/>
+                                <p><xsl:value-of select="name"/>10K</p>
+                                <p><xsl:value-of select="name"/>Delivered food</p>
+                            </div>
+                            <div class="stats">
+                                <img src="plate.png" alt="{name}"/>
+                                <p><xsl:value-of select="name"/>2K</p>
+                                <p><xsl:value-of select="name"/>Happy customers</p>
+                             </div>
+                    </div>
+
                 </body>
             </head>
         </html>
