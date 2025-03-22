@@ -6,11 +6,11 @@
         <highlight>&amp;go</highlight>
     </logo>
     <nav>
-        <item>Home</item>
-        <item>Our restaurants</item>
-        <item>About us</item>
-        <item>Contacts</item>
-        <item>Profile</item>
+        <item link="newHomePage.xml">Home</item>
+        <item link="ourRestaurant.xml">Our restaurants</item>
+        <item link="aboutUs.xml">About us</item>
+        <item link="contactUs.xml">Contacts</item>
+        <item link="newHomePage.xml">Profile</item>
     </nav>
     <title>Grab it and go!</title>
     <section>
@@ -46,20 +46,20 @@
         </footerLogo>
         <footerData>
             <links>
-                <link><name>About us</name><url>#about</url></link>
-                <link><name>Contact us</name><url>#contact</url></link>
-                <link><name>Blog</name><url>#blog</url></link>
-                <link><name>FAQ</name><url>#faq</url></link>
+                <Link>About us</Link>
+                <Link>Contact us</Link>
+                <Link>Blog</Link>
+                <Link>Frequently asked questions</Link>
             </links>
             <social>
-                <network><name>Facebook</name><url>https://facebook.com</url></network>
-                <network><name>Instagram</name><url>https://instagram.com</url></network>
-                <network><name>LinkedIn</name><url>https://linkedin.com</url></network>
+                <Link>Facebook</Link>
+                <Link>Instagram</Link>
+                <Link>LinkedIn</Link>
             </social>
             <policies>
-                <policy><name>Terms and conditions</name><url>#terms</url></policy>
-                <policy><name>Privacy Policy</name><url>#privacy</url></policy>
-                <policy><name>Cookie Policy</name><url>#cookies</url></policy>
+                <Link>Terms and conditions</Link>
+                <Link>Privacy Policy</Link>
+                <Link>Cookie Policy</Link>
             </policies>
         </footerData>
     </footer>

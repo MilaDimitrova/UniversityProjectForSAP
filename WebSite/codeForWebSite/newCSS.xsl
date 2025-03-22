@@ -128,6 +128,7 @@
                     .column {
                     float: left;
                     width: 30%;
+                    color: white;
                     }
 
                     .column h3 {
@@ -142,21 +143,20 @@
 
                     .column li {
                     margin-bottom: 5px;
+                    color:black;
                     }
 
                     .copyright {
                     position: absolute;
                     width: 190px;
                     height: 31px;
-                    left: 625px;
+                    left: 925px;
                     top: 983px;
-
                     font-family: 'Alike';
                     font-style: normal;
                     font-weight: 400;
                     font-size: 17px;
                     line-height: 31px;
-
                     color: #000000;
                     }
 
@@ -173,7 +173,7 @@
                     </div>
                     <div class="menu">
                         <xsl:for-each select="restaurants/nav/item">
-                            <a href="#"><xsl:value-of select="."/></a>
+                            <a href="{@link}"><xsl:value-of select="."/></a>
                         </xsl:for-each>
                     </div>
                 </div>
@@ -219,30 +219,31 @@
                     <div class="column">
                         <h3>Useful links</h3>
                         <ul>
-                            <xsl:for-each select="Footer/UsefulLinks/Link">
+                            <xsl:for-each select="footer/footerData/links/Link">
+                                <li><a href="facebook.com"><xsl:value-of select="name"/>About us</a></li>
+                            </xsl:for-each>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3>Follow us on</h3>
+                        <ul>
+                            <xsl:for-each select="footer/footerData/social/Link">
                                 <li><xsl:value-of select="."/></li>
                             </xsl:for-each>
                         </ul>
                     </div>
                     <div class="column">
-                        <h3>Follow us on:</h3>
+                        <h3>Terms and conditions</h3>
                         <ul>
-                            <xsl:for-each select="Footer/FollowUsOn/Link">
-                                <li><xsl:value-of select="."/></li>
-                            </xsl:for-each>
-                        </ul>
-                    </div>
-                    <div class="column">
-                        <h3>Policies</h3>
-                        <ul>
-                            <xsl:for-each select="Footer/Policies/Link">
+                            <xsl:for-each select="footer/footerData/policies/Link">
                                 <li><xsl:value-of select="."/></li>
                             </xsl:for-each>
                         </ul>
                     </div>
                     <div class="copyright">
-                        <xsl:value-of select="Footer/Copyright"/>© 2025 Grab&amp;Go
+                        <xsl:value-of select="footer/footerData/Copyright"/>© 2025 Grab&amp;Go
                     </div>
+
                 </div>
             </body>
         </html>

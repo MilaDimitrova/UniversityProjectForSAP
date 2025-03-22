@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="contactUsCSS.xsl"?>
+<contactus>
+    <logo>
+        <text>Grab</text>
+        <highlight>&amp;go</highlight>
+    </logo>
+    <nav>
+        <item link="newHomePage.xml">Home</item>
+        <item link="ourRestaurant.xml">Our restaurants</item>
+        <item link="aboutUs.xml">About us</item>
+        <item link="contactUs.xml">Contacts</item>
+        <item link="newHomePage.xml">Profile</item>
+    </nav>
+</contactus>
