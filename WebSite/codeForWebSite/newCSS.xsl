@@ -195,7 +195,7 @@
                 </div>
 
                 <!-- Бутон -->
-                <button class="button"><xsl:value-of select="restaurants/button"/></button>
+                <button class="button"><a href="ourRestaurant.xml"><xsl:value-of select="restaurants/button"/></a></button>
 
                 <!-- Емейл за бърза поръчка-->
                 <div class="subscription-form">

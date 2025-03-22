@@ -12,4 +12,24 @@
         <item link="contactUs.xml">Contacts</item>
         <item link="newHomePage.xml">Profile</item>
     </nav>
+    <title>Gash&amp;Go – Order Fast, Enjoy Faster!</title>
+    <logoImage>
+        <name>Grab&amp;go</name>
+        <title>Who We Are</title>
+        <text>Grab&amp;Go – Your Ultimate Food Delivery Experience! At Grab&amp;Go, we bring your favorite meals right to your doorstep with just a few clicks. Whether you're craving local flavors or international cuisine, we’ve got you covered. Fast, reliable, and hassle-free – because good food should always be within reach. Order now and let us handle the rest!</text>
+    </logoImage>
+    <Stats>
+        <firstStats>
+            <name></name>
+            <image></image>
+        </firstStats>
+        <secondStats>
+            <name></name>
+            <image></image>
+        </secondStats>
+        <thirdStats>
+            <name></name>
+            <image></image>
+        </thirdStats>
+    </Stats>
 </aboutus>
