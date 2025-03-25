@@ -1,0 +1,241 @@
+/* Основни настройки за цялата страница */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #E6AF2E;
+    margin: 0;
+}
+
+/* Лого и навигационна лента */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Разделя логото и останалите елементи */
+    background: #E6AF2E;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    margin-left: 0; /* Премества логото до ръба на страницата */
+}
+
+.logo .highlight {
+    color: gray;
+}
+
+.logo .highlightSecond {
+    color: black;
+}
+
+/* Менюто в навигационната лента */
+nav {
+    background: #E6AF2E; /* Фон на менюто */
+    padding: 15px; /* Вътрешно отстояние */
+    border-radius: 10px; /* Заоблени краища */
+    display: flex;
+    gap: 20px;
+}
+
+nav ul {
+    display: flex; /* Подреждане в редица */
+    justify-content: center; /* Центриране на елементите */
+    gap: 30px; /* Разстояние между линковете */
+    list-style: none; /* Премахване на маркери */
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    position: relative; /* Нужно за ефекти */
+}
+
+nav ul li a {
+    text-decoration: none; /* Премахване на подчертаване */
+    font-size: 18px;
+    font-weight: bold;
+    color: black; /* Основен цвят на текста */
+    padding: 8px 15px; /* Вътрешно отстояние за по-добра зона на клик */
+    border-radius: 5px; /* Заоблени краища при hover */
+    transition: all 0.3s ease; /* Анимация за гладък ефект */
+}
+
+nav ul li a:hover {
+    background-color: #ffa500; /* Оранжев фон при hover */
+    color: white; /* Бял текст при hover */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Сянка при hover */
+}
+
+/* Ефект с underline (подчертаване при hover) */
+nav ul li::after {
+    content: "";
+    height: 0;
+    width: 0;
+    background: #E6AF2E;
+}
+
+nav ul li:hover::after {
+    width: 100%; /* Запълване на underline при hover */
+}
+
+/* Заглавие */
+main h1 {
+    font-family: 'Original Surfer', sans-serif;
+    font-size: 75px;
+    margin: 20px 0;
+    color: black;
+}
+
+/* Секция с ресторанти */
+section {
+    padding: 20px;
+    background-color: #E6AF2E;
+}
+
+section h2 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+section ul {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+section ul li {
+    border: 1px solid #f2d987;
+    background-color: #f2d987;
+    padding: 10px;
+    width: 300px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+section ul li img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+section button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ffa500;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+section button:hover {
+    background-color: #E6AF2E;
+}
+
+/* Абонаментна форма */
+.subscription {
+    margin: 20px auto;
+    padding: 40px;
+    background: #f2d987;
+    text-align: center;
+    border-radius: 8px;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.subscription input {
+    width: 80%;
+    max-width: 400px; /* Максимална ширина */
+    padding: 15px; /* Вътрешни отстояния за по-добър изглед */
+    margin-bottom: 10px;
+    border: 2px solid #ffa500; /* Ярко оранжева рамка */
+    border-radius: 8px; /* Заоблени краища */
+    font-size: 16px; /* По-голям шрифт за по-добра четимост */
+    color: #333; /* Тъмен цвят на текста */
+    background-color: #fff; /* Бял фон */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Лека сянка за елегантност */
+    transition: all 0.3s ease; /* Гладка анимация при фокус */
+}
+
+.subscription input:focus {
+    border-color: #ff7700; /* Промяна на цвета на рамката при фокус */
+    box-shadow: 0 0 8px rgba(255, 119, 0, 0.5); /* Подчертаващ ефект при фокус */
+    outline: none; /* Премахва стандартното очертание */
+}
+
+.subscription button {
+    padding: 15px 25px; /* Повече отстояние за по-голям бутон */
+    background-color: #ffa500; /* Основен ярък цвят */
+    border: none;
+    border-radius: 8px; /* Заоблени краища */
+    color: white; /* Бял текст */
+    font-size: 16px; /* По-голям шрифт */
+    font-weight: bold; /* Подчертаване на текста */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Анимация на натискане */
+}
+
+.subscription button:hover {
+    background-color: #ff7700; /* Промяна на цвета при задържане на мишката */
+    transform: scale(1.05); /* Лек ефект на уголемяване */
+}
+
+.subscription button:active {
+    transform: scale(0.95); /* Лек ефект на натискане */
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    padding: 20px;
+    text-align: left;
+}
+
+footer .footer-logo span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+footer .footer-logo .highlight {
+    color: gray;
+}
+
+footer .footer-logo .highlightSecond {
+    color: black;
+}
+
+footer .footer-data {
+    display: flex;
+    justify-content: center;
+    gap: 400px;
+    margin: 20px 0;
+}
+
+footer .footer-data ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer .footer-data ul li {
+    margin-bottom: 5px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #ffa500;
+}
+
+footer a:hover {
+    color: white;
+}
