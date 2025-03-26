@@ -47,20 +47,18 @@ section ul li img {
 }
 
 section button {
+    padding: 15px 25px;
     margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #ffa500;
+    background-color: #f2d987;
     border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
+    border-radius: 8px;
     color: white;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-section button:hover {
-    background-color: #E6AF2E;
-}
 
 /* Абонаментна форма */
 .subscription {
@@ -75,50 +73,50 @@ section button:hover {
 
 .subscription input {
     width: 80%;
-    max-width: 400px; /* Максимална ширина */
-    padding: 15px; /* Вътрешни отстояния за по-добър изглед */
+    max-width: 400px;
+    padding: 15px;
     margin-bottom: 10px;
-    border: 2px solid #ffa500; /* Ярко оранжева рамка */
-    border-radius: 8px; /* Заоблени краища */
-    font-size: 16px; /* По-голям шрифт за по-добра четимост */
-    color: #333; /* Тъмен цвят на текста */
-    background-color: #fff; /* Бял фон */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Лека сянка за елегантност */
-    transition: all 0.3s ease; /* Гладка анимация при фокус */
+    border: 2px solid #ffa500;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 .subscription input:focus {
-    border-color: #ff7700; /* Промяна на цвета на рамката при фокус */
-    box-shadow: 0 0 8px rgba(255, 119, 0, 0.5); /* Подчертаващ ефект при фокус */
-    outline: none; /* Премахва стандартното очертание */
+    border-color: #ff7700;
+    box-shadow: 0 0 8px rgba(255, 119, 0, 0.5);
+    outline: none;
 }
 
 .subscription button {
-    padding: 15px 25px; /* Повече отстояние за по-голям бутон */
-    background-color: #ffa500; /* Основен ярък цвят */
+    padding: 15px 25px;
+    background-color: #ffa500;
     border: none;
-    border-radius: 8px; /* Заоблени краища */
-    color: white; /* Бял текст */
-    font-size: 16px; /* По-голям шрифт */
-    font-weight: bold; /* Подчертаване на текста */
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Анимация на натискане */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .subscription button:hover {
-    background-color: #ff7700; /* Промяна на цвета при задържане на мишката */
-    transform: scale(1.05); /* Лек ефект на уголемяване */
+    background-color: #ff7700;
+    transform: scale(1.05);
 }
 
 .subscription button:active {
-    transform: scale(0.95); /* Лек ефект на натискане */
+    transform: scale(0.95);
 }
 
 /* Footer */
 footer {
     background: #333;
     color: white;
-    padding: 20px;
+    padding: 25px;
     text-align: left;
 }
 

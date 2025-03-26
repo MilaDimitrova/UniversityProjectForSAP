@@ -1,10 +1,10 @@
 @import url("mainCSS.css");
 
 nav ul li:hover::after {
-    width: 100%; /* Запълване на underline при hover */
+    width: 100%;
 }
 section {
-    padding: 20px;
+    padding: 70px;
     background-color: #E6AF2E;
 }
 
@@ -81,7 +81,7 @@ footer .footer-data {
     display: flex;
     justify-content: center;
     gap: 400px;
-    margin: 20px 0;
+    margin: 20px 0 100px;
 }
 
 footer .footer-data ul {
