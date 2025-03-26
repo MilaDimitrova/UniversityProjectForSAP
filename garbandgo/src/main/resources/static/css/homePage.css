@@ -1,4 +1,6 @@
 /* Заглавие */
+
+@import url("mainCSS.css");
 main h1 {
     font-family: 'Original Surfer', sans-serif;
     font-size: 75px;
