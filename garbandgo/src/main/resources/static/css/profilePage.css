@@ -1,2 +1,9 @@
 @import url("mainCSS.css");
 
+.login form{
+    position: absolute;
+    background-color: #f2d987;
+    padding: 120px;
+    margin: 0 5% 0 38%;
+}
+
