@@ -1,6 +1,5 @@
 @import url("mainCSS.css");
 
-
 .login form{
     position: absolute;
     background-color: #f2d987;
@@ -46,11 +45,20 @@ button{
     display: block;
 }
 
+label[for="fname"] {
+    margin-right: 205px;
+}
+
+label[for="lname"] {
+    margin-right: 205px;
+
+}
+
 label[for="email"] {
-    margin-right: 160px;
+    margin-right: 200px;
 }
 
 label[for="password"] {
-    margin-right: 200px;
+    margin-right: 205px;
 
 }

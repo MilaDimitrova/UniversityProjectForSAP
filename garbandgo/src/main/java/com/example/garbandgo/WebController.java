@@ -31,4 +31,8 @@ public class WebController {
         return "profilePage";
     }
 
+    @GetMapping("/registration")
+    public String registrationPage() {
+        return "registrationPage";
+    }
 }
