@@ -1,0 +1,64 @@
+@import url("mainCSS.css");
+
+.login form{
+    position: absolute;
+    background-color: #f2d987;
+    padding: 100px;
+    margin: 0 5% 0 38%;
+    border: 2px solid #f2d987;
+    border-radius: 25px;
+}
+.login h2{
+    text-align: center;
+    margin: 0px 0px 50px 0px;
+    font-family: 'Original Surfer';
+}
+
+.login input{
+    display: block;
+    width: 108%;
+    max-width: 450px;
+    padding: 10px;
+    border: 2px solid  #ffa500;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+button{
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ffa500;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.login button:hover {
+    background-color: #f8c237;
+}
+
+.login label{
+    margin-bottom: 5px;
+    display: block;
+}
+
+label[for="fname"] {
+    margin-right: 205px;
+}
+
+label[for="lname"] {
+    margin-right: 205px;
+
+}
+
+label[for="email"] {
+    margin-right: 200px;
+}
+
+label[for="password"] {
+    margin-right: 205px;
+
+}

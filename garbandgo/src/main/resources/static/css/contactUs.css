@@ -1,0 +1,133 @@
+@import url("mainCSS.css");
+
+h2{
+    font-family: 'Original Surfer', sans-serif;
+    font-size: 35px;
+    margin: 20px 0;
+    color: black;
+}
+
+form{
+    border: 1px solid #f2d987;
+    background-color: #f2d987;
+    padding: 80px;
+    width: 300px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 70px 40%;
+}
+
+label[for="fname"] {
+    margin-right: 200px;
+}
+
+label[for="lname"] {
+    margin-right: 210px;
+}
+
+label[for="email"] {
+    margin-right: 170px;
+}
+
+label[for="subject"] {
+    margin-right: 240px;
+
+}
+
+input{
+    display: block;
+    width: 108%;
+    max-width: 450px;
+    padding: 10px;
+    border: 2px solid  #ffa500;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+input[type=submit]{
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ffa500;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+
+}
+
+input[type=submit]:hover {
+    background-color: #f8c237;
+}
+
+label{
+    margin-bottom: 5px;
+    display: block;
+}
+
+textarea {
+    width: 100%;
+    max-width: 280px;
+    height: 200px;
+    padding: 10px 20px;
+    border: 2px solid  #ffa500;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+    resize: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+textarea:focus {
+    border-color:  #ffa500;
+    outline: none;
+    background-color: #eef9ff;
+}
+
+footer {
+    background: #333;
+    color: white;
+    padding: 20px;
+    text-align: left;
+}
+
+footer .footer-logo span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+footer .footer-logo .highlight {
+    color: gray;
+}
+
+footer .footer-logo .highlightSecond {
+    color: black;
+}
+
+footer .footer-data {
+    display: flex;
+    justify-content: center;
+    gap: 400px;
+    margin: 20px 0;
+}
+
+footer .footer-data ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer .footer-data ul li {
+    margin-bottom: 5px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #ffa500;
+}
+
+footer a:hover {
+    color: white;
+}

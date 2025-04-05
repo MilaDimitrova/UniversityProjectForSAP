@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/aboutUs.css}">
+    <title>About Us!</title>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/restaurants">Our restaurants</a></li>
+      <li><a href="/aboutUs">About us</a></li>
+      <li><a href="/contact">Contacts</a></li>
+      <li><a href="/profile">Profile</a></li>
+    </ul>
+  </nav>
+</header>
+<section>
+    <div class="container">
+      <div class="header">
+        <h1>Gash&Go – Order Fast, Enjoy Faster!</h1>
+      </div>
+      <div class="logoContainer">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8PEBIPDhAQEA8QEhIQEBAQEBAQEBARFREXGBURFRoYKCgiGBooHRYTITUhJSkrLi4wFx81ODMsOCgtMS0BCgoKDg0OGhAQGyslICYtLSs1LSsrKy0tLSstLy0rLS0tLy0tLS0tLTAtKzcrKy0tLS8tLS0tLS0tLS0tKy0tLf/AABEIAOEA4QMBEQACEQEDEQH/xAAcAAEAAgMBAQEAAAAAAAAAAAAAAQYEBQcDAgj/xABIEAACAQEEBAgKCAQEBwAAAAAAAQIDBBEhMQUGElETQWFxgZGSsRUWIjRSVIOhwdEHFzJTYmNy0iNCgsIUJKKzM0Nzk7Lh8f/EABoBAQACAwEAAAAAAAAAAAAAAAABBQIDBAb/xAA1EQEAAgEBAwoFBAICAwAAAAAAAQIDEQQSgQUTFCExM0FRUmEVcZGh0TKxwfAiQuHxIzRD/9oADAMBAAIRAxEAPwDuIGNbrfRoR2q04wXFe8XyJZvoNmPFfJOlI1YXvWka2lppa52NPB1Hyqnh7zrjk3N7fVo6XjR46WP83sL5k/Dc3t9TpmP3R462P83sL5j4bm9vqdMx+5462P8AN7C+Y+GZvb6nTMfueOtj/N7C+Y+GZvb6nTMfueOtj/N7C+Y+GZvb6nTMfueOtj/N7C+Y+GZvb6nTMfueOtj/ADewvmPhmb2+p0zH7njtY/zewvmPhmb2+p0zH7njtY/zewvmPhmb2+p0zH7vuz642Sc4wXCJzkopuCSvbuV+JFuTs1azadOpNdrxzOiwnA6QAAAAAAAAAAAAAAAAAxtI2yNClOtP7MIt3b3xRXO7l0mzFjnJeKR4sb3ilZtLlOkLdUtFR1arvk+qK4ox3I9PixVxV3aqa95vOssY2sACBoAQAQAAAQyQAc3WB1/Q1s4ez0q3HOCcuSSwkutM8pnx83ktTyld4r79IszDS2AAAAAAAAAAAAAAAACu6+SasjW+pBPmxfwR38mx/wCfhLl2vu3OT0KrABIBCAAACAABgQSDIQvn0d23ap1KDeNOSnH9Ms/ev9RR8q4tLxfz6vostivrWa+S3lU7gAAAAAAAAAAAAAAABW9fvNPaw7mWHJnfcJcu2d3xc6R6CFWkkAhAAABAAABAAkAhuNT7bwNspt4RqX0pf1Zf6lE4tux7+Cfbr+n/AA6Nmvu5I9+p1M80uAAAAAAAAAAAAAAAABW9fvNPaw7mWHJnfcJcu2d3xc6R6BVBIAAAACAAACCQCACE2nenc1inufEyJjzS7Fou1qvRp1l/PBSfJK7Fdd6PJ5sfN5Jp5SvMd9+sWZRqZgAAAAAAAAAAAAAAFb1+809rDuZYcmd9wly7Z3fFzpHoFUEgAAAQAAAAIJAIGBDISv8A9Hlt2qM6DzpS2o/pn/7UusouVMemSL+f7wstivrWa+S2lW7QAAAAAAAAAAAAAACt6/eae1h3MsOTO+4S5ds7vi50j0CqCQAAQAAAAIJAIAICQDO0JX2K0cblPyH05e9LrOLb8e/hn26/z9nRst93JHv1LvZKzeDz4nvPOytmbG8xS+1eQGIDEBiBGIDEBiBGIDED2o2mUeVbn8ANjCSaTWTA+gK3r/5p7WHcyw5M77hLl2zu+LnKPQKoJAAAA3GjdWrTXSlsqlB/zVL02uSOb6bkcWbb8OLq11n2/Lox7Lkv19ke7eUdS6S/4lapJ/gUYL33nBblW/8ArWOOs/h1RsNfGZes9TbM8qlZf1U3/aYxyrm8Yj7/AJTOxU85/vBrLbqbVjjRqRqfhkuDl0PFPpuOrFyrSeq8afLr/v3ab7FaP0zqrtos86UnCpGUJrOMlc+flXKWVL1vG9WdYcVqzWdJh5GaEBIEJUmmmsGsU9zWQmImNJInTrheLHVU4RmspRT5r1keTy0mlprPhOi9pberFo8Wzs1a/B58T3mpmykQJQACAAAABAAD5kBnaOlg1ufeBlgVvX/zT2sO5lhyZ33CXLtnd8XOUegVQSAEpX4JNt4JLFtvJIC86u6uRopVa6Uq2ai8Y0vnLl4uLeUG2bfOT/DH1V/f/j+ys9n2aKf5W7f2WIrXY8q9op01fUnCC/HKMb+szpjtf9MTPyhja1a9s6PGlpOzzd0a9GT3KpC/vM7bPlrGs1n6SxjLSey0fVlmlsaXWudmVD/MLak7+BUblU2t8XxLK95c+CO7YIzTk/8AHx8tPf8AhzbVOPc/z4ebnZ6RUgQAALLq1aL6bg84Sw/TLFe/aKLlPFu5Yt5x94/sLTYr603fJvYSKyXYzaFa/B9ZA90yBIEMAAAAQAAiQGXo3KXQBmgVvX/zT2sO5lhyZ33CXLtnd8XOUegVQSAFo1J0YpydpmsIPZpp+ndjLoTXS+QquU9o3YjFXx7fl5cf72u3Y8Ws78+C6FGslS1j1mcZOjZnc44Tq4O58cYfPq3lxsXJ8WiMmXhH5/Dg2japid2n1VGpNyblJuUnnKTcpPnbzLmIiI0jsV8zrOsvklDaaI09WsruT26f3U29lfpf8vRgcm0bHjzdc9U+cfz5t+HaL4+zrjyYVutlSvN1KstqT6ElxRiuJG/Firiru0jqa73ted6zHNjAAAQBsdBV9islxTTj05ruu6Th5Qx7+HXy6/y6dkvu5NPNbKcjz0rZkRZilmUavE+hkD2AMAAAgAAAiQGXo3KXQBmgVrX/AM09rDuZY8md9wly7Z3fFzlHoFUEgB0/Qdm4KzUYZNQUpfql5Uve2eU2rJzma1vf7R1LrDXdxxDw1lt7oWacou6crqcHxpyza5UlJ9Bs2LDGXNET2R1zwY7Tk3MczHb2Obnp1MAZ9DQtqqRU6dGUoSV8ZJwua6Wc99rw0tNbW0ni21wZLRrEPTxetnq8+1T+Zj03Z/XH3/DLo+X0/seL1t9Xn2qfzHTdn9cff8HR8vp/ZHi9bfV59qn8x07Z/XH3/COjZfT+zX1qcoScJrZlFuMk8007mjpraLREx2S1TExOkvMlAEPqE3FqSzTTXOneiLVi0TE+KYmYnWF2s1VSipLKSUl0q88pkpNLTWfDqX1bRaImGZA1snqjEYHjVZIylCc5bUW4v+HN4p3NZchluSw5yrIsesNlrVI0qc5Oc79lOnNLBNvFrcmJrMEXiZ0bUxZgEMAAAiQGXo3KXQBmgVrX/wA09rDuZY8md9wly7Z3fFzlHoFUEoRPJ8zEdqJ7HXY5YHjZehVjX1vgqO7hHfz7Du+Ja8k/rt8v5cO3fpj5qUXqtQEul6teaUP0f3M8vtv/ALF/mudn7qrZnK3AADmms6utle700+lwi372z1Gwzrs9Pl/MqXae9s1Z1NIEBKVm1cr7VLZ44NroeK+K6Cg5Sx7uXe8/37Fpsd9cenk3kCtdj2iQOY6Q/wCNV/6tX/ckbo7HLPa2WqUv87R55/7Uxf8ASmn6odLNDpAIAAAPmQGZo3KXQBmgVrX/AM09rDuZY8md9wly7Z3fFzlHoFUEoQwaOpaHtPC2elU45U43/qSul70zye0Y+by2r7/9LzFbepE+zC1ssTrWaWyr5U2qsVxvZT2l2XLqN/J+WMeaNeyer+8Wvaqb+OdPDrc6PSqgA2Nn05a6cVCnWlGEVdGKjTdy6Vec99jwXtNrV65+f5bK58lY0if2ffjHbfWJdil+0w6Bs/o+8/ll0nL6v2/Cw6n2+1WidSVarKdOEUknGCW3J4ZJZJPrK7lHDhxVrFK6TPz7Pq69kyZLzM2nqWkqXc5bpqtwlprTWTqSu5k7l7kj1mzU3MNK+0KPNbeyWn3YRuaglIB7WbSNSz7Uqai70k1JNrPPBo4OUMW/i18nTsuTdvp5smOtto+7o9VT9xRbkLDnJekdcLR93R7NT9xHNwc7LQ1qjnKU3dfOUpu7K+Tbd3WZNb20fa5UKsasFFyhfcpX7OMWsbrt4mNY0TE6Tq38ddbT93Q7NT9xhzcM+dl9eOlp+7odmp+4nm4OdlHjpafu6HZqfuHNwc7J46Wn7uh2an7hzcI52WbobWmvXtFOjOFFRm2m4qe0roN4XvkMZpERqyrkmZ0WyRrbmZo3KXQBmgVr6QPNPaw7mWPJnfcJcu2d3xc4R6BVBIAW7UbSS8qzTebc6X98Pj2im5U2fsyx8p/if4+jv2LL/pPBcCmWCkax6tShJ1rNHapvGVOKvlTfHsrjjyLLmyvdi5QraIplnr8/P5+/7qzaNlmJ3qdnkrBauIAytG6Oq2mexRjf6UnhCHLJ8XNmas2emGu9efzPyZ48dsk6VdI0To6FmpRpQxuxlK65zm85P3dCR5jaM9s15vb/AKhc4scY67sPPT2kFZqE6l/l3bFNb5yy6sX0GWyYOeyxXw7Z+X96mOfJzdJlzA9WpAJAAESV6aItWLVms+JE6Tq3FHValJKSrTukk15McmeVtM1maz4LqKRMaxLIjqhS++qdmJhvynmofa1Op/fVOzEjnDmofa1MpffVOzAc5JzUJ8TKX31TsxHOSc1HmrOlLPCjWnShJzUHs7TuTcrltLDc710Gys6w1WjSdGy1c0D/AItVJSm6cYOMU1FS2m0210LZ6yLW0TSm83HiRD1if/bj8zDnGfMx5snRuqkKFWFZVpScG3suCSd8Wt/KRN9Y0ZVx6TqsMjBsZmjcpdAGaBWvpA809rDuZY8md9wly7Z3fFzhHoYVIAA+qdSUWpRbjKLTjJZprJoi1YtGk9iYmYnWHQtXtPwtSUJ3QrpYxyU/xQ+XFzHnNs2K2CdY66/t8/ytsG0RkjSe1ujhdLCteirPWd9WjCUnnK66T52rmzfj2nLjjStphrvhpf8AVDHp6uWKLvVCL/VKcl1N3Gydu2if9v2YRs2KP9WypU4wSjCMYxWUYpRiuZI5bWm06zOst0RERpD5tNohSg6lSShCOcn3cr5DKlLXtFaxrKLWisay51rBpiVrqX4xpQvVODzu45S/E/dlz+l2TZYwU08Z7Z/hT5805bezVHW0gAAEIAseh7alZ3KV74G+9JXvZWKuXN3Hn+UcW7m1jx61tsl9cXyfcNabL+Z2F8zhmkt/OQ3lgtUK0I1KbvjJYX4PB3NPlvNcxozidY1ZMSEsfStuVnozqvOK8lelN4RXX7ryYjWdEWnSNXMZybblJ3tttt8beLZ0OR0zVmycBZoQkrpy/iT37UsbnypXLoNFp1l1UjSG2MWSAIkBmaNyl0AZoFa+kDzT2sO5ljyZ3/CXLtnd8XN0ehVKQAAAnc01g0701g01k0BYtG63V6aUayVaK429mounJ9Kv5StzcmY79dP8Z+39/ujsx7ZevVbr/dvKGt9kkvK4Sm90oX/+N5wW5Lzx2aTx/OjprtuKe3WHrLWuxL/mSfIqVT4pGEcm7RPh94ZdMxef2lrrZrrBYUKUpP0qjUY89yvb60dOPkm3/wBLfT+/lpvt0f6x9VY0lpOtaZbVae1d9mKwhHmXxzLbDs+PDGlI/LhyZb5J1tLDNzAABABAADaavVtmq4PKcfesV7toruUse9ii3lP2n+w7Nivpfd82o0xYP8PVcV9iXlU3+F8XRl/9KaJ1h2WrpLa6n6U4OpwE3dCq/IbyjUyu6cFzpGF4162WO2k6LzE0t6i62aV4erwUHfSpNq9ZTqZOXMsl07zdSukOfJbWdHlqvo3h66cl/DpXTnubv8mHS11Ji86QildZdDNLpesJ8TA+gIkBmaNyl0AZoFa+kDzT2sO5ljyZ3/CXJtnd8XN0ehVQAAAAgAACQCQAACACAAAD7oVXCUZrOLUup5GGSkXrNZ8eplS27aLR4LRpbRytVG6N22vLpS5WsnyNfB8R5XrrOkryYi0dSiuLTakmmm008GmsGmZudYZ60VXZuCx4Z+RKrfnTuz/W8r+nPLDcjXVs5ydNGjoUpTlGEFtSk1GMVxvcZNejpWhdHRs1KNNYy+1Ul6U3m+biXIjRadZdNa7saM8hkAekJAfUgMzRuUudAZoFa+kDzT2sO5ljyZ3/AAlybZ3fFzdHoVUBAAAEgEgAAACACAAAAAAgC26vWjboxTzg3B8yy9zXUed5Qx7maZ8+v8/db7Jfexx7dTSa4xo8LFwf8Zr+LFZXXeTKW6XJu3YX8tNWeTTVoEZNa2ajwoXzk3faFelF8VPjcd737unHVk1bcWnFcEa24AlASgPu8DO0ZlLnQGaBWvpB8z9rDuZY8md/wlybZ3fFzZHoYVSSQAAAAAAEAEAAAAAAAgAB70NJzs8J8HdfNJJv+R3/AGruPPuK7lLFvUi3l+0uvZMm7Mx5tRtOTvbcpSd7bvcpNv3sqHW309Wa6ocLnUzlRS8pQu4t8uT4569+NWfNzpq09GrKElOEnGUXfGSzT3ksIdA1e07G1R2ZXRrxXlR4pr04/FcRptXR0UvvNyYs0oCUAkBsNFvCXOgM4CtfSD5n7WHcyx5L7/hLk2zu+LmyPRQqkgAAQAAAEAAAAAAAgAAAAfNSN6a3owyU36TXzZVtuzEt/qzoRU7q1VJ1Wr4RzVNNZ8su48te3guqU061ogam1XdZdX9u+vZ4+XnUppfb3zj+LeuPnzzrbwlqvTxhU6NWUJKcJOMou+MlmnvRm066L/q9pyNqjszujXivKjxTXpx+K4jTaujopfebpGLNIBgZ+ispc6AzwK19IC/yfNVhf7yx5M7/AIS5Ns7vi5sj0SqAgAAAAAAAAAAAEAAAAABBItuga23Rjvh5D6Mvdceb2/HuZ59+v6/8rjZb72OPbqbiBwul7RIFa1m1e2769nj5edSml9vfOK9LeuPnzzrbwlqvTxhUKVWUJKcJOMou+Mlg096NrREukavaRnaaKqVIOMr9lu66NS7+ePJ8bzRaNJdVLaxq2ZiyQwNhorKXOgM8DD0xYFaaFSi8NuNyfoyWMX1pG7BlnFki8eDXlpv0mrkNqs06M5UqsXGcHdJPvW9cp6ql63rFq9cSpLVms6T2vIzQAAAAAAAAAF4EAAJCACABIAbzVWvdOdN/zLaXPHP3P/SVXKuPWlb+XV9f793dsN9LTXzWuCKFZvWJA+0BpLdqxQq11Wd8Ytt1accFUe+/+W/juz5HiZxeYjRrnHEzq3cYpJJJJJJJJXJJZJLiRg2PpAANhorKXOgM8ABrtL6Es9rSVaF8lhGcXszjzPdyPA6MG1ZMM/4Tw8GrLhpk/VCvz+j+jfhXrJbmoP4HfHK9/GsfdzdAr5y+fq+pesVezAfF7+mEdAr6pPq+pesVezAfF7+mDoFfVJ9X1L1ir2YD4vf0wdAr6pPq+pesVezAfF7+mDoFfVJ9X1L1ir2YD4vf0wdAr6pPq+pesVezAfF7+mDoFfVJ9X1L1ir2YD4vf0wdAr6pPq+pesVezAfF7+mDoFfVJ9X1L1ir2YD4vf0wdAr6pPq+pesVezAfF7+mDoFfVLV6zaoqyWWpaKVSdWVLZk4SSS2NpKTw3J39BtwcpzkvFZrEaotsURGusqH4Ul6C62WPOy09GjzPCkvQXWyedk6NHmjwpL0F1sc7J0aPM8KS9BdbHOydGjzPCkvQXWxzs+R0aPNvNUuGr14zjFRp0nfObvuxX2FvbT6Fjuv4tu2isYppbtn+6tuHZtLxaJ7HQInn1i9YkD6AMAB9IABsNFZS50BngAAAAAAAAAAAAAAAPG12eNWnOlNXwqQlCS/DJXPvJraazEwTGr88WuzSo1J0p/bpTlTl+qMmn3Hpq2i0RaPFxT1PIyAABsNCaJqWupsQwirnUndeoR+LeNy+TNOfPXFXWeEMq1m0unWCxwoU40qUdmEVguNvjk97e8ocmS17Ta3a6ojTqhmxRrS9IkCQAEoD6QBgbDRWUudAZ4AAAAAAAAAAAAAAAABxz6UNHcDbnVSujaYKpybcfJmvdB/1F3sF97Fp5ObLGllQO5rAMvRej6lpqKlTWLxlJ/ZhHjk/lxmvLlrirvWZVrMzpDp2itHU7NTVKksFi5P7U5ccpcpQZctslt6zpisRGkM+KNTJ6IgfaAkABKAkCWBsNFZS50BngAAAAAAAAAAAAAAAAFL+lXRvC2NVkvKs01K/j4OfkyXXsP8ApO7k/Ju5N3zassaxq5CXbne1hsdSvUjSpLanLqS45N8SRjkyVx1m1uxMRMzpDpuhNE07LTVOGMnjUm1c5y38i3Li62UGfPbLbel1VrFYbNI0snokQPpED6QEgSBIEoCQNhorKXOgM8AAAAAAAAAAAAAAAAAx9I2SNejUoz+zVhKnLmlFq8ypaa2i0eCJjWNH58Viq8L/AIdRbrKbpuC9OLaa5sHjyHpJyViu/M9Xa5NJ10dG1f0NCyU7sJVZXcJPf+FfhXvzKPaNonNb28IdNK7sNvE5mb0QH2mQJTA+kwJvAXgSmBKYErEDc2OjsRuebxYHuAAAAAAAAAAAAAAAAAANAtVaCtFa0xbVSu05YJ7K2Umo7r2r3vb5DdfPe1IpPZDGKxE6snwIvTfZRq1ZJWhV6b7KIE+B16b7IE+CF6b6gJ8Er031AT4KXpvqAeCl6b6gHgpem+oB4LXpvqAnwYvTfUBkULJCGKxe9gZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/9k=" alt="grab and go logo"/>
+      </div>
+      <div class="aboutus">
+        <h2>Who We Are</h2>
+        <p>Grab&Go – Your Ultimate Food Delivery Experience! At Grab&Go, we bring your favorite meals right to your doorstep with just a few clicks. Whether you're craving local flavors or international cuisine, we’ve got you covered. Fast, reliable, and hassle-free – because good food should always be within reach. Order now and let us handle the rest!</p>
+      </div>
+    </div>
+</section>
+<article>
+  <div class="statistics">
+    <img src="" alt="">
+    <p></p>
+  </div>
+</article>
+<footer>
+  <div class="footer-logo">
+    <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+  </div>
+  <div class="footer-data">
+    <div class="links">
+      <h4>Links</h4>
+      <ul>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Contact us</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Frequently asked questions</a></li>
+      </ul>
+    </div>
+    <div class="social">
+      <h4>Social</h4>
+      <ul>
+        <li><a href="facebook.com">Facebook</a></li>
+        <li><a href="instagram.com">Instagram</a></li>
+        <li><a href="linkedin.com">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div class="policies">
+      <h4>Policies</h4>
+      <ul>
+        <li><a href="#">Terms and conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
