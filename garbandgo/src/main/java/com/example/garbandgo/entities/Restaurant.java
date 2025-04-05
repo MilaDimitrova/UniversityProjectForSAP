@@ -1,4 +1,4 @@
-package entities;
+package com.example.garbandgo.entities;
 
 import jakarta.persistence.*;
 

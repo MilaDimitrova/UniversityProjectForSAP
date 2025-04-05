@@ -1,13 +1,13 @@
-package entities;
+package com.example.garbandgo.entities;
 
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 
-@Entity(name = "ProductCategory")
-@Table(name = "product_category")
-public class ProductCategory implements Serializable {
-    private static final long serialVersionUID = -9152230030650181239L;
+@Entity(name = "Product")
+@Table(name = "products")
+public class Product implements Serializable {
+    private static final long serialVersionUID = -1237456920859395092L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -17,7 +17,7 @@ public class ProductCategory implements Serializable {
         return id;
     }
 
-    public ProductCategory setId(Integer id) {
+    public Product setId(Integer id) {
         this.id = id;
         return this;
     }
