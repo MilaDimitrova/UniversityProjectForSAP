@@ -1,4 +1,4 @@
-package repositories;
+package com.example.garbandgo.repositories;
 
 import entities.Ingredient;
 import org.springframework.data.jpa.repository.JpaRepository;
