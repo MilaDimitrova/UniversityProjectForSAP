@@ -62,6 +62,15 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<<<<<<< Updated upstream
+=======
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>6.6.11.Final</version>
+		</dependency>
+>>>>>>> Stashed changes
 	</dependencies>
 
 	<build>
