@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/UniversityProjectForSAP.iml" filepath="$PROJECT_DIR$/.idea/UniversityProjectForSAP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/garbandgo/garbandgo.iml" filepath="$PROJECT_DIR$/garbandgo/garbandgo.iml" />
     </modules>
   </component>
 </project>
