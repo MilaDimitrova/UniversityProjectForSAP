@@ -1,6 +1,7 @@
 package com.example.garbandgo.repositories;
 
-import entities.ProductCategory;
+
+import com.example.garbandgo.entities.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Integer> {
