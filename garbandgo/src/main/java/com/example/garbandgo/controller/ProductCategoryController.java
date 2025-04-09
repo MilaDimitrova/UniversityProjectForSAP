@@ -1,25 +1,34 @@
 package com.example.garbandgo.controller;
 
 import com.example.garbandgo.entities.ProductCategory;
-import com.example.garbandgo.repositories.ProductCategoryRepository;
-import org.springframework.stereotype.Service;
-import java.util.List;
+import com.example.garbandgo.service.ProductCategoryService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-@Service
+@Controller
+@RequestMapping("/productcategories")
 public class ProductCategoryController {
+    private final ProductCategoryService productCategoryService;
 
-    private final ProductCategoryRepository productCategoryRepository;
-
-
-    public ProductCategoryController(ProductCategoryRepository productCategoryRepository) {
-        this.productCategoryRepository = productCategoryRepository;
+    public ProductCategoryController(ProductCategoryService productCategoryService) {
+        this.productCategoryService = productCategoryService;
     }
 
-    public List<ProductCategory> getProductCategoryRepository() {
-        return productCategoryRepository.findAll();
+    @GetMapping
+    public String index() {
+        return "index";
     }
 
-    public void saveProductCategory(ProductCategory productCategory) {
-        productCategoryRepository.save(productCategory);
+    @GetMapping("/list")
+    public String listProductCategories(Model model) {
+        model.addAttribute("productCategories", productCategoryService.getProductCategoryRepository());
+        return "productcategories";
+    }
+
+    @PostMapping("/add")
+    public String addProductCategory(@ModelAttribute ProductCategory productCategory) {
+        productCategoryService.saveProductCategory(productCategory);
+        return "redirect:/productcategories/list";
     }
 }
