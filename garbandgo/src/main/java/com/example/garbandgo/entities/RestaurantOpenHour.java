@@ -1,7 +1,7 @@
 package com.example.garbandgo.entities;
 
 import jakarta.persistence.*;
-
+import com.example.garbandgo.entities.Restaurant;
 import java.io.Serializable;
 import java.time.LocalTime;
 
@@ -30,9 +30,8 @@ public class RestaurantOpenHour implements Serializable {
         return dayOfWeek;
     }
 
-    public RestaurantOpenHour setDayOfWeek(String dayOfWeek) {
+    public void setDayOfWeek(String dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
-        return this;
     }
 
     @Convert(disableConversion = true)
@@ -41,9 +40,8 @@ public class RestaurantOpenHour implements Serializable {
         return closesAt;
     }
 
-    public RestaurantOpenHour setClosesAt(LocalTime closesAt) {
+    public void setClosesAt(LocalTime closesAt) {
         this.closesAt = closesAt;
-        return this;
     }
 
     @Convert(disableConversion = true)
@@ -52,9 +50,8 @@ public class RestaurantOpenHour implements Serializable {
         return opensAt;
     }
 
-    public RestaurantOpenHour setOpensAt(LocalTime opensAt) {
+    public void setOpensAt(LocalTime opensAt) {
         this.opensAt = opensAt;
-        return this;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -63,17 +60,15 @@ public class RestaurantOpenHour implements Serializable {
         return restaurant;
     }
 
-    public RestaurantOpenHour setRestaurant(Restaurant restaurant) {
+    public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
-        return this;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public RestaurantOpenHour setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 }

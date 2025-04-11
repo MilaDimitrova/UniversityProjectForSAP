@@ -20,7 +20,7 @@ public class OrderProduct implements Serializable {
 
     private Product product;
 
-    private Integer qunatity;
+    private Integer quantity;
 
     private Double price;
 
@@ -29,19 +29,17 @@ public class OrderProduct implements Serializable {
         return price;
     }
 
-    public OrderProduct setPrice(Double price) {
+    public void setPrice(Double price) {
         this.price = price;
-        return this;
     }
 
-    @Column(name = "qunatity", nullable = false)
-    public Integer getQunatity() {
-        return qunatity;
+    @Column(name = "quantity", nullable = false)
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public OrderProduct setQunatity(Integer qunatity) {
-        this.qunatity = qunatity;
-        return this;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -50,9 +48,8 @@ public class OrderProduct implements Serializable {
         return product;
     }
 
-    public OrderProduct setProduct(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
-        return this;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -61,17 +58,15 @@ public class OrderProduct implements Serializable {
         return order;
     }
 
-    public OrderProduct setOrder(Order order) {
+    public void setOrder(Order order) {
         this.order = order;
-        return this;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public OrderProduct setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 }
