@@ -1,7 +1,7 @@
 package com.example.garbandgo.entities;
 
 import jakarta.persistence.*;
-
+import com.example.garbandgo.entities.Restaurant;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.LinkedHashSet;
@@ -38,9 +38,8 @@ public class Promocode implements Serializable {
         return orders;
     }
 
-    public Promocode setOrders(Set<Order> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
-        return this;
     }
 
     @Column(name = "discount", nullable = false)
@@ -48,9 +47,8 @@ public class Promocode implements Serializable {
         return discount;
     }
 
-    public Promocode setDiscount(Integer discount) {
+    public void setDiscount(Integer discount) {
         this.discount = discount;
-        return this;
     }
 
     @Convert(disableConversion = true)
@@ -59,9 +57,8 @@ public class Promocode implements Serializable {
         return validTo;
     }
 
-    public Promocode setValidTo(Instant validTo) {
+    public void setValidTo(Instant validTo) {
         this.validTo = validTo;
-        return this;
     }
 
     @Convert(disableConversion = true)
@@ -70,9 +67,8 @@ public class Promocode implements Serializable {
         return validFrom;
     }
 
-    public Promocode setValidFrom(Instant validFrom) {
+    public void setValidFrom(Instant validFrom) {
         this.validFrom = validFrom;
-        return this;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -81,9 +77,8 @@ public class Promocode implements Serializable {
         return restaurant;
     }
 
-    public Promocode setRestaurant(Restaurant restaurant) {
+    public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
-        return this;
     }
 
     @Lob
@@ -92,9 +87,8 @@ public class Promocode implements Serializable {
         return description;
     }
 
-    public Promocode setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
-        return this;
     }
 
     @Column(name = "promocode", nullable = false, length = 60)
@@ -102,17 +96,15 @@ public class Promocode implements Serializable {
         return promocode;
     }
 
-    public Promocode setPromocode(String promocode) {
+    public void setPromocode(String promocode) {
         this.promocode = promocode;
-        return this;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public Promocode setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.garbandgo.entities;
 
 import jakarta.persistence.*;
+import com.example.garbandgo.entities.Currency;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
@@ -28,9 +29,8 @@ public class Country implements Serializable {
         return towns;
     }
 
-    public Country setTowns(Set<Town> towns) {
+    public void setTowns(Set<Town> towns) {
         this.towns = towns;
-        return this;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -39,9 +39,8 @@ public class Country implements Serializable {
         return currency;
     }
 
-    public Country setCurrency(Currency currency) {
+    public void setCurrency(Currency currency) {
         this.currency = currency;
-        return this;
     }
 
     @Column(name = "country", nullable = false, length = 100)
@@ -49,17 +48,15 @@ public class Country implements Serializable {
         return country;
     }
 
-    public Country setCountry(String country) {
+    public void setCountry(String country) {
         this.country = country;
-        return this;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public Country setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 }

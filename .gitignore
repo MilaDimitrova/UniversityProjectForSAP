@@ -167,3 +167,5 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+/.idea
+garbandgo/garbandgo.eml

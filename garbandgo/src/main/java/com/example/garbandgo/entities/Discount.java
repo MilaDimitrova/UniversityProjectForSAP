@@ -25,7 +25,7 @@ public class Discount implements Serializable {
 
     private Instant validTo;
 
-    private Restaurant restautant;
+    private Restaurant restaurant;
 
     private ProductCategory discountedCategory;
 
@@ -41,9 +41,8 @@ public class Discount implements Serializable {
         return addedAt;
     }
 
-    public Discount setAddedAt(Instant addedAt) {
+    public void setAddedAt(Instant addedAt) {
         this.addedAt = addedAt;
-        return this;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -52,9 +51,8 @@ public class Discount implements Serializable {
         return addedBy;
     }
 
-    public Discount setAddedBy(User addedBy) {
+    public void setAddedBy(User addedBy) {
         this.addedBy = addedBy;
-        return this;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -63,9 +61,8 @@ public class Discount implements Serializable {
         return discountedProduct;
     }
 
-    public Discount setDiscountedProduct(Product discountedProduct) {
+    public void setDiscountedProduct(Product discountedProduct) {
         this.discountedProduct = discountedProduct;
-        return this;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -74,20 +71,18 @@ public class Discount implements Serializable {
         return discountedCategory;
     }
 
-    public Discount setDiscountedCategory(ProductCategory discountedCategory) {
+    public void setDiscountedCategory(ProductCategory discountedCategory) {
         this.discountedCategory = discountedCategory;
-        return this;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "restautant", nullable = false)
-    public Restaurant getRestautant() {
-        return restautant;
+    @JoinColumn(name = "restaurant", nullable = false)
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public Discount setRestautant(Restaurant restautant) {
-        this.restautant = restautant;
-        return this;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     @Convert(disableConversion = true)
@@ -96,9 +91,8 @@ public class Discount implements Serializable {
         return validTo;
     }
 
-    public Discount setValidTo(Instant validTo) {
+    public void setValidTo(Instant validTo) {
         this.validTo = validTo;
-        return this;
     }
 
     @Convert(disableConversion = true)
@@ -107,9 +101,8 @@ public class Discount implements Serializable {
         return validFrom;
     }
 
-    public Discount setValidFrom(Instant validFrom) {
+    public void setValidFrom(Instant validFrom) {
         this.validFrom = validFrom;
-        return this;
     }
 
     @Column(name = "discount", nullable = false)
@@ -117,17 +110,15 @@ public class Discount implements Serializable {
         return discount;
     }
 
-    public Discount setDiscount(Double discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
-        return this;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public Discount setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 }

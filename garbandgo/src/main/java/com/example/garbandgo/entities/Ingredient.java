@@ -36,9 +36,8 @@ public class Ingredient implements Serializable {
         return alergen;
     }
 
-    public Ingredient setAlergen(Boolean alergen) {
+    public void setAlergen(Boolean alergen) {
         this.alergen = alergen;
-        return this;
     }
 
     @Column(name = "ingredient", nullable = false)
@@ -46,17 +45,15 @@ public class Ingredient implements Serializable {
         return ingredient;
     }
 
-    public Ingredient setIngredient(String ingredient) {
+    public void setIngredient(String ingredient) {
         this.ingredient = ingredient;
-        return this;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public Ingredient setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 }

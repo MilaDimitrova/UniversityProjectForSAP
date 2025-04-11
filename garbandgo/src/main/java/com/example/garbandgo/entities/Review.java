@@ -1,7 +1,7 @@
 package com.example.garbandgo.entities;
 
 import jakarta.persistence.*;
-
+import com.example.garbandgo.entities.Order;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -20,7 +20,7 @@ public class Review implements Serializable {
 
     private Integer review;
 
-    private Integer orderId;
+    private Order orderId;
 
     private Instant dateCreated;
 
@@ -30,19 +30,17 @@ public class Review implements Serializable {
         return dateCreated;
     }
 
-    public Review setDateCreated(Instant dateCreated) {
+    public void setDateCreated(Instant dateCreated) {
         this.dateCreated = dateCreated;
-        return this;
     }
 
     @Column(name = "order_id", nullable = false)
-    public Integer getOrderId() {
+    public Order getOrderId() {
         return orderId;
     }
 
-    public Review setOrderId(Integer orderId) {
+    public void setOrderId(Order orderId) {
         this.orderId = orderId;
-        return this;
     }
 
     @Column(name = "review", nullable = false)
@@ -50,9 +48,8 @@ public class Review implements Serializable {
         return review;
     }
 
-    public Review setReview(Integer review) {
+    public void setReview(Integer review) {
         this.review = review;
-        return this;
     }
 
     @Lob
@@ -61,17 +58,15 @@ public class Review implements Serializable {
         return reviewText;
     }
 
-    public Review setReviewText(String reviewText) {
+    public void setReviewText(String reviewText) {
         this.reviewText = reviewText;
-        return this;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public Review setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 }

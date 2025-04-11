@@ -1,6 +1,7 @@
 package com.example.garbandgo.entities;
 
 import jakarta.persistence.*;
+import com.example.garbandgo.entities.Order;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -31,9 +32,8 @@ public class CancelledOrder implements Serializable {
         return orders;
     }
 
-    public CancelledOrder setOrders(Set<Order> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
-        return this;
     }
 
     @Lob
@@ -42,9 +42,8 @@ public class CancelledOrder implements Serializable {
         return reason;
     }
 
-    public CancelledOrder setReason(String reason) {
+    public void setReason(String reason) {
         this.reason = reason;
-        return this;
     }
 
     @Convert(disableConversion = true)
@@ -53,9 +52,8 @@ public class CancelledOrder implements Serializable {
         return canceledAt;
     }
 
-    public CancelledOrder setCanceledAt(Instant canceledAt) {
+    public void setCanceledAt(Instant canceledAt) {
         this.canceledAt = canceledAt;
-        return this;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -64,17 +62,15 @@ public class CancelledOrder implements Serializable {
         return order;
     }
 
-    public CancelledOrder setOrder(Order order) {
+    public void setOrder(Order order) {
         this.order = order;
-        return this;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public CancelledOrder setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 }
