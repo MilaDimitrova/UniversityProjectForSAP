@@ -6,9 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 @Controller
-@RequestMapping("/")
+@RequestMapping("/users")  // Unique base path to resolve ambiguity
 public class UserController {
     private final UserService userService;
 
@@ -18,21 +17,18 @@ public class UserController {
 
     @GetMapping
     public String index() {
-        return "index";
+        return "index";  // Path: /users
     }
 
-
-    @GetMapping("/users")
+    @GetMapping("/list")  // Updated mapping for listing users
     public String listUsers(Model model) {
         model.addAttribute("users", userService.getUsersRepository());
-        return "users";
+        return "users";  // Path: /users/list
     }
 
-
-    @PostMapping("/addUser")
+    @PostMapping("/add")  // Updated mapping for adding users
     public String addUser(@ModelAttribute User user) {
         userService.saveUser(user);
-        return "redirect:/users";
-
+        return "redirect:/users/list";  // Redirects to /users/list
     }
 }

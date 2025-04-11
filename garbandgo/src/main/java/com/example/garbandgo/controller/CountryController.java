@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/countries")  // Unique base path
 public class CountryController {
     private final CountryService countryService;
 
@@ -18,18 +18,18 @@ public class CountryController {
 
     @GetMapping
     public String index() {
-        return "index";
+        return "Country_index";
     }
 
-    @GetMapping("/country")
+    @GetMapping("/list")
     public String listCountry(Model model) {
         model.addAttribute("country", countryService.getCountryRepository());
         return "country";
     }
 
-    @PostMapping("/addCountry")
+    @PostMapping("/add")
     public String addCountry(@ModelAttribute Country country) {
-        countryService.saveAddress(country);
-        return "redirect:/country";
+        countryService.saveCountry(country);
+        return "redirect:/countries";
     }
 }

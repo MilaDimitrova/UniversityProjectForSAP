@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/roles")  // Updated base path to make it unique
 public class RoleController {
     private final RoleService roleService;
 
@@ -16,21 +16,20 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-
     @GetMapping
     public String index() {
-        return "index";
+        return "index";  // Path: /roles
     }
 
-    @GetMapping("/role")
+    @GetMapping("/list")  // Updated mapping for listing roles
     public String listRoles(Model model) {
         model.addAttribute("role", roleService.getRolesRepository());
-        return "role";
+        return "role";  // Path: /roles/list
     }
 
-    @PostMapping("/addRoles")
+    @PostMapping("/add")  // Updated mapping for adding roles
     public String addRoles(@ModelAttribute Role role) {
         roleService.saveRoles(role);
-        return "redirect:/role";
+        return "redirect:/roles/list";  // Redirects to /roles/list
     }
 }
