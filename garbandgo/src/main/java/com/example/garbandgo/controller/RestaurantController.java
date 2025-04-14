@@ -1,7 +1,10 @@
 package com.example.garbandgo.controller;
 
+import com.example.garbandgo.dto.RestaurantWithFullData;
 import com.example.garbandgo.entities.Restaurant;
 import com.example.garbandgo.service.RestaurantService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/restaurants")
 public class RestaurantController {
 
@@ -19,15 +22,17 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     // GET /restaurants - Index: Retrieve all restaurants
-    @GetMapping
-    public List<Restaurant> index() {
-        return restaurantService.getAllRestaurants();
+    @GetMapping("/index")
+    public String index(Model model) {
+        List<RestaurantWithFullData> restaurants = restaurantService.getAllRestaurants();
+        model.addAttribute("restaurants", restaurants);
+        return "restaurants/index";
     }
 
     // GET /restaurants/{id} - Show: Retrieve a single restaurant by its ID
     @GetMapping("/{id}")
-    public ResponseEntity<Restaurant> show(@PathVariable Integer id) {
-        Restaurant restaurant = restaurantService.getRestaurantById(id);
+    public ResponseEntity<RestaurantWithFullData> show(@PathVariable Integer id) {
+        RestaurantWithFullData restaurant = restaurantService.getRestaurantById(id);
         if (restaurant != null) {
             return ResponseEntity.ok(restaurant);
         } else {

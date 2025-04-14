@@ -1,5 +1,6 @@
 package com.example.garbandgo.service;
 
+import com.example.garbandgo.dto.RestaurantWithFullData;
 import com.example.garbandgo.entities.Restaurant;
 import com.example.garbandgo.repositories.RestaurantRepository;
 import org.springframework.stereotype.Service;
@@ -14,13 +15,13 @@ public class RestaurantService {
     private RestaurantRepository restaurantRepository;
 
     // Retrieve all restaurants
-    public List<Restaurant> getAllRestaurants() {
+    public List<RestaurantWithFullData> getAllRestaurants() {
         return restaurantRepository.findAllRestaurantsWithFullData();
     }
 
     // Retrieve a specific restaurant by its ID
-    public Restaurant getRestaurantById(Integer id) {
-        Optional<Restaurant> restaurant = Optional.ofNullable(restaurantRepository.findRestaurantWithFullData(id));
+    public RestaurantWithFullData getRestaurantById(Integer id) {
+        Optional<RestaurantWithFullData> restaurant = Optional.ofNullable(restaurantRepository.findRestaurantWithFullData(id));
         return restaurant.orElse(null);
 
     }
