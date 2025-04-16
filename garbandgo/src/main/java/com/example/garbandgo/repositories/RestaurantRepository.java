@@ -9,13 +9,13 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
-    @Query(value="SELECT r.id, r.restaurant, r.logo, r.reputation, roh.opens_at, roh.closes_at, roh.day_of_week, adr.address, t.town FROM restaurants r\n" +
+    @Query(value="SELECT r.id, r.restaurant, r.logo, r.reputation, roh.opens_at as opensAt, roh.closes_at as closesAt, roh.day_of_week as dayOfWeek, adr.address, t.town FROM restaurants r\n" +
             "JOIN restaurant_open_hours roh ON roh.restaurant = r.id\n" +
             "JOIN addresses adr ON r.address = adr.id\n" +
             "JOIN towns t ON adr.town = t.id;", nativeQuery = true)
     List<RestaurantWithFullData> findAllRestaurantsWithFullData();
 
-    @Query(value="SELECT r.id, r.restaurant, r.logo, r.reputation, roh.opens_at, roh.closes_at, roh.day_of_week, adr.address, t.town FROM restaurants r\n" +
+    @Query(value="SELECT r.id, r.restaurant, r.logo, r.reputation, roh.opens_at as opensAt, roh.closes_at as closesAt, roh.day_of_week as dayOfWeek, adr.address, t.town FROM restaurants r\n" +
             "JOIN restaurant_open_hours roh ON roh.restaurant = r.id\n" +
             "JOIN addresses adr ON r.address = adr.id\n" +
             "JOIN towns t ON adr.town = t.id" +

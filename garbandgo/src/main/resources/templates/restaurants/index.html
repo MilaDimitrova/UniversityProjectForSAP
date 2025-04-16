@@ -24,7 +24,7 @@
     <ul>
         <li th:each="restaurant : ${restaurants}">
             <h3>
-                <a th:text="${restaurant.restaurant}}" th:href="@{/restaurants/{id}(id=${restaurant.id})}"></a>
+                <a th:text="${restaurant.restaurant}" th:href="@{/restaurants/{id}(id=${restaurant.id})}"></a>
             </h3>
         <img th:src="@{/images/restaurant.jpg}" alt="Restaurant">
         </li>

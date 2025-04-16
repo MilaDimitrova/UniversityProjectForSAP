@@ -15,8 +15,8 @@ public class RestaurantService {
     private RestaurantRepository restaurantRepository;
 
     // Retrieve all restaurants
-    public List<RestaurantWithFullData> getAllRestaurants() {
-        return restaurantRepository.findAllRestaurantsWithFullData();
+    public List<Restaurant> getAllRestaurants() {
+        return restaurantRepository.findAll();
     }
 
     // Retrieve a specific restaurant by its ID

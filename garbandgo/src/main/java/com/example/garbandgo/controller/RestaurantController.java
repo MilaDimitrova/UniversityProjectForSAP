@@ -24,7 +24,7 @@ public class RestaurantController {
     // GET /restaurants - Index: Retrieve all restaurants
     @GetMapping("/index")
     public String index(Model model) {
-        List<RestaurantWithFullData> restaurants = restaurantService.getAllRestaurants();
+        List<Restaurant> restaurants = restaurantService.getAllRestaurants();
         model.addAttribute("restaurants", restaurants);
         return "restaurants/index";
     }
