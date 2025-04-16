@@ -1,23 +1,23 @@
 package com.example.garbandgo.service;
 
-import com.example.garbandgo.repositories.UserRepository;
 import com.example.garbandgo.entities.User;
+import com.example.garbandgo.repositories.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public List<User> getUsersRepository() {
-        return userRepository.findAll();
-    }
 
-    public void saveUser(User user) {
-        userRepository.save(user);
+    public User registerUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 }
