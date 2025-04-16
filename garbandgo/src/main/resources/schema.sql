@@ -57,7 +57,7 @@ CREATE TABLE `currencies` (
 
 CREATE TABLE `discounts` (
   `id` int(11) NOT NULL,
-  `discount` float(2,2) NOT NULL,
+  `discount` float(5,2) NOT NULL,
   `valid_from` datetime NOT NULL,
   `valid_to` datetime NOT NULL,
   `restautant` int(11) NOT NULL,
@@ -91,8 +91,8 @@ CREATE TABLE `orders` (
   `user` int(11) NOT NULL,
   `address` int(11) NOT NULL,
   `promocode` int(11) NOT NULL,
-  `additional_discount` float(2,2) NOT NULL,
-  `total_price` float(4,2) NOT NULL,
+  `additional_discount` float(5,2) NOT NULL,
+  `total_price` float(5,2) NOT NULL,
   `ordered_at` datetime NOT NULL,
   `due_to_delivery` datetime NOT NULL,
   `packed_at` datetime DEFAULT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE `order_products` (
   `order_id` int(11) NOT NULL,
   `product` int(11) NOT NULL,
   `qunatity` int(5) NOT NULL,
-  `price` float(3,2) NOT NULL
+  `price` float(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -129,8 +129,8 @@ CREATE TABLE `products` (
   `image` text NOT NULL,
   `description` text NOT NULL,
   `restaurant` int(11) NOT NULL,
-  `delivery_price` float(2,2) NOT NULL,
-  `price` float(3,2) NOT NULL,
+  `delivery_price` float(5,2) NOT NULL,
+  `price` float(5,2) NOT NULL,
   `currency` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -185,7 +185,7 @@ CREATE TABLE `restaurants` (
   `restaurant` varchar(255) NOT NULL,
   `logo` text NOT NULL,
   `address` int(11) NOT NULL,
-  `reputation` float(1,1) DEFAULT NULL,
+  `reputation` float(5,1) DEFAULT NULL,
   `manager` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
