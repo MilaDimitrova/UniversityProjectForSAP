@@ -28,7 +28,7 @@ public class WebController {
 
     @GetMapping("/profile")
     public String profilePage() {
-        return "profilePage";
+        return "login";
     }
 
     @GetMapping("/registration")
