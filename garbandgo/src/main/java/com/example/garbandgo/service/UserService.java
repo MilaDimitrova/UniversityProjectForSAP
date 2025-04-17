@@ -20,15 +20,18 @@ public class UserService {
     }
 
     public User registerUser(User user) {
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new RuntimeException("Имейлът вече се използва!");
+        if (user.getEmail() == null || user.getEmail().isEmpty()) {
+            throw new IllegalArgumentException("Имейлът не може да бъде празен!");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        logger.info("Регистриране на нов потребител: " + user.getEmail());
-        return userRepository.save(user);
-    }
+        if (user.getPassword() == null || user.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("Паролата не може да бъде празна!");
+        }
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Имейлът вече се използва!");
+        }
 
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(Math.toIntExact(id));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        logger.info("Успешна регистрация: {}", user.getEmail());
+        return userRepository.save(user);
     }
 }
