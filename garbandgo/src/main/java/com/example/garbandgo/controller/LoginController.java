@@ -8,12 +8,11 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginForm() {
-        return "users/login"; // Търси login.html в templates/users/
+        return "users/login"; // Увери се, че login.html е в templates/users/
     }
 
     @PostMapping("/login")
     public String processLogin() {
         return "redirect:/home";
     }
-
 }
