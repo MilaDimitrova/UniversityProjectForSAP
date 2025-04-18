@@ -33,6 +33,11 @@ public class WebController {
 
     @GetMapping("/registration")
     public String registrationPage() {
-        return "registrationPage";
+        return "register";
+    }
+
+    @GetMapping("/users/rootPage")
+    public String rootPageProfile() {
+        return "rootPage";
     }
 }
