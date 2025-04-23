@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/css/dashboards.css}">
+    <link rel="stylesheet" th:href="@{/css/rootDashboard.css}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Grab&go</title>
@@ -29,6 +29,8 @@
             <button onclick="showSection('employees')">Employees</button>
             <button onclick="showSection('managers')">Managers</button>
             <button onclick="showSection('delivery')">Delivery</button>
+            <button onclick="showSection('profile')">Profile Settings</button>
+
             <form th:action="@{/logout}" method="post">
                 <button type="submit">Log out</button>
             </form>
@@ -44,15 +46,56 @@
             </section>
             <section id="employees" class="dashboard-section" style="display: none;">
                 <h1>Employees</h1>
-                <p>Here you can add a new employees.</p>
+                <p>Add a new courier (employee).</p>
+
+                <form th:action="@{/admin/addCourier}" method="post">
+                    <label for="courierUsername">Username:</label>
+                    <input type="text" id="courierUsername" name="username" required><br>
+
+                    <label for="courierEmail">Email:</label>
+                    <input type="email" id="courierEmail" name="email" required><br>
+
+                    <label for="courierPassword">Password:</label>
+                    <input type="password" id="courierPassword" name="password" required><br>
+
+                    <button type="submit">Add Courier</button>
+                </form>
             </section>
             <section id="managers" class="dashboard-section" style="display: none;">
                 <h1>Managers</h1>
-                <p>Here you can add a new managers.</p>
+                <p>Here you can add a new manager.</p>
+
+                <form th:action="@{/admin/addManager}" method="post">
+                    <label for="managerUsername">Username:</label>
+                    <input type="text" id="managerUsername" name="username" required><br>
+
+                    <label for="managerEmail">Email:</label>
+                    <input type="email" id="managerEmail" name="email" required><br>
+
+                    <label for="managerPassword">Password:</label>
+                    <input type="password" id="managerPassword" name="password" required><br>
+
+                    <button type="submit">Add Manager</button>
+                </form>
             </section>
             <section id="delivery" class="dashboard-section" style="display: none;">
                 <h1>Delivery</h1>
                 <p>Here you can see all delivery.</p>
+            </section>
+            <section id="profile" class="dashboard-section" style="display: none;">
+                <h1>Profile Settings</h1>
+                <p><strong>Username:</strong> <span th:text="${user.username}">User</span></p>
+                <p><strong>Email:</strong> <span th:text="${user.email}">email@example.com</span></p>
+
+                <form th:action="@{/admin/update}" method="post" th:object="${user}">
+                    <label th:for="*{username}">New Username:</label>
+                    <input type="text" th:field="*{username}" /><br>
+
+                    <label th:for="*{password}">New Password:</label>
+                    <input type="password" th:field="*{password}" /><br>
+
+                    <button type="submit">Update</button>
+                </form>
             </section>
             <section id="logout" class="dashboard-section" style="display: none;">
                 <h1>Log out</h1>

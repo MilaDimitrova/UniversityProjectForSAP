@@ -173,82 +173,56 @@ nav ul li a:hover {
     background-color: #d18f00;
 }
 
-.dashboard-section h2 {
-    margin-top: 20px;
-    font-size: 20px;
-    color: #b66a00;
+.dashboard-section {
+    display: none;
 }
 
-.dashboard-section ul {
-    list-style: disc;
-    margin-left: 20px;
+.dashboard-section.active {
+    display: block;
 }
 
-.dashboard-section ul li {
-    margin-bottom: 8px;
+.dashboard-section h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
 }
 
-.dashboard-section p {
-    margin: 10px 0;
-    font-size: 16px;
-}
-
-.form-panel {
+.dashboard-section form {
     background-color: #fdf6ec;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     max-width: 500px;
-    margin: 20px auto;
-    font-family: 'Arial', sans-serif;
-}
-
-.form-panel h1 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.form-panel p {
-    font-size: 16px;
-    color: #444;
-    margin-bottom: 10px;
-}
-
-.form-panel form {
     margin-top: 20px;
 }
 
-.form-panel label {
+.dashboard-section label {
     display: block;
-    margin-bottom: 5px;
+    margin: 10px 0 5px;
     font-weight: bold;
-    color: #555;
 }
 
-.form-panel input[type="text"],
-.form-panel input[type="password"],
-.form-panel input[type="email"] {
+.dashboard-section input[type="text"],
+.dashboard-section input[type="password"],
+.dashboard-section input[type="email"] {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 14px;
     margin-bottom: 15px;
 }
 
-.form-panel button[type="submit"] {
+.dashboard-section button[type="submit"] {
     background-color: #f0a500;
-    color: #fff;
-    border: none;
+    color: white;
     padding: 10px 20px;
-    font-size: 14px;
+    border: none;
     border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
     width: 100%;
 }
 
-.form-panel button[type="submit"]:hover {
+.dashboard-section button[type="submit"]:hover {
     background-color: #d18f00;
 }

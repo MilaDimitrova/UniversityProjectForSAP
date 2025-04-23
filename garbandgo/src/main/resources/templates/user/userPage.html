@@ -17,7 +17,7 @@
             <li><a th:href="@{/restaurants}">Our restaurants</a></li>
             <li><a th:href="@{/aboutUs}">About us</a></li>
             <li><a th:href="@{/contact}">Contacts</a></li>
-            <li><a th:href="@{/profile}">Profile</a></li>
+            <li><a href="#" onclick="showSection('profile')">Profile</a></li>
         </ul>
     </nav>
 </header>
@@ -26,18 +26,58 @@
         <div class="sidebar">
             <button onclick="showSection('info')">Information</button>
             <button onclick="showSection('orders')">Orders</button>
+            <button onclick="showSection('profile')">Profile</button>
             <form th:action="@{/logout}" method="post">
                 <button type="submit">Log out</button>
             </form>
         </div>
         <div class="main-content">
             <section id="info" class="dashboard-section">
-                <h1>Information</h1>
-                <p>Here you can see all the details about Grab&Go.</p>
+                <h1>Welcome to Grab&Go!</h1>
+                <p>Grab&Go е най-бързият начин да поръчате любимата си храна от топ ресторанти във вашия град.</p>
+
+                <h2>Как работи?</h2>
+                <ul>
+                    <li>Изберете ресторант и добавете храна в кошницата.</li>
+                    <li>Потвърдете поръчката си и следете статуса ѝ в реално време.</li>
+                    <li>Очаквайте доставчика си на адреса, който сте избрали.</li>
+                </ul>
+
+                <h2>Полезни връзки:</h2>
+                <ul>
+                    <li><a th:href="@{/faq}">Често задавани въпроси</a></li>
+                    <li><a th:href="@{/contact}">Свържи се с нас</a></li>
+                    <li><a th:href="@{/terms}">Условия за ползване</a></li>
+                </ul>
+
+                <h2>Текущи оферти:</h2>
+                <p>🎉 Използвай код <strong>IvkaBeibe10</strong> за 10% отстъпка при следващата поръчка!</p>
+
+                <h2>Топ Ресторанти:</h2>
+                <ul>
+                    <li>🍕 Greek Gyros Molly</li>
+                    <li>🍔 Burger King</li>
+                    <li>🍣 Happy Bar & Grill</li>
+                </ul>
             </section>
             <section id="orders" class="dashboard-section" style="display: none;">
                 <h1>Orders</h1>
                 <p>Your active and past orders will appear here.</p>
+            </section>
+            <section id="profile" class="dashboard-section" style="display: none;">
+                <h1>Profile Settings</h1>
+                <p><strong>Username:</strong> <span th:text="${user.username}">User</span></p>
+                <p><strong>Email:</strong> <span th:text="${user.email}">email@example.com</span></p>
+
+                <form th:action="@{/user/update}" method="post" th:object="${user}">
+                    <label th:for="*{username}">New Username:</label>
+                    <input type="text" th:field="*{username}" /><br>
+
+                    <label th:for="*{password}">New Password:</label>
+                    <input type="password" th:field="*{password}" /><br>
+
+                    <button type="submit">Update</button>
+                </form>
             </section>
         </div>
     </div>
