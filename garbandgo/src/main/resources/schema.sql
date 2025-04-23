@@ -608,6 +608,81 @@ ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role`) REFERENCES `roles` (`id`);
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+DELIMITER //
+
+CREATE PROCEDURE add_restaurant_with_open_hours(
+    IN p_restaurant VARCHAR(255),
+    IN p_logo TEXT,
+    IN p_address VARCHAR(150),
+    IN p_town VARCHAR(200),
+    IN p_country INT,
+    IN p_zip_code VARCHAR(4),
+    IN p_reputation FLOAT,
+    IN p_manager INT,
+    IN p_opens_mon TIME,
+    IN p_closes_mon TIME,
+    IN p_opens_tue TIME,
+    IN p_closes_tue TIME,
+    IN p_opens_wed TIME,
+    IN p_closes_wed TIME,
+    IN p_opens_thu TIME,
+    IN p_closes_thu TIME,
+    IN p_opens_fri TIME,
+    IN p_closes_fri TIME,
+    IN p_opens_sat TIME,
+    IN p_closes_sat TIME,
+    IN p_opens_sun TIME,
+    IN p_closes_sun TIME
+)
+BEGIN
+    DECLARE v_town_id INT;
+    DECLARE v_address_id INT;
+    DECLARE v_restaurant_id INT;
+
+    -- Try to find an existing town by name
+    SELECT id INTO v_town_id
+    FROM towns
+    WHERE town = p_town
+    LIMIT 1;
+
+    IF v_town_id IS NULL THEN
+        -- Insert new town if not exists
+        INSERT INTO towns (town, country, zip_code)
+        VALUES (p_town, p_country, p_zip_code);
+        SET v_town_id = LAST_INSERT_ID();
+    END IF;
+
+    -- Insert new address using the town id and the manager as the user owner
+    INSERT INTO addresses (address, town, user)
+    VALUES (p_address, v_town_id, NULL);
+    SET v_address_id = LAST_INSERT_ID();
+
+    -- Insert a new restaurant record
+    INSERT INTO restaurants (restaurant, logo, address, reputation, manager)
+    VALUES (p_restaurant, p_logo, v_address_id, p_reputation, p_manager);
+    SET v_restaurant_id = LAST_INSERT_ID();
+
+    -- Insert open hours for every day (handle nulls for days off)
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_mon, p_closes_mon, 'Понеделник');
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_tue, p_closes_tue, 'Вторник');
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_wed, p_closes_wed, 'Сряда');
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_thu, p_closes_thu, 'Четвъртък');
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_fri, p_closes_fri, 'Петък');
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_sat, p_closes_sat, 'Събота');
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_sun, p_closes_sun, 'Неделя');
+END //
+
+DELIMITER ;

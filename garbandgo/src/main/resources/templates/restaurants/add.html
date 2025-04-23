@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+    <title>Grab and go - Restaurants</title>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/restaurants">Our restaurants</a></li>
+            <li><a href="/aboutUs">About us</a></li>
+            <li><a href="/contact">Contacts</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+<section>
+    <h1>Add New Restaurant</h1>
+    <form th:action="@{/restaurants/add}" method="post">
+        <label for="restaurant">Restaurant Name:</label>
+        <input type="text" id="restaurant" name="restaurant" required /><br/>
+
+        <label for="logo">Logo URL:</label>
+        <input type="text" id="logo" name="logo" required /><br/>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required /><br/>
+
+        <label for="town">Town Name:</label>
+        <input type="text" id="town" name="town" required /><br/>
+
+        <input type="hidden" id="country" name="country" required value="1" /><br/>
+
+        <label for="zipCode">Zip Code:</label>
+        <input type="text" id="zipCode" name="zipCode" required /><br/>
+
+        <label for="reputation">Reputation:</label>
+        <input type="number" step="0.1" id="reputation" name="reputation" required /><br/>
+
+        <h3>Open Hours (if closed, leave blank)</h3>
+
+        <h4>Monday</h4>
+        <label for="opensMon">Opens at:</label>
+        <input type="text" id="opensMon" name="opensMon" placeholder="08:00:00" />
+        <label for="closesMon">Closes at:</label>
+        <input type="text" id="closesMon" name="closesMon" placeholder="22:00:00" /><br/>
+
+        <h4>Tuesday</h4>
+        <label for="opensTue">Opens at:</label>
+        <input type="text" id="opensTue" name="opensTue" placeholder="08:00:00" />
+        <label for="closesTue">Closes at:</label>
+        <input type="text" id="closesTue" name="closesTue" placeholder="22:00:00" /><br/>
+
+        <h4>Wednesday</h4>
+        <label for="opensWed">Opens at:</label>
+        <input type="text" id="opensWed" name="opensWed" placeholder="08:00:00" />
+        <label for="closesWed">Closes at:</label>
+        <input type="text" id="closesWed" name="closesWed" placeholder="22:00:00" /><br/>
+
+        <h4>Thursday</h4>
+        <label for="opensThu">Opens at:</label>
+        <input type="text" id="opensThu" name="opensThu" placeholder="08:00:00" />
+        <label for="closesThu">Closes at:</label>
+        <input type="text" id="closesThu" name="closesThu" placeholder="22:00:00" /><br/>
+
+        <h4>Friday</h4>
+        <label for="opensFri">Opens at:</label>
+        <input type="text" id="opensFri" name="opensFri" placeholder="08:00:00" />
+        <label for="closesFri">Closes at:</label>
+        <input type="text" id="closesFri" name="closesFri" placeholder="22:00:00" /><br/>
+
+        <h4>Saturday</h4>
+        <label for="opensSat">Opens at:</label>
+        <input type="text" id="opensSat" name="opensSat" placeholder="08:00:00" />
+        <label for="closesSat">Closes at:</label>
+        <input type="text" id="closesSat" name="closesSat" placeholder="22:00:00" /><br/>
+
+        <h4>Sunday</h4>
+        <label for="opensSun">Opens at:</label>
+        <input type="text" id="opensSun" name="opensSun" placeholder="08:00:00" />
+        <label for="closesSun">Closes at:</label>
+        <input type="text" id="closesSun" name="closesSun" placeholder="22:00:00" /><br/>
+
+        <button type="submit">Add Restaurant</button>
+    </form>
+
+    <!-- Display success or error messages -->
+    <div th:if="${message}">
+        <p th:text="${message}" style="color: green;"></p>
+    </div>
+    <div th:if="${error}">
+        <p th:text="${error}" style="color: red;"></p>
+    </div>
+
+</section>
+<footer>
+    <div class="footer-logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <div class="footer-data">
+        <div class="links">
+            <h4>Links</h4>
+            <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Frequently asked questions</a></li>
+            </ul>
+        </div>
+        <div class="social">
+            <h4>Social</h4>
+            <ul>
+                <li><a href="facebook.com">Facebook</a></li>
+                <li><a href="instagram.com">Instagram</a></li>
+                <li><a href="linkedin.com">LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="policies">
+            <h4>Policies</h4>
+            <ul>
+                <li><a href="#">Terms and conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
