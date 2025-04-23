@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="dashboards.css">
+    <link rel="stylesheet" href="../../static/css/dashboards.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Grab&go</title>
@@ -13,7 +13,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="/">Home</a></li>
+                <li><a href="/static">Home</a></li>
                 <li><a href="/restaurants">Our restaurants</a></li>
                 <li><a href="/aboutUs">About us</a></li>
                 <li><a href="/contact">Contacts</a></li>
@@ -26,8 +26,6 @@
             <div class="sidebar">
                 <button onclick="showSection('info')">Information</button>
                 <button onclick="showSection('orders')">Orders</button>
-                <button onclick="showSection('employees')">Employees</button>
-                <button onclick="showSection('managers')">Managers</button>
                 <button onclick="showSection('delivery')">Delivery</button>
                 <button onclick="showSection('logout')">Log out</button>
             </div>
@@ -40,14 +38,6 @@
                     <h1>Orders</h1>
                     <p>Your active and past orders will appear here.</p>
                 </section>
-                <section id="employees" class="dashboard-section">
-                    <h1>Employees</h1>
-                    <p>Here you can add a new employees.</p>
-                </section>
-                <section id="managers" class="dashboard-section">
-                    <h1>Managers</h1>
-                    <p>Here you can add a new managers.</p>
-                </section>
                 <section id="delivery" class="dashboard-section">
                     <h1>Delivery</h1>
                     <p>Here you can see all delivery.</p>
@@ -59,6 +49,6 @@
             </div>
         </div>
     </main>
-    <script src="dashboard.js"></script>
+    <script src="../../static/css/js/dashboard.js"></script>
 </body>
 </html>

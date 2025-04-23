@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/profilePage.css}">
-    <title>Profile</title>
+    <title>Login</title>
 </head>
 <body>
 <header>
@@ -19,19 +19,24 @@
         </ul>
     </nav>
 </header>
+
 <div class="login">
     <form th:action="@{/login}" method="post">
         <h2>Log In</h2>
-        <label for="email">Email address:</label><br>
-        <input type="email" id="email" name="email" placeholder="Enter your address"><br><br>
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" placeholder="Enter your username"><br><br>
+
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password"><br><br>
+
         <button type="submit">Log in</button>
+
         <div th:if="${param.error}">
-            <p style="color: red;">Invalid email or password. Please try again.</p>
+            <p style="color: red;">Invalid username or password. Please try again.</p>
         </div>
+
         <a th:href="@{/forgot-password}"><p>Forgotten password?</p></a>
-        <a th:href="@{/register}"><p>Sign in? Register here!</p></a>
+        <a th:href="@{/register}"><p>Don't have an account? Register here!</p></a>
     </form>
 </div>
 </body>

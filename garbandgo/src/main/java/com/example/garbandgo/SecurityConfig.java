@@ -1,39 +1,56 @@
 package com.example.garbandgo;
 
+import com.example.garbandgo.service.CustomAuthenticationSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+
+    private final CustomAuthenticationSuccessHandler successHandler;
+
+    public SecurityConfig(CustomAuthenticationSuccessHandler successHandler) {
+        this.successHandler = successHandler;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Позволяваме публичен достъп до login страницата, aboutUs и статични ресурси
-                        .requestMatchers("/","/aboutUs","/products/list","/login", "/aboutUs", "/css/**", "/js/**", "/images/**", "/register")
-                        .permitAll()
-                        // Всички останали заявки изискват автентикация
+                        .requestMatchers("/login", "/register", "/css/**", "/images/**", "/", "/aboutUs", "/contact", "/restaurants").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")            // URL на custom login страницата
-                        .loginProcessingUrl("/login")   // URL, към който се изпраща формата с POST
-                        .defaultSuccessUrl("/aboutUs", true) // При успешен логин винаги се пренасочва към /aboutUs
+                        .loginPage("/login")
+                        .successHandler(successHandler) // 👉 динамично пренасочване по роля
                         .permitAll()
                 )
-                .logout(logout -> logout
-                        .permitAll()
-                )
-                .csrf(csrf -> csrf.disable());       // Деактивира CSRF (ползвайте с внимание)
+                .logout(logout -> logout.permitAll());
 
         return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
