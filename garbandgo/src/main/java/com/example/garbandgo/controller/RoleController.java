@@ -1,14 +1,14 @@
 package com.example.garbandgo.controller;
 
 import com.example.garbandgo.entities.Role;
+import com.example.garbandgo.entities.User;
 import com.example.garbandgo.service.RoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 @Controller
-@RequestMapping("/roles")  // Updated base path to make it unique
+@RequestMapping("/roles")
 public class RoleController {
     private final RoleService roleService;
 
@@ -16,20 +16,32 @@ public class RoleController {
         this.roleService = roleService;
     }
 
+    // GET /roles/register – показва формата за регистрация (пример: регистрация на потребител с роля)
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+        User user = new User();
+        user.setRole(new Role());
+        model.addAttribute("user", user);
+        return "users/register";
+    }
+
+    // GET /roles – може да върне някакъв index/начална страница за ролите
     @GetMapping
     public String index() {
-        return "index";  // Path: /roles
+        return "index";
     }
 
-    @GetMapping("/list")  // Updated mapping for listing roles
+    // GET /roles/list – показва списък с роли
+    @GetMapping("/list")
     public String listRoles(Model model) {
         model.addAttribute("role", roleService.getRolesRepository());
-        return "role";  // Path: /roles/list
+        return "role";
     }
 
-    @PostMapping("/add")  // Updated mapping for adding roles
+    // POST /roles/add – обработва формата за добавяне на нова роля
+    @PostMapping("/add")
     public String addRoles(@ModelAttribute Role role) {
         roleService.saveRoles(role);
-        return "redirect:/roles/list";  // Redirects to /roles/list
+        return "redirect:/roles/list";
     }
 }

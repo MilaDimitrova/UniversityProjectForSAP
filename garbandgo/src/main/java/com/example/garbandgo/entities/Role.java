@@ -34,17 +34,15 @@ public class Role implements Serializable {
         return role;
     }
 
-    public Role setRole(String role) {
+    public void setRole(String role) {
         this.role = role;
-        return this;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public Role setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 }

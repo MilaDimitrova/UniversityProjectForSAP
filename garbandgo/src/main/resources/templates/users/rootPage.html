@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="dashboards.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Grab&go</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/restaurants">Our restaurants</a></li>
+                <li><a href="/aboutUs">About us</a></li>
+                <li><a href="/contact">Contacts</a></li>
+                <li><a href="/profile">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="content">
+            <div class="sidebar">
+                <button onclick="showSection('info')">Information</button>
+                <button onclick="showSection('orders')">Orders</button>
+                <button onclick="showSection('employees')">Employees</button>
+                <button onclick="showSection('managers')">Managers</button>
+                <button onclick="showSection('delivery')">Delivery</button>
+                <button onclick="showSection('logout')">Log out</button>
+            </div>
+            <div class="main-content">
+                <section id="info" class="dashboard-section">
+                    <h1>Information</h1>
+                    <p>Here you can see all the details about Grab&go.</p>
+                </section>
+                <section id="orders" class="dashboard-section" style="display: none;">
+                    <h1>Orders</h1>
+                    <p>Your active and past orders will appear here.</p>
+                </section>
+                <section id="employees" class="dashboard-section">
+                    <h1>Employees</h1>
+                    <p>Here you can add a new employees.</p>
+                </section>
+                <section id="managers" class="dashboard-section">
+                    <h1>Managers</h1>
+                    <p>Here you can add a new managers.</p>
+                </section>
+                <section id="delivery" class="dashboard-section">
+                    <h1>Delivery</h1>
+                    <p>Here you can see all delivery.</p>
+                </section>
+                <section id="logout" class="dashboard-section" style="display: none;">
+                    <h1>Log out</h1>
+                    <p>Thank you for using Grab&go. See you again soon!</p>
+                </section>
+            </div>
+        </div>
+    </main>
+    <script src="dashboard.js"></script>
+</body>
+</html>

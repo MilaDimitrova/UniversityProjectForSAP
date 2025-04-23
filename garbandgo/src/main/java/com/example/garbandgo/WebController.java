@@ -28,11 +28,16 @@ public class WebController {
 
     @GetMapping("/profile")
     public String profilePage() {
-        return "profilePage";
+        return "users/login"; // Ако login.html е профилната страница
     }
 
     @GetMapping("/registration")
     public String registrationPage() {
-        return "registrationPage";
+        return "register";
+    }
+
+    @GetMapping("/users/rootPage")
+    public String rootPageProfile() {
+        return "rootPage";
     }
 }
