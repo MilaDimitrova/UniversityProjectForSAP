@@ -23,19 +23,19 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             String role = authority.getAuthority();
             switch (role) {
                 case "ROLE_ADMIN":
-                    redirectUrl = "/admin/dashboard";
+                    redirectUrl = "/admin/rootPage";
                     break;
                 case "ROLE_USER":
                     redirectUrl = "/user/userPage";
                     break;
                 case "ROLE_COURIER":
-                    redirectUrl = "/courier/dashboard";
+                    redirectUrl = "/courier/deliveryPage";
                     break;
                 case "ROLE_REST_OWNER":
-                    redirectUrl = "/rest-owner/dashboard";
+                    redirectUrl = "/rest_owner/restOwner";
                     break;
                 case "ROLE_MANAGER":
-                    redirectUrl = "/manager/dashboard";
+                    redirectUrl = "/manager/managerPage";
                     break;
             }
         }

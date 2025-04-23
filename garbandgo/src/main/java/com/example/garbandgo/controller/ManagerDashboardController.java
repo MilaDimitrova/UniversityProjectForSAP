@@ -4,10 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class UserDashboardController {
-
-    @GetMapping("/user/userPage")
-    public String userDashboard() {
-        return "user/userPage";
+public class ManagerDashboardController {
+    @GetMapping("/manager/managerPage")
+    public String dashboard() {
+        return "manager/managerPage"; // managerPage.html
     }
 }
