@@ -18,7 +18,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         // Позволяваме публичен достъп до login страницата, aboutUs и статични ресурси
-                        .requestMatchers("/","/login", "/aboutUs", "/css/**", "/js/**", "/images/**", "/register")
+                        .requestMatchers("/","/products/list","/login", "/aboutUs", "/css/**", "/js/**", "/images/**", "/register")
                         .permitAll()
                         // Всички останали заявки изискват автентикация
                         .anyRequest().authenticated()
