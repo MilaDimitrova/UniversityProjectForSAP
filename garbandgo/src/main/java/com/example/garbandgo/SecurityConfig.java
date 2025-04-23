@@ -12,13 +12,28 @@ public class SecurityConfig {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll() // Allows access to all routes
+                        // Позволяваме публичен достъп до login страницата, aboutUs и статични ресурси
+                        .requestMatchers("/login", "/aboutUs", "/css/**", "/js/**", "/images/**", "/register")
+                        .permitAll()
+                        // Всички останали заявки изискват автентикация
+                        .anyRequest().authenticated()
                 )
-                .csrf(csrf -> csrf.disable()); // Disables CSRF protection (use with caution)
+                .formLogin(form -> form
+                        .loginPage("/login")            // URL на custom login страницата
+                        .loginProcessingUrl("/login")   // URL, към който се изпраща формата с POST
+                        .defaultSuccessUrl("/aboutUs", true) // При успешен логин винаги се пренасочва към /aboutUs
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .permitAll()
+                )
+                .csrf(csrf -> csrf.disable());       // Деактивира CSRF (ползвайте с внимание)
+
         return http.build();
     }
 }
