@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
-    <title>Grab and go - Restaurants</title>
+    <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
+    <title>Grab and go - Restaurant view</title>
 </head>
 <body>
 <header>
@@ -20,12 +20,12 @@
     </nav>
 </header>
 <section>
-    <h2 th:text="${restaurants[0].restaurant}"></h2>
+    <h2 th:text="${restaurant[0].restaurant}"></h2>
     <br>
     <img th:src="@{/images/restaurant.jpg}" alt="Restaurant">
     <ul>
-        <li th:each="open_hour : ${restaurants}">
-            <span th:text="${open_hour.opensAt}"></span><span th:text="${open_hour.closesAt}"></span>
+        <li th:each="open_hour : ${restaurant}">
+            <span th:text="${open_hour.opensAt}"></span>-<span th:text="${open_hour.closesAt}"></span>
         </li>
     </ul>
 </section>

@@ -3,6 +3,7 @@ package com.example.garbandgo.controller;
 import com.example.garbandgo.dto.RestaurantWithFullData;
 import com.example.garbandgo.entities.Restaurant;
 import com.example.garbandgo.service.RestaurantService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @Controller
@@ -24,19 +27,20 @@ public class RestaurantController {
     // GET /restaurants - Index: Retrieve all restaurants
     @GetMapping("/index")
     public String index(Model model) {
-        List<Restaurant> restaurants = restaurantService.getAllRestaurants();
+        List<RestaurantWithFullData> restaurants = restaurantService.getAllRestaurants();
         model.addAttribute("restaurants", restaurants);
         return "restaurants/index";
     }
 
     // GET /restaurants/{id} - Show: Retrieve a single restaurant by its ID
     @GetMapping("/{id}")
-    public ResponseEntity<RestaurantWithFullData> show(@PathVariable Integer id) {
-        RestaurantWithFullData restaurant = restaurantService.getRestaurantById(id);
+    public String show(@PathVariable Integer id, Model model) {
+        List<RestaurantWithFullData> restaurant = restaurantService.getRestaurantById(id);
         if (restaurant != null) {
-            return ResponseEntity.ok(restaurant);
+            model.addAttribute("restaurant", restaurant);
+            return "restaurants/show";
         } else {
-            return ResponseEntity.notFound().build();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant not found");
         }
     }
 
