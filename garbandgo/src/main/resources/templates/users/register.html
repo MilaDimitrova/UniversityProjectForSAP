@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/registrationPage.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
 </head>
 <body>
@@ -24,8 +26,8 @@
     <form th:action="@{/register}" th:object="${user}" method="post">
         <h2>Registration</h2>
 
-        <!-- Скритото поле използва binding към role.id, за да зададе стойност "2" -->
-        <input type="hidden" th:field="*{role.id}" th:value="2" />
+        <!-- Скритото поле за Role ID -->
+        <input type="hidden" name="role.id" value="2" />
 
         <label th:for="*{username}">Name:</label><br>
         <input type="text" th:field="*{username}" placeholder="JohnDoe" required /><br><br>
@@ -37,7 +39,7 @@
         <input type="tel" th:field="*{phone}" placeholder="Enter your phone number" pattern="\d{10}" required /><br><br>
 
         <label th:for="*{password}">Password:</label><br>
-        <input type="password" th:field="*{password}" required /><br><br>
+        <input type="password" th:field="*{password}" placeholder="Enter password" required /><br><br>
 
         <button type="submit">Register me</button>
 
