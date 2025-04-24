@@ -1,6 +1,8 @@
 package com.example.garbandgo.entities;
 
 import jakarta.persistence.*;
+import com.example.garbandgo.entities.User;
+import com.example.garbandgo.entities.Town;
 
 import java.io.Serializable;
 
@@ -28,9 +30,8 @@ public class Address implements Serializable {
         return user;
     }
 
-    public Address setUser(User user) {
+    public void setUser(User user) {
         this.user = user;
-        return this;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -39,9 +40,8 @@ public class Address implements Serializable {
         return town;
     }
 
-    public Address setTown(Town town) {
+    public void setTown(Town town) {
         this.town = town;
-        return this;
     }
 
     @Column(name = "address", nullable = false, length = 150)
@@ -49,17 +49,15 @@ public class Address implements Serializable {
         return address;
     }
 
-    public Address setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
-        return this;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public Address setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 }

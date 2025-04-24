@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
+    <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
+    <title>Grab and go - Restaurants</title>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/restaurants">Our restaurants</a></li>
+            <li><a href="/aboutUs">About us</a></li>
+            <li><a href="/contact">Contacts</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+<section>
+    <h2>Our restaurants</h2>
+    <ul>
+        <li th:each="restaurant : ${restaurants}">
+            <h3>
+                <a th:text="${restaurant.restaurant}" th:href="@{/restaurants/{id}(id=${restaurant.id})}"></a>
+            </h3>
+        <img th:src="${restaurant.logo}" alt="Restaurant">
+        </li>
+    </ul>
+</section>
+<footer>
+    <div class="footer-logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <div class="footer-data">
+        <div class="links">
+            <h4>Links</h4>
+            <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Frequently asked questions</a></li>
+            </ul>
+        </div>
+        <div class="social">
+            <h4>Social</h4>
+            <ul>
+                <li><a href="facebook.com">Facebook</a></li>
+                <li><a href="instagram.com">Instagram</a></li>
+                <li><a href="linkedin.com">LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="policies">
+            <h4>Policies</h4>
+            <ul>
+                <li><a href="#">Terms and conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
