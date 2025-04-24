@@ -27,10 +27,13 @@ public class Order implements Serializable {
     @JoinColumn(name = "promocode", referencedColumnName = "id")
     private Promocode promocode;
 
-    // Ако имаш User ентитет
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "delivered_by", referencedColumnName = "id")
+    private User deliveredBy;
 
     public Integer getId() {
         return id;
@@ -85,4 +88,26 @@ public class Order implements Serializable {
         this.user = user;
         return this;
     }
+
+    public User getDeliveredBy() {
+        return deliveredBy;
+    }
+
+    public Order setDeliveredBy(User deliveredBy) {
+        this.deliveredBy = deliveredBy;
+        return this;
+    }
+
+    @Column(name = "delivered_at")
+    private LocalDateTime deliveredAt;
+
+    public LocalDateTime getDeliveredAt() {
+        return deliveredAt;
+    }
+
+    public Order setDeliveredAt(LocalDateTime deliveredAt) {
+        this.deliveredAt = deliveredAt;
+        return this;
+    }
+
 }

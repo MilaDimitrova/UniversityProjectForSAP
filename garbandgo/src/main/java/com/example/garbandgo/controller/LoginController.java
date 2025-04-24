@@ -8,7 +8,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginForm() {
-        return "users/login"; // Увери се, че login.html е в templates/users/
+        return "users/login";
     }
 
     @PostMapping("/login")

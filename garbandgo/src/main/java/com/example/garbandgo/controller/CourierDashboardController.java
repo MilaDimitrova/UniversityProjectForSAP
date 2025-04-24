@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -48,7 +49,7 @@ public class CourierDashboardController {
                 .orElseThrow(() -> new IllegalArgumentException("Потребителят не е намерен."));
 
         order.setDeliveredBy(courier);
-        order.setDeliveredAt(Instant.now());
+        order.setDeliveredAt(LocalDateTime.from(Instant.now()));
         orderRepository.save(order);
 
         return "redirect:/courier/deliveryPage";
@@ -59,7 +60,7 @@ public class CourierDashboardController {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new IllegalArgumentException("Поръчката не е намерена."));
 
-        order.setDeliveredAt(Instant.now());
+        order.setDeliveredAt(LocalDateTime.from(Instant.now()));
         orderRepository.save(order);
 
         return "redirect:/courier/deliveryPage";

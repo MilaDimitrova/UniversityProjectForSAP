@@ -5,6 +5,8 @@ import com.example.garbandgo.entities.Order;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity(name = "CancelledOrder")
 @Table(name = "cancelled_orders", indexes = {
@@ -41,7 +43,6 @@ public class CancelledOrder implements Serializable {
 
     @Lob
     @Column(name = "reason", nullable = false)
-    private String reason;
 
     public Integer getId() {
         return id;
@@ -71,9 +72,6 @@ public class CancelledOrder implements Serializable {
         return this;
     }
 
-    public Integer getId() {
-        return id;
-    }
 
     public CancelledOrder setId(Integer id) {
         this.id = id;
