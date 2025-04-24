@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/profilePage.css}">
+    <title>Profile</title>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a th:href="@{/restaurants/}">Our restaurants</a></li>
+            <li><a href="/aboutUs">About us</a></li>
+            <li><a href="/contact">Contacts</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="login">
+    <form action="/login">
+        <h2>Log In</h2>
+        <label for="email">Email address:</label><br>
+        <input type="email" id="email" placeholder="Enter your address"><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password"><br><br>
+        <button type="submit" value="Submit">Log in</button>
+        <a href=""><p>Forgotten password?</p></a>
+        <a href="/registration"><p>Sign in?Register here!</p></a>
+    </form>
+</div>
+</body>
+</html>

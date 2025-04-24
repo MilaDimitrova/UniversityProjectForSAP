@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Time;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/restaurants")
@@ -31,7 +32,7 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     // GET /restaurants - Index: Retrieve all restaurants
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index(Model model) {
         List<RestaurantWithFullData> restaurants = restaurantService.getAllRestaurants();
         model.addAttribute("restaurants", restaurants);
@@ -118,25 +119,92 @@ public class RestaurantController {
 
     }
 
-    // PUT /restaurants/{id} - Update: Update an existing restaurant
-    @PutMapping("/{id}")
-    public ResponseEntity<Restaurant> update(@PathVariable Integer id, @RequestBody Restaurant updatedRestaurant) {
-        Restaurant restaurant = restaurantService.updateRestaurant(id, updatedRestaurant);
-        if (restaurant != null) {
-            return ResponseEntity.ok(restaurant);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/edit/{id}")
+    public String showEditRestaurantForm(@PathVariable("id") int restaurantId, Model model) {
+        // In a real application, retrieve existing details from a repository/service.
+        // Here we assume restaurantService.getRestaurantDetails(id) returns a Map containing values.
+        List<RestaurantWithFullData> restaurantDetails = restaurantService.getRestaurantById(restaurantId);
+        model.addAttribute("restaurantDetails", restaurantDetails);
+        return "restaurants/edit";
     }
 
-    // DELETE /restaurants/{id} - Delete: Remove a restaurant by its ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        boolean deleted = restaurantService.deleteRestaurant(id);
-        if (deleted) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
+
+    // PUT /restaurants/{id} - Update: Update an existing restaurant
+    @PutMapping("/edit/{id}")
+    public String updateRestaurant(
+            @PathVariable("id") Integer restaurantId,
+            @RequestParam String restaurant,
+            @RequestParam String logo,
+            @RequestParam Double reputation,
+            @RequestParam String address,
+            @RequestParam String town,
+            @RequestParam String country,
+            @RequestParam String zipCode,
+            @RequestParam(required = false) String opensMon,
+            @RequestParam(required = false) String closesMon,
+            @RequestParam(required = false) String opensTue,
+            @RequestParam(required = false) String closesTue,
+            @RequestParam(required = false) String opensWed,
+            @RequestParam(required = false) String closesWed,
+            @RequestParam(required = false) String opensThu,
+            @RequestParam(required = false) String closesThu,
+            @RequestParam(required = false) String opensFri,
+            @RequestParam(required = false) String closesFri,
+            @RequestParam(required = false) String opensSat,
+            @RequestParam(required = false) String closesSat,
+            @RequestParam(required = false) String opensSun,
+            @RequestParam(required = false) String closesSun,
+            //Authentication authentication,
+            RedirectAttributes redirectAttributes) {
+
+        //User manager = (User) authentication.getPrincipal();
+
+        try {
+            Time tOpensMon = (opensMon == null || opensMon.trim().isEmpty()) ? null : Time.valueOf(opensMon);
+            Time tClosesMon = (closesMon == null || closesMon.trim().isEmpty()) ? null : Time.valueOf(closesMon);
+            Time tOpensTue = (opensTue == null || opensTue.trim().isEmpty()) ? null : Time.valueOf(opensTue);
+            Time tClosesTue = (closesTue == null || closesTue.trim().isEmpty()) ? null : Time.valueOf(closesTue);
+            Time tOpensWed = (opensWed == null || opensWed.trim().isEmpty()) ? null : Time.valueOf(opensWed);
+            Time tClosesWed = (closesWed == null || closesWed.trim().isEmpty()) ? null : Time.valueOf(closesWed);
+            Time tOpensThu = (opensThu == null || opensThu.trim().isEmpty()) ? null : Time.valueOf(opensThu);
+            Time tClosesThu = (closesThu == null || closesThu.trim().isEmpty()) ? null : Time.valueOf(closesThu);
+            Time tOpensFri = (opensFri == null || opensFri.trim().isEmpty()) ? null : Time.valueOf(opensFri);
+            Time tClosesFri = (closesFri == null || closesFri.trim().isEmpty()) ? null : Time.valueOf(closesFri);
+            Time tOpensSat = (opensSat == null || opensSat.trim().isEmpty()) ? null : Time.valueOf(opensSat);
+            Time tClosesSat = (closesSat == null || closesSat.trim().isEmpty()) ? null : Time.valueOf(closesSat);
+            Time tOpensSun = (opensSun == null || opensSun.trim().isEmpty()) ? null : Time.valueOf(opensSun);
+            Time tClosesSun = (closesSun == null || closesSun.trim().isEmpty()) ? null : Time.valueOf(closesSun);
+
+            restaurantService.updateRestaurant(
+                    restaurantId, restaurant, logo, reputation,
+                    //address, town, Integer.parseInt(country), zipCode, manager.getId(),
+                    address, town, Integer.parseInt(country), zipCode, 1,
+                    tOpensMon, tClosesMon,
+                    tOpensTue, tClosesTue,
+                    tOpensWed, tClosesWed,
+                    tOpensThu, tClosesThu,
+                    tOpensFri, tClosesFri,
+                    tOpensSat, tClosesSat,
+                    tOpensSun, tClosesSun
+            );
+
+            redirectAttributes.addFlashAttribute("message", "Restaurant updated successfully!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error updating restaurant: " + e.getMessage());
         }
+        return "redirect:/restaurants/"+restaurantId;
+    }
+
+
+    // DELETE /restaurants/{id} - Delete: Remove a restaurant by its ID
+    @DeleteMapping("/delete/{id}")
+    public String deleteRestaurant(@PathVariable("id") int restaurantId, RedirectAttributes redirectAttributes) {
+        try {
+            restaurantService.deleteRestaurant(restaurantId);
+            redirectAttributes.addFlashAttribute("message", "Restaurant and address deleted successfully!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error deleting restaurant: " + e.getMessage());
+        }
+        return "redirect:/restaurants";
     }
 }

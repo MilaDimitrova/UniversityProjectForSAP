@@ -13,8 +13,20 @@ public class RestaurantWithFullData {
         private final String dayOfWeek;
         private final String address;
         private final String town;
+        private final String country;
+        private final String zipCode;
 
-        public RestaurantWithFullData(Integer id, String restaurant, String logo, Float reputation, Time opensAt, Time closesAt, String dayOfWeek, String address, String town) {
+        public RestaurantWithFullData(Integer id,
+                                      String restaurant,
+                                      String logo,
+                                      Float reputation,
+                                      Time opensAt,
+                                      Time closesAt,
+                                      String dayOfWeek,
+                                      String address,
+                                      String town,
+                                      String country,
+                                      String zipCode) {
                 this.id = id;
                 this.restaurant = restaurant;
                 this.logo = logo;
@@ -24,6 +36,8 @@ public class RestaurantWithFullData {
                 this.dayOfWeek = dayOfWeek;
                 this.address = address;
                 this.town = town;
+                this.zipCode = zipCode;
+                this.country  = country;
         }
 
         public Integer getId() {
@@ -56,5 +70,15 @@ public class RestaurantWithFullData {
 
         public String getTown() {
                 return town;
+        }
+
+        public String getCountry() { return  country;}
+
+        public String getLogo() {
+                return logo;
+        }
+
+        public String getZipCode() {
+                return zipCode;
         }
 }

@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
+    <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
     <title>Grab and go - Restaurants</title>
 </head>
 <body>
@@ -26,7 +27,7 @@
             <h3>
                 <a th:text="${restaurant.restaurant}" th:href="@{/restaurants/{id}(id=${restaurant.id})}"></a>
             </h3>
-        <img th:src="@{/images/restaurant.jpg}" alt="Restaurant">
+        <img th:src="${restaurant.logo}" alt="Restaurant">
         </li>
     </ul>
 </section>
