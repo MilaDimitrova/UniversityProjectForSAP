@@ -697,7 +697,7 @@ CREATE PROCEDURE update_restaurant_with_open_hours(
     IN p_address VARCHAR(150),
     IN p_town VARCHAR(200),
     IN p_country INT,
-    IN p_zip_code VARCHAR(4),
+    IN p_zip_code VARCHAR(20),
     IN p_manager INT,
     IN p_opens_mon TIME,
     IN p_closes_mon TIME,
@@ -718,13 +718,11 @@ BEGIN
     DECLARE v_address_id INT;
     DECLARE v_town_id INT;
 
-    -- 1. Retrieve the address id of the existing restaurant
     SELECT address INTO v_address_id
     FROM restaurants
     WHERE id = p_restaurant_id
     LIMIT 1;
 
-    -- 2. Look up the town id by name; if it doesn’t exist, insert it.
     SELECT id INTO v_town_id
     FROM towns
     WHERE town = p_town
@@ -736,14 +734,12 @@ BEGIN
         SET v_town_id = LAST_INSERT_ID();
     END IF;
 
-    -- 3. Update the address record with the new address and town
     UPDATE addresses
     SET address = p_address,
         town = v_town_id,
         user = p_manager
     WHERE id = v_address_id;
 
-    -- 4. Update the restaurant details itself
     UPDATE restaurants
     SET restaurant = p_restaurant,
         logo = p_logo,
@@ -751,7 +747,6 @@ BEGIN
         manager = p_manager
     WHERE id = p_restaurant_id;
 
-    -- 5. Update the open hours for each day using the new times.
     UPDATE restaurant_open_hours
     SET opens_at = p_opens_mon, closes_at = p_closes_mon
     WHERE restaurant = p_restaurant_id AND day_of_week = 'Monday';

@@ -59,14 +59,32 @@ public class RestaurantService {
 
 
     // Update an existing restaurant
-    public Restaurant updateRestaurant(Integer id, Restaurant updatedRestaurant) {
-        Optional<Restaurant> existingRestaurant = restaurantRepository.findById(id);
-        if (existingRestaurant.isPresent()) {
-            updatedRestaurant.setId(id);
-            return restaurantRepository.save(updatedRestaurant);
+    public void updateRestaurant(int restaurantId, String restaurant, String logo, double reputation,
+                                 String address, String town, int country, String zipCode, int manager,
+                                 Time opensMon, Time closesMon,
+                                 Time opensTue, Time closesTue,
+                                 Time opensWed, Time closesWed,
+                                 Time opensThu, Time closesThu,
+                                 Time opensFri, Time closesFri,
+                                 Time opensSat, Time closesSat,
+                                 Time opensSun, Time closesSun) {
+
+        String sql = "CALL update_restaurant_with_open_hours(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+        jdbcTemplate.update(sql,
+                restaurantId, restaurant, logo, reputation, address, town, country, zipCode, manager,
+                opensMon, closesMon,
+                opensTue, closesTue,
+                opensWed, closesWed,
+                opensThu, closesThu,
+                opensFri, closesFri,
+                opensSat, closesSat,
+                opensSun, closesSun
+        );}catch (Exception e){
+            System.out.println(e);
         }
-        return null;
     }
+
 
     // Delete a restaurant by its ID
     public boolean deleteRestaurant(Integer id) {

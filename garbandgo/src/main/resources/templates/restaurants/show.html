@@ -25,7 +25,7 @@
     <img th:src="@{/images/restaurant.jpg}" alt="Restaurant">
     <ul>
         <li th:each="open_hour : ${restaurant}">
-            <span th:text="${open_hour.opensAt}"></span>-<span th:text="${open_hour.closesAt}"></span>
+            <b th:text="${open_hour.dayOfWeek}">: </b><span th:text="${open_hour.opensAt}"></span>-<span th:text="${open_hour.closesAt}"></span>
         </li>
     </ul>
 </section>
