@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/css/dashboards.css}">
+    <link rel="stylesheet" th:href="@{/css/courierDashboard.css}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Courier Dashboard | Grab&go</title>
@@ -33,8 +33,36 @@
         </div>
         <div class="main-content">
             <section id="info" class="dashboard-section">
-                <h1>Information</h1>
-                <p>Here you can see all the details about Grab&go.</p>
+                <h1>Welcome to Your Courier Dashboard</h1>
+                <p>Hello <span th:text="${user.username}">Courier</span>!</p>
+
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h2>Today's Deliveries</h2>
+                        <p th:text="${deliveriesToday}">5</p>
+                    </div>
+                    <div class="card">
+                        <h2>Pending Deliveries</h2>
+                        <p th:text="${pendingDeliveries}">2</p>
+                    </div>
+                    <div class="card">
+                        <h2>Completed Deliveries</h2>
+                        <p th:text="${completedDeliveries}">15</p>
+                    </div>
+                    <div class="card">
+                        <h2>Average Rating</h2>
+                        <p th:text="${courierRating}">4.8</p>
+                    </div>
+                </div>
+
+                <div class="notifications">
+                    <h2>Notifications</h2>
+                    <ul>
+                        <li>You have 2 pending deliveries.</li>
+                        <li>New delivery route assigned.</li>
+                        <li>Remember to check-in at the hub by 9 AM.</li>
+                    </ul>
+                </div>
             </section>
 
             <section id="orders" class="dashboard-section" style="display: none;">
@@ -56,8 +84,8 @@
                     <tbody>
                     <tr th:each="order : ${availableOrders}">
                         <td th:text="${order.id}">1</td>
-                        <td th:text="${order.totalPrice} + ' лв.'">20.50 лв.</td>
-                        <td th:text="${#dates.format(order.dueToDelivery, 'yyyy-MM-dd HH:mm')}">2025-05-01</td>
+                        <td th:text="${order.totalPrice}">20.00</td>
+                        <td th:text="${#dates.format(order.dueDate, 'yyyy-MM-dd HH:mm')}">2025-04-25</td>
                         <td>
                             <form th:action="@{/courier/accept}" method="post">
                                 <input type="hidden" name="orderId" th:value="${order.id}" />
@@ -68,7 +96,7 @@
                     </tbody>
                 </table>
 
-                <h1>Your Active Deliveries</h1>
+                <h2>Your Active Deliveries</h2>
                 <table>
                     <thead>
                     <tr>
@@ -80,9 +108,9 @@
                     </thead>
                     <tbody>
                     <tr th:each="order : ${myDeliveries}">
-                        <td th:text="${order.id}">2</td>
-                        <td th:text="${order.user.username}">John Doe</td>
-                        <td th:text="${order.totalPrice} + ' лв.'">15.30 лв.</td>
+                        <td th:text="${order.id}">1</td>
+                        <td th:text="${order.customer.username}">JohnDoe</td>
+                        <td th:text="${order.totalPrice}">20.00</td>
                         <td>
                             <form th:action="@{/courier/delivered}" method="post">
                                 <input type="hidden" name="orderId" th:value="${order.id}" />
