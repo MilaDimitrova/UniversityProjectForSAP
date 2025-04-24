@@ -32,7 +32,7 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     // GET /restaurants - Index: Retrieve all restaurants
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index(Model model) {
         List<RestaurantWithFullData> restaurants = restaurantService.getAllRestaurants();
         model.addAttribute("restaurants", restaurants);
