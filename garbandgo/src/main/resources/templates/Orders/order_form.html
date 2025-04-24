@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
+    <title>Grab and go - New Order</title>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/restaurants">Our restaurants</a></li>
+            <li><a href="/aboutUs">About us</a></li>
+            <li><a href="/contact">Contacts</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h2>New Order</h2>
+
+    <form th:action="@{/orders}" th:object="${order}" method="post">
+        <label>Date:
+            <input type="date" th:field="*{orderDate}" required/>
+        </label><br/><br/>
+
+        <label>Total Price:
+            <input type="number" step="0.01" th:field="*{totalPrice}" required/>
+        </label><br/><br/>
+
+        <label>Status:
+            <input type="text" th:field="*{status}" required/>
+        </label><br/><br/>
+
+        <label>Promo Code:
+            <input type="text" th:field="*{promocode}"/>
+        </label><br/><br/>
+
+        <button type="submit">Save Order</button>
+    </form>
+
+    <br><br>
+
+    <div>
+        <a th:href="@{/reviews}" class="button-link">Go to Reviews</a> |
+        <a th:href="@{/cancelled_orders}" class="button-link">Cancel Order</a>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <div class="footer-data">
+        <div class="links">
+            <h4>Links</h4>
+            <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Frequently asked questions</a></li>
+            </ul>
+        </div>
+        <div class="social">
+            <h4>Social</h4>
+            <ul>
+                <li><a href="facebook.com">Facebook</a></li>
+                <li><a href="instagram.com">Instagram</a></li>
+                <li><a href="linkedin.com">LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="policies">
+            <h4>Policies</h4>
+            <ul>
+                <li><a href="#">Terms and conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
