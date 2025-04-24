@@ -197,13 +197,14 @@ public class RestaurantController {
 
 
     // DELETE /restaurants/{id} - Delete: Remove a restaurant by its ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        boolean deleted = restaurantService.deleteRestaurant(id);
-        if (deleted) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
+    @DeleteMapping("/delete/{id}")
+    public String deleteRestaurant(@PathVariable("id") int restaurantId, RedirectAttributes redirectAttributes) {
+        try {
+            restaurantService.deleteRestaurant(restaurantId);
+            redirectAttributes.addFlashAttribute("message", "Restaurant and address deleted successfully!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error deleting restaurant: " + e.getMessage());
         }
+        return "redirect:/restaurants";
     }
 }

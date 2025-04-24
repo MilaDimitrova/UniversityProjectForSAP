@@ -28,6 +28,11 @@
             <b th:text="${open_hour.dayOfWeek}">: </b><span th:text="${open_hour.opensAt}"></span>-<span th:text="${open_hour.closesAt}"></span>
         </li>
     </ul>
+    <a th:href="@{/restaurants/edit/{id}(id=${restaurant[0].id})}">Update restaurant</a>
+    <form th:action="@{/restaurants/delete/{id}(id=${restaurant[0].id})}" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        <input type="submit" value="Delete restaurant">
+    </form>
 </section>
 <footer>
     <div class="footer-logo">

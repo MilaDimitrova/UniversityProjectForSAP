@@ -70,7 +70,6 @@ public class RestaurantService {
                                  Time opensSun, Time closesSun) {
 
         String sql = "CALL update_restaurant_with_open_hours(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try {
         jdbcTemplate.update(sql,
                 restaurantId, restaurant, logo, reputation, address, town, country, zipCode, manager,
                 opensMon, closesMon,
@@ -80,18 +79,25 @@ public class RestaurantService {
                 opensFri, closesFri,
                 opensSat, closesSat,
                 opensSun, closesSun
-        );}catch (Exception e){
-            System.out.println(e);
-        }
+        );
     }
 
 
     // Delete a restaurant by its ID
-    public boolean deleteRestaurant(Integer id) {
-        if (restaurantRepository.existsById(id)) {
-            restaurantRepository.deleteById(id);
-            return true;
+    public void deleteRestaurant(int restaurantId) {
+        // Retrieve the address ID for the restaurant
+        String getAddressQuery = "SELECT address FROM restaurants WHERE id = ?";
+        Integer addressId = jdbcTemplate.queryForObject(getAddressQuery, Integer.class, restaurantId);
+
+        if (addressId != null) {
+            String deleteOpenHoursQuery = "DELETE FROM restaurant_open_hours WHERE restaurant = ?";
+            jdbcTemplate.update(deleteOpenHoursQuery, restaurantId);
+
+            String deleteRestaurantQuery = "DELETE FROM restaurants WHERE id = ?";
+            jdbcTemplate.update(deleteRestaurantQuery, restaurantId);
+
+            String deleteAddressQuery = "DELETE FROM addresses WHERE id = ?";
+            jdbcTemplate.update(deleteAddressQuery, addressId);
         }
-        return false;
     }
 }
