@@ -115,7 +115,7 @@ public class RestaurantController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error adding restaurant: " + e.getMessage());
         }
-        return "redirect:/restaurants/index";
+        return "redirect:/restaurants/";
 
     }
 
