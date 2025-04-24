@@ -7,7 +7,8 @@ INSERT INTO `roles` (`id`, `role`) VALUES
 (3, 'courier'),
 (4, 'delivery'),
 (5, 'manager');
-INSERT INTO `currencies`(`id`, `currency`) VALUES
+
+INSERT INTO `currencies` (`id`, `currency`) VALUES
 (1, 'BGN'),
 (2, 'EUR'),
 (3, 'USD');
