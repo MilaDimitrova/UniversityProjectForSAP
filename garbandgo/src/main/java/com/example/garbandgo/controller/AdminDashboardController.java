@@ -47,16 +47,18 @@ public class AdminDashboardController {
     @PostMapping("/admin/addManager")
     public String addManager(@RequestParam String username,
                              @RequestParam String email,
-                             @RequestParam String password) {
-        userService.registerManager(username, email, password);
+                             @RequestParam String password,
+                             @RequestParam String phone) {
+        userService.registerManager(username, email, password, phone);
         return "redirect:/admin/rootPage?managerAdded";
     }
 
     @PostMapping("/admin/addCourier")
     public String addCourier(@RequestParam String username,
                              @RequestParam String email,
-                             @RequestParam String password) {
-        userService.registerCourier(username, email, password);
+                             @RequestParam String password,
+                             @RequestParam String phone) {
+        userService.registerCourier(username, email, password, phone);
         return "redirect:/admin/rootPage?courierAdded";
     }
 }

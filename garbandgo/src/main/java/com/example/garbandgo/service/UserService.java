@@ -96,25 +96,27 @@ public class UserService {
         return passwordEncoder.encode(rawPassword);
     }
 
-    public void registerManager(String username, String email, String password) {
+    public void registerManager(String username, String email, String password, String phone) {
         Role role = roleRepository.findByRole("MANAGER")
                 .orElseThrow(() -> new IllegalArgumentException("Ролята MANAGER не е намерена."));
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
+        user.setPhone(phone);
         user.setRole(role);
         userRepository.save(user);
         logger.info("Добавен нов мениджър: {}", email);
     }
 
-    public void registerCourier(String username, String email, String password) {
+    public void registerCourier(String username, String email, String password, String phone) {
         Role role = roleRepository.findByRole("COURIER")
                 .orElseThrow(() -> new IllegalArgumentException("Ролята COURIER не е намерена."));
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
+        user.setPhone(phone);
         user.setRole(role);
         userRepository.save(user);
         logger.info("Добавен нов куриер: {}", email);

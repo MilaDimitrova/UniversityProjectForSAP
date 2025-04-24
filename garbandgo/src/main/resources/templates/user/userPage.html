@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Grab&Go</title>
-    <link rel="stylesheet" th:href="@{/css/dashboards.css}">
+    <link rel="stylesheet" th:href="@{/css/userDashboard.css}">
 </head>
 <body>
 <header>
@@ -61,8 +61,26 @@
                 </ul>
             </section>
             <section id="orders" class="dashboard-section" style="display: none;">
-                <h1>Orders</h1>
-                <p>Your active and past orders will appear here.</p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.id}">1</td>
+                        <td th:text="${#dates.format(order.orderedAt, 'yyyy-MM-dd')}">2025-04-20</td>
+                        <td th:text="${order.status}">Delivered</td>
+                        <td th:text="${order.totalPrice}">25.00</td>
+                        <td><a th:href="@{'/user/order/' + ${order.id}}">View</a></td>
+                    </tr>
+                    </tbody>
+                </table>
             </section>
             <section id="profile" class="dashboard-section" style="display: none;">
                 <h1>Profile Settings</h1>

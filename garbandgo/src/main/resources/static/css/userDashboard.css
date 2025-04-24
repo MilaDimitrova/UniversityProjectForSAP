@@ -253,3 +253,48 @@ nav ul li a:hover {
     background-color: #d18f00;
 }
 
+.dashboard-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.dashboard-section th, .dashboard-section td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.dashboard-section th {
+    background-color: #f0a500;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.dashboard-section tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.dashboard-section tr:hover {
+    background-color: #f1f1f1;
+}
+
+.dashboard-section td a {
+    color: #f0a500;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.dashboard-section td a:hover {
+    color: #d18f00;
+    text-decoration: underline;
+}

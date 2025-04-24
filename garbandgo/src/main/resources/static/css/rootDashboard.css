@@ -226,3 +226,85 @@ nav ul li a:hover {
 .dashboard-section button[type="submit"]:hover {
     background-color: #d18f00;
 }
+
+.stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    background: #fdf6ec;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    flex: 1;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.stat-item h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.stat-item p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+#delivery {
+    background-color: #fdf6ec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+#delivery h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#delivery table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#delivery table th, #delivery table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+#delivery table th {
+    background-color: #f0a500;
+    color: white;
+}
+
+#delivery table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#delivery table tr:hover {
+    background-color: #f1f1f1;
+}
+
+#delivery .status {
+    font-weight: bold;
+}
+
+#delivery .status.in-delivery {
+    color: #f0a500;
+}
+
+#delivery .status.delivered {
+    color: #28a745;
+}
+
+#delivery .status.cancelled {
+    color: #dc3545;
+}
