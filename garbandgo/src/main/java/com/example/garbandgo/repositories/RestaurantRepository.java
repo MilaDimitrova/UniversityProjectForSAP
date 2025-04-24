@@ -2,13 +2,16 @@ package com.example.garbandgo.repositories;
 
 import com.example.garbandgo.dto.RestaurantWithFullData;
 import com.example.garbandgo.entities.Restaurant;
+import com.example.garbandgo.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
+    Optional<Restaurant> findByManager(User manager);
     @Query(value="SELECT id, restaurant, logo, reputation, opensAt, closesAt, dayOfWeek, address, town, zipCode, country " +
             "FROM (" +
             "SELECT r.id, r.restaurant, r.logo, r.reputation, " +
@@ -33,5 +36,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
             "JOIN countries c ON t.country = c.id " +
             "WHERE r.id = :id;", nativeQuery = true)
     List<RestaurantWithFullData> findRestaurantWithFullData(@Param("id") Integer id);
+
+
 
 }

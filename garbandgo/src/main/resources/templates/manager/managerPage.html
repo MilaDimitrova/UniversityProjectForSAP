@@ -35,8 +35,37 @@
         </div>
         <div class="main-content">
             <section id="info" class="dashboard-section">
-                <h1>Information</h1>
-                <p>Here you can see all the details about Grab&go.</p>
+                <h1>Manager Dashboard Overview</h1>
+                <p>Welcome, <span th:text="${user.username}">Manager</span>!</p>
+
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h2>Total Orders Today</h2>
+                        <p th:text="${totalOrdersToday}">123</p>
+                    </div>
+                    <div class="card">
+                        <h2>Pending Deliveries</h2>
+                        <p th:text="${pendingDeliveries}">12</p>
+                    </div>
+                    <div class="card">
+                        <h2>Active Couriers</h2>
+                        <p th:text="${activeCouriers}">5</p>
+                    </div>
+                    <div class="card">
+                        <h2>Restaurant Reputation</h2>
+                        <p th:if="${restaurant != null}" th:text="${restaurant.reputation}">4.5</p>
+                        <p th:if="${restaurant == null}">No restaurant info available.</p>
+                    </div>
+                </div>
+
+                <div class="notifications">
+                    <h2>Notifications</h2>
+                    <ul>
+                        <li>New courier added successfully.</li>
+                        <li>3 new orders received in the last hour.</li>
+                        <li>Inventory check is due tomorrow.</li>
+                    </ul>
+                </div>
             </section>
             <section id="orders" class="dashboard-section" style="display: none;">
                 <h1>Orders</h1>
@@ -62,8 +91,36 @@
                 </form>
             </section>
             <section id="delivery" class="dashboard-section" style="display: none;">
-                <h1>Delivery</h1>
-                <p>Here you can see all deliveries.</p>
+                <h1>Delivery Overview</h1>
+                <p>Here you can see all active deliveries.</p>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Delivery ID</th>
+                        <th>Order ID</th>
+                        <th>Courier</th>
+                        <th>Status</th>
+                        <th>Estimated Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1001</td>
+                        <td>501</td>
+                        <td>John Doe</td>
+                        <td>In Transit</td>
+                        <td>15 min</td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>502</td>
+                        <td>Jane Smith</td>
+                        <td>Delivered</td>
+                        <td>—</td>
+                    </tr>
+                    </tbody>
+                </table>
             </section>
             <section id="profile" class="dashboard-section" style="display: none;">
                 <h1>Profile Settings</h1>

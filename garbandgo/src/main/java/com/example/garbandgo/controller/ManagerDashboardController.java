@@ -1,6 +1,8 @@
 package com.example.garbandgo.controller;
 
+import com.example.garbandgo.entities.Restaurant;
 import com.example.garbandgo.entities.User;
+import com.example.garbandgo.repositories.RestaurantRepository;
 import com.example.garbandgo.repositories.UserRepository;
 import com.example.garbandgo.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,17 +17,25 @@ public class ManagerDashboardController {
 
     private final UserService userService;
     private final UserRepository userRepository;
+    private final RestaurantRepository restaurantRepository;
 
-    public ManagerDashboardController(UserService userService, UserRepository userRepository) {
+    public ManagerDashboardController(UserService userService,
+                                      UserRepository userRepository,
+                                      RestaurantRepository restaurantRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
+        this.restaurantRepository = restaurantRepository;
     }
 
     @GetMapping("/managerPage")
     public String dashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         User user = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new IllegalArgumentException("Потребителят не е намерен."));
+
+        Restaurant restaurant = restaurantRepository.findByManager(user).orElse(null);
+
         model.addAttribute("user", user);
+        model.addAttribute("restaurant", restaurant);
         return "manager/managerPage";
     }
 
