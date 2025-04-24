@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Leave a Review</title>
+    <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
+    <style>
+        .review-form {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 25px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .review-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .review-form label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        .review-form input,
+        .review-form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        .review-form .star-rating {
+            direction: rtl;
+            display: flex;
+            justify-content: flex-start;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+        .review-form .star-rating input {
+            display: none;
+        }
+        .review-form .star-rating label {
+            color: #ccc;
+            cursor: pointer;
+        }
+        .review-form .star-rating input:checked ~ label,
+        .review-form .star-rating label:hover,
+        .review-form .star-rating label:hover ~ label {
+            color: gold;
+        }
+        .review-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .review-form button:hover {
+            background-color: #45a049;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            color: #4CAF50;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/restaurants">Our restaurants</a></li>
+            <li><a href="/aboutUs">About us</a></li>
+            <li><a href="/contact">Contacts</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <form class="review-form" th:action="@{/reviews/create}" th:object="${review}" method="post">
+        <h2>Leave a Review</h2>
+
+        <label>Rating:</label>
+        <div class="star-rating">
+            <input type="radio" th:field="*{rating}" id="star5" value="5"/><label for="star5">&#9733;</label>
+            <input type="radio" th:field="*{rating}" id="star4" value="4"/><label for="star4">&#9733;</label>
+            <input type="radio" th:field="*{rating}" id="star3" value="3"/><label for="star3">&#9733;</label>
+            <input type="radio" th:field="*{rating}" id="star2" value="2"/><label for="star2">&#9733;</label>
+            <input type="radio" th:field="*{rating}" id="star1" value="1"/><label for="star1">&#9733;</label>
+        </div>
+
+        <label>Comment:</label>
+        <textarea th:field="*{reviewText}" rows="4" placeholder="Write your experience here..."></textarea>
+
+        <label>Order ID:</label>
+        <input type="number" th:field="*{orderId}" placeholder="Enter Order ID" />
+
+        <button type="submit">Submit Review</button>
+
+        <a href="/reviews" class="back-button">⬅ Back to Reviews</a>
+    </form>
+
+</section>
+
+<footer>
+    <div class="footer-logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <div class="footer-data">
+        <div class="links">
+            <h4>Links</h4>
+            <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+        <div class="social">
+            <h4>Social</h4>
+            <ul>
+                <li><a href="facebook.com">Facebook</a></li>
+                <li><a href="instagram.com">Instagram</a></li>
+                <li><a href="linkedin.com">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
