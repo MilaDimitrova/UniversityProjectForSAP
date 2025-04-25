@@ -64,6 +64,7 @@ public class ProductsController {
         return "redirect:/products/manage/" + restaurantId;
     }
 
+
     @GetMapping("/edit/{productId}")
     public String editProductForm(@PathVariable Integer productId, Model model) {
         Product product = productsService.getProductById(productId);
