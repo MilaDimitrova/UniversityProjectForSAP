@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+    <link rel="stylesheet" th:href="@{/css/manageProducts.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Edit Product</h1>
+    <form th:action="@{/products/edit/{id}(id=${product.id})}" method="post" th:object="${product}">
+        <div>
+            <label for="name">Product Name:</label>
+            <input type="text" id="name" th:field="*{name}" required />
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}" rows="4" required></textarea>
+        </div>
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" th:field="*{price}" step="0.01" required />
+        </div>
+        <div>
+            <label for="deliveryPrice">Delivery Price:</label>
+            <input type="number" id="deliveryPrice" th:field="*{deliveryPrice}" step="0.01" required />
+        </div>
+        <div>
+            <label for="imageUrl">Image URL:</label>
+            <input type="text" id="imageUrl" th:field="*{imageUrl}" required />
+        </div>
+        <div>
+            <label for="currency">Currency:</label>
+            <input type="number" id="currency" th:field="*{currency}" required />
+        </div>
+        <div>
+            <label for="category">Category:</label>
+            <select id="category" th:field="*{category.id}" required>
+                <option value="" disabled>Select a category</option>
+                <option th:each="cat : ${categories}"
+                        th:value="${cat.id}"
+                        th:text="${cat.name}">
+                </option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Update Product</button>
+        </div>
+    </form>
+    <p>
+        <!-- Използваме параметризирана връзка за връщане -->
+        <a th:href="@{/products/manage/{restaurantId}(restaurantId=${product.restaurant.id})}">
+            Back to Manage Products
+        </a>
+    </p>
+</div>
+</body>
+</html>

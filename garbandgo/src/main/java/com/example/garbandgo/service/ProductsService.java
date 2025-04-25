@@ -3,9 +3,7 @@ package com.example.garbandgo.service;
 import com.example.garbandgo.entities.Product;
 import com.example.garbandgo.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductsService {
@@ -27,8 +25,9 @@ public class ProductsService {
         return productRepository.findByRestaurantId(restaurantId);
     }
 
-    public Optional<Product> findProductById(Integer id) {
-        return productRepository.findById(id);
+    public Product getProductById(Integer id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found with id " + id));
     }
 
     public void deleteProductById(Integer id) {
