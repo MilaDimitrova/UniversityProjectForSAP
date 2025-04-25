@@ -53,7 +53,7 @@ public class RestaurantController {
 
     @GetMapping("/add")
     public String getAddRestaurantView() {
-        return "restaurants/add"; // Thymeleaf will look for 'add.html' in '/resources/templates/restaurants/'
+        return "restaurants/add";
     }
 
 
@@ -80,7 +80,7 @@ public class RestaurantController {
                         @RequestParam(required = false) String closesSat,
                         @RequestParam(required = false) String opensSun,
                         @RequestParam(required = false) String closesSun,
-                        Authentication authentication,
+                        //Authentication authentication,
                         RedirectAttributes redirectAttributes) {
         //User manager = (User) authentication.getPrincipal();
 
@@ -115,14 +115,12 @@ public class RestaurantController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error adding restaurant: " + e.getMessage());
         }
-        return "redirect:/restaurants/index";
+        return "redirect:/restaurants/";
 
     }
 
     @GetMapping("/edit/{id}")
     public String showEditRestaurantForm(@PathVariable("id") int restaurantId, Model model) {
-        // In a real application, retrieve existing details from a repository/service.
-        // Here we assume restaurantService.getRestaurantDetails(id) returns a Map containing values.
         List<RestaurantWithFullData> restaurantDetails = restaurantService.getRestaurantById(restaurantId);
         model.addAttribute("restaurantDetails", restaurantDetails);
         return "restaurants/edit";
@@ -154,7 +152,7 @@ public class RestaurantController {
             @RequestParam(required = false) String closesSat,
             @RequestParam(required = false) String opensSun,
             @RequestParam(required = false) String closesSun,
-            //Authentication authentication,
+            Authentication authentication,
             RedirectAttributes redirectAttributes) {
 
         //User manager = (User) authentication.getPrincipal();
