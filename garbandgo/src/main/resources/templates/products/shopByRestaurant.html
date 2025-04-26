@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Products from ' + ${restaurant.restaurant}">Products</title>
+    <link rel="stylesheet" th:href="@{/css/shop.css}" />
+    <script th:src="@{/js/shop.js}" defer></script>
+
+</head>
+<body>
+<h1 th:text="'Order from ' + ${restaurant.restaurant}">Order Products</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Product</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Delivery</th>
+        <th>Order</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}">Product Name</td>
+        <td th:text="${product.category.name}">Category</td>
+        <td th:text="${product.description}">Description</td>
+        <td th:text="${product.price} + ' USD'">Price</td>
+        <td th:text="${product.deliveryPrice} + ' USD'">Delivery</td>
+        <td>
+            <a href="#" class="order-button" th:data-product-id="${product.id}">Order</a>
+            <form th:id="'orderForm_' + ${product.id}" th:action="@{'/cart/add/' + ${product.id}}" method="post" style="display:none;">
+                <input type="hidden" name="quantity" value="1" />
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/">Back to Home</a>
+</body>
+</html>

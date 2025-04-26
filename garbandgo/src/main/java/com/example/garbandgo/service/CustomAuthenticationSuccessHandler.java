@@ -21,6 +21,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         for (GrantedAuthority authority : authorities) {
             String role = authority.getAuthority();
+            System.out.println("User roles: " + role);
             switch (role) {
                 case "ROLE_ADMIN":
                     redirectUrl = "/admin/rootPage";
@@ -39,6 +40,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                     break;
             }
         }
+
+
 
         response.sendRedirect(redirectUrl);
     }
