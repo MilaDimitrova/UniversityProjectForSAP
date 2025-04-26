@@ -6,9 +6,8 @@
     <title>Manage Products</title>
 </head>
 <body>
-<h1>
-    Manage Products for Restaurant #
-    <span th:text="${restaurantId}">1</span>
+<h1 th:text="'Manage Products for ' + ${restaurantName}">Manage Products
+   <!--  <span th:text="${restaurantId}">1</span>1-->
 </h1>
 
 <div>
@@ -33,7 +32,7 @@
             <td th:text="${prod.description}">Description</td>
             <td th:text="${prod.price}">Price</td>
             <td th:text="${prod.deliveryPrice}">Delivery Price</td>
-            <td th:text="${prod.currency}">Currency</td>
+            <td th:text="${prod.currency == 1 ? 'BGN' : 'Unknown'}">Currency</td>
             <td th:text="${prod.category != null ? prod.category.name : 'N/A'}">Category</td>
             <td>
                 <a th:href="@{'/products/edit/' + ${prod.id}}">Edit</a> |
@@ -80,5 +79,6 @@
         <button type="submit">Add Product</button>
     </form>
 </div>
+<a href="/restaurants/" id="backHome">Back to Restaurants</a>
 </body>
 </html>

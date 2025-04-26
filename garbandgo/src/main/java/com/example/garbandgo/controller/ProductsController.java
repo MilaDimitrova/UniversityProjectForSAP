@@ -35,10 +35,13 @@ public class ProductsController {
     public String manageProducts(@PathVariable Integer restaurantId, Model model) {
         List<Product> products = productsService.findProductsByRestaurantId(restaurantId);
         List<ProductCategory> categories = productCategoryService.findAll();
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new IllegalArgumentException("Restaurant not found"));
         model.addAttribute("products", products);
         model.addAttribute("restaurantId", restaurantId);
         model.addAttribute("categories", categories);
         model.addAttribute("newProduct", new Product());
+        model.addAttribute("restaurantName", restaurant.getRestaurant());
         return "products/manageProducts";
     }
 
