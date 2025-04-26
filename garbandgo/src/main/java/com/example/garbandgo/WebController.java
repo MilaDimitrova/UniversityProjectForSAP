@@ -18,13 +18,6 @@ public class WebController {
         return "aboutUs";
     }
 
-
-    @GetMapping("/contact")
-    public String contactForm(Model model) {
-        model.addAttribute("contactMessage", new ContactMessage());
-        return "contactUs";
-    }
-
     @GetMapping("/profile")
     public String profilePage() {
         return "users/login"; // Ако login.html е профилната страница
