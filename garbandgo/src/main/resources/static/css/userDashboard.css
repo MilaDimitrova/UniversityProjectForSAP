@@ -298,3 +298,18 @@ nav ul li a:hover {
     color: #d18f00;
     text-decoration: underline;
 }
+
+.menu-button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #c87d0a;
+    background-color: white;
+    color: #c87d0a;
+    font-weight: bold;
+    cursor: pointer;
+}
+.menu-button:hover {
+    background-color: #f2b648;
+    color: white;
+}

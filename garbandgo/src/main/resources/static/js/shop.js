@@ -1,13 +1,12 @@
-document.addEventListener("DOMContentLoaded", function() {
-    var orderLinks = document.querySelectorAll('.order-link');
+document.addEventListener("DOMContentLoaded", function () {
+    const orderButtons = document.querySelectorAll(".order-button");
 
-    orderLinks.forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            var prodId = link.getAttribute('data-prod-id');
-            var formId = 'orderForm_' + prodId;
-            var form = document.getElementById(formId);
-            if(form){
+    orderButtons.forEach(button => {
+        button.addEventListener("click", function (e) {
+            e.preventDefault();
+            const productId = button.getAttribute("data-product-id");
+            const form = document.getElementById("orderForm_" + productId);
+            if (form) {
                 form.submit();
             }
         });

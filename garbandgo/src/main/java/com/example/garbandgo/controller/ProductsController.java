@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/products")
@@ -28,6 +30,7 @@ public class ProductsController {
         this.productCategoryService = productCategoryService;
     }
 
+    // Управление на продукти за конкретен ресторант
     @GetMapping("/manage/{restaurantId}")
     public String manageProducts(@PathVariable Integer restaurantId, Model model) {
         List<Product> products = productsService.findProductsByRestaurantId(restaurantId);
@@ -64,7 +67,6 @@ public class ProductsController {
         return "redirect:/products/manage/" + restaurantId;
     }
 
-
     @GetMapping("/edit/{productId}")
     public String editProductForm(@PathVariable Integer productId, Model model) {
         Product product = productsService.getProductById(productId);
@@ -94,5 +96,18 @@ public class ProductsController {
 
         productsService.saveProduct(existingProduct);
         return "redirect:/products/manage/" + existingProduct.getRestaurant().getId();
+    }
+
+    @GetMapping("/shop")
+    public String showProductsGroupedByRestaurants(Model model) {
+        List<Restaurant> restaurants = restaurantRepository.findAll();
+        Map<Restaurant, List<Product>> groupedProducts = new LinkedHashMap<>();
+
+        for (Restaurant restaurant : restaurants) {
+            List<Product> products = productsService.findProductsByRestaurantId(restaurant.getId());
+            groupedProducts.put(restaurant, products);
+        }
+        model.addAttribute("groupedProducts", groupedProducts);
+        return "products/shop";
     }
 }

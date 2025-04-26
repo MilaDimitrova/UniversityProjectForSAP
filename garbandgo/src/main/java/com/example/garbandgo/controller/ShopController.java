@@ -17,11 +17,4 @@ public class ShopController {
     public ShopController(ProductsService productsService) {
         this.productsService = productsService;
     }
-
-    @GetMapping("/shop")
-    public String shopProducts(Model model) {
-        List<Product> products = productsService.findAllProducts();
-        model.addAttribute("products", products);
-        return "products/shop";
-    }
 }

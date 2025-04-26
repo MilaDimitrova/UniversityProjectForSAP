@@ -2,40 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Shop Products</title>
-    <link rel="stylesheet" th:href="@{/css/shop.css}">
+    <title>Products by Restaurant</title>
+    <link rel="stylesheet" th:href="@{/css/shop.css}" />
+    <script th:src="@{/js/shop.js}" defer></script>
 </head>
 <body>
-<h1>Our Products</h1>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Product</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Order</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="prod : ${products}">
-        <td th:text="${prod.name}">Product Name</td>
-        <td th:text="${prod.description}">Description</td>
-        <td th:text="${prod.price}">Price</td>
-        <td>
-            <a th:href="@{'/cart/add/' + ${prod.id}}"
-               class="order-link"
-               th:attr="data-prod-id=${prod.id}">
-                Order
-            </a>
-            <form th:id="'orderForm_' + ${prod.id}" th:action="@{'/cart/add/' + ${prod.id}}" method="post" style="display:none;">
-                <input type="hidden" name="quantity" value="1" />
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<a href="/static">Back to Home</a>
+<h1>Order Products</h1>
 
-<script th:src="@{/js/shop.js}"></script>
+<div th:each="entry : ${groupedProducts}">
+    <h2 th:text="${entry.key.restaurant}">Restaurant Name</h2>
+    <img th:src="@{${entry.key.logo}}" alt="Logo" style="width:100px; height:100px;"/>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Delivery</th>
+            <th>Order</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${entry.value}">
+            <td th:text="${product.name}">Product Name</td>
+            <td th:text="${product.category.name}">Category</td>
+            <td th:text="${product.description}">Description</td>
+            <td th:text="${product.price} + ' BGN'">Price</td>
+            <td th:text="${product.deliveryPrice} + ' BGN'">Delivery</td>
+            <td>
+                <a href="#" class="order-button" th:data-product-id="${product.id}">Order</a>
+                <form th:id="'orderForm_' + ${product.id}" th:action="@{'/cart/add/' + ${product.id}}" method="post" style="display:none;">
+                    <input type="hidden" name="quantity" value="1" />
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<a href="/" id="backHome">Back to Home</a>
 </body>
 </html>
