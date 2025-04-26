@@ -1,6 +1,8 @@
 package com.example.garbandgo;
 
+import com.example.garbandgo.entities.ContactMessage;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -16,8 +18,10 @@ public class WebController {
         return "aboutUs";
     }
 
+
     @GetMapping("/contact")
-    public String contactUs() {
+    public String contactForm(Model model) {
+        model.addAttribute("contactMessage", new ContactMessage());
         return "contactUs";
     }
 
