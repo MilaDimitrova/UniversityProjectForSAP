@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/restOwnerDashboard.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Owner Dashboard | Grab&go</title>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/restaurants}">Our restaurants</a></li>
+            <li><a th:href="@{/aboutUs}">About us</a></li>
+            <li><a th:href="@{/contact}">Contacts</a></li>
+            <li><a th:href="@{/profile}">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="content">
+        <div class="sidebar">
+            <button onclick="showSection('info')">Information</button>
+            <button onclick="showSection('orders')">Orders</button>
+            <button onclick="showSection('employees')">Employees</button>
+            <button onclick="showSection('managers')">Managers</button>
+            <button onclick="showSection('delivery')">Delivery</button>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Log out</button>
+            </form>
+        </div>
+        <div class="main-content">
+            <section id="info" class="dashboard-section">
+                <h1>Information</h1>
+                <p>Here you can see all the details about your restaurant and Grab&go platform.</p>
+            </section>
+            <section id="orders" class="dashboard-section" style="display: none;">
+                <h1>Orders</h1>
+                <p>View and manage all restaurant orders here.</p>
+            </section>
+            <section id="employees" class="dashboard-section" style="display: none;">
+                <h1>Employees</h1>
+                <p>Add a new courier (employee).</p>
+                <form th:action="@{/rest_owner/addCourier}" method="post">
+                    <label for="courierUsername">Username:</label>
+                    <input type="text" id="courierUsername" name="username" required><br>
+
+                    <label for="courierEmail">Email:</label>
+                    <input type="email" id="courierEmail" name="email" required><br>
+
+                    <label for="courierPhone">Phone:</label>
+                    <input type="text" id="courierPhone" name="phone" required><br>
+
+                    <label for="courierPassword">Password:</label>
+                    <input type="password" id="courierPassword" name="password" required><br>
+
+                    <button type="submit">Add Courier</button>
+                </form>
+            </section>
+            <section id="managers" class="dashboard-section" style="display: none;">
+                <h1>Managers</h1>
+                <p>Assign or view managers for your restaurant.</p>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="manager : ${managers}">
+                        <td th:text="${manager.username}">Username</td>
+                        <td th:text="${manager.email}">email@example.com</td>
+                        <td th:text="${manager.phone}">0000000000</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="delivery" class="dashboard-section" style="display: none;">
+                <h1>Delivery Overview</h1>
+                <p>Here you can see all active deliveries.</p>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Delivery ID</th>
+                        <th>Order ID</th>
+                        <th>Courier</th>
+                        <th>Status</th>
+                        <th>Estimated Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1001</td>
+                        <td>501</td>
+                        <td>John Doe</td>
+                        <td>In Transit</td>
+                        <td>15 min</td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>502</td>
+                        <td>Jane Smith</td>
+                        <td>Delivered</td>
+                        <td>—</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="logout" class="dashboard-section" style="display: none;">
+                <h1>Log out</h1>
+                <p>Thank you for managing your restaurant with Grab&go. See you again!</p>
+            </section>
+        </div>
+    </div>
+</main>
+<script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products To Cart - Grab &amp; go</title>
+    <style>
+        /* Основен стил за тялото */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #E6AF2E;
+            margin: 0;
+        }
+        /* Header и навигация */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #E6AF2E;
+            padding: 10px 20px;
+        }
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            margin-left: 0;
+        }
+        .logo .highlight {
+            color: gray;
+        }
+        .logo .highlightSecond {
+            color: black;
+        }
+        nav {
+            background: #E6AF2E;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            gap: 20px;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            position: relative;
+        }
+        nav ul li a {
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #ffa500;
+            color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        nav ul li::after {
+            content: "";
+            height: 0;
+            width: 0;
+            background: #E6AF2E;
+        }
+        nav ul li:hover::after {
+            width: 100%;
+        }
+        /* Стилове за продуктовата решетка и картите */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+        .product-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .product-card h2 {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #333;
+        }
+        .product-card p {
+            font-size: 16px;
+            margin: 8px 0;
+            color: #555;
+        }
+        .product-card .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #E6AF2E;
+            margin: 10px 0;
+        }
+        .product-card form button {
+            background-color: #E6AF2E;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .product-card form button:hover {
+            background-color: #cca117;
+        }
+        /* Footer стилове */
+        footer {
+            background: #E6AF2E;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<!-- Header с навигация -->
+<header>
+    <div class="logo">
+        Grab <span class="highlight">&amp;</span> <span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/static}">Home</a></li>
+            <li><a th:href="@{/templates/restaurants}">Our restaurants</a></li>
+            <li><a th:href="@{/aboutUs}">About us</a></li>
+            <li><a th:href="@{/contact}">Contacts</a></li>
+            <li><a th:href="@{/profile}">Profile</a></li>
+            <li><a th:href="@{/cart}">Cart</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Основната част – визуализиране на продуктите -->
+<main>
+    <h1 style="color: white; margin: 20px 0;">Our Products</h1>
+    <div class="products-grid">
+        <!-- Обхождаме списъка от продукти, подаден от контролера -->
+        <div class="product-card" th:each="product : ${products}">
+            <!-- Изображение на продукта – приемаме, че полето 'image' съдържа името на файла, напр. 'margherita.jpg' -->
+            <img th:src="@{'/images/' + ${product.image}}" alt="Product Image">
+            <!-- Име на продукта -->
+            <h2 th:text="${product.product}">Product Name</h2>
+            <!-- Описание -->
+            <p th:text="${product.description}">Product description...</p>
+            <!-- Цена с валута -->
+            <p class="price">
+                €<span th:text="${#numbers.formatDecimal(product.price, 2, 'POINT', ',')}">10.99</span>
+            </p>
+            <!-- Цена за доставка -->
+            <p>
+                Delivery: €<span th:text="${#numbers.formatDecimal(product.delivery_price, 2, 'POINT', ',')}">2.50</span>
+            </p>
+            <!-- Форма за добавяне в количката -->
+            <form th:action="@{/cart/add}" method="post">
+                <input type="hidden" name="productId" th:value="${product.id}">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-logo">
+        Grab <span class="highlight">&amp;</span> <span class="highlightSecond">go</span>
+    </div>
+    <p>&copy; 2025 Grab &amp; go. All rights reserved.</p>
+</footer>
+</body>
+</html>

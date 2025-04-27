@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/manageProducts.css}">
+    <title>Manage Products</title>
+</head>
+<body>
+<h1 th:text="'Manage Products for ' + ${restaurantName}">Manage Products
+</h1>
+
+<div>
+    <h2>Existing Products</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Delivery Price</th>
+            <th>Currency</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="prod : ${products}">
+            <td th:text="${prod.id}">ID</td>
+            <td th:text="${prod.name}">Name</td>
+            <td th:text="${prod.description}">Description</td>
+            <td th:text="${prod.price}">Price</td>
+            <td th:text="${prod.deliveryPrice}">Delivery Price</td>
+            <td th:text="${prod.currency == 1 ? 'BGN' : 'Unknown'}">Currency</td>
+            <td th:text="${prod.category != null ? prod.category.name : 'N/A'}">Category</td>
+            <td>
+                <a th:href="@{'/products/edit/' + ${prod.id}}">Edit</a> |
+                <form th:action="@{'/products/delete/' + ${prod.id}}" method="post" style="display:inline;">
+                    <input type="hidden" name="restaurantId" th:value="${restaurantId}" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h2>Add New Product</h2>
+    <form th:action="@{'/products/add/' + ${restaurantId}}" method="post" th:object="${newProduct}">
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" th:field="*{name}" /><br/>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" th:field="*{description}" /><br/>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" th:field="*{price}" step="0.01" /><br/>
+
+        <label for="deliveryPrice">Delivery Price:</label>
+        <input type="number" id="deliveryPrice" th:field="*{deliveryPrice}" step="0.01" /><br/>
+
+        <label for="imageUrl">Image URL:</label>
+        <input type="text" id="imageUrl" th:field="*{imageUrl}" /><br/>
+
+        <label for="currency">Currency:</label>
+        <input type="number" id="currency" th:field="*{currency}" required /><br/>
+
+        <label for="category">Category:</label>
+        <select id="category" th:field="*{category.id}" required>
+            <option value="" disabled selected>Select a category</option>
+            <option th:each="cat : ${categories}"
+                    th:value="${cat.id}"
+                    th:text="${cat.name}">
+            </option>
+        </select><br/>
+
+        <button type="submit">Add Product</button>
+    </form>
+</div>
+<a href="/restaurants/" id="backHome">Back to Restaurants</a>
+</body>
+</html>

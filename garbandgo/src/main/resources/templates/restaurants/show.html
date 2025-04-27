@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
     <title>Grab and go - Restaurant view</title>
@@ -12,13 +13,15 @@
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/restaurants">Our restaurants</a></li>
+            <li><a href="/restaurants/">Our restaurants</a></li>
             <li><a href="/aboutUs">About us</a></li>
             <li><a href="/contact">Contacts</a></li>
-            <li><a href="/profile">Profile</a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/profile">Profile</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
         </ul>
     </nav>
 </header>
+
 <section>
     <h2 th:text="${restaurant[0].restaurant}"></h2>
     <br>
@@ -28,12 +31,22 @@
             <b th:text="${open_hour.dayOfWeek}">: </b>  <span th:text="${open_hour.opensAt}"></span>-<span th:text="${open_hour.closesAt}"></span>
         </li>
     </ul>
-    <a th:href="@{/restaurants/edit/{id}(id=${restaurant[0].id})}" style="text-decoration: none">Update restaurant</a>
-    <form th:action="@{/restaurants/delete/{id}(id=${restaurant[0].id})}" method="post">
-        <input type="hidden" name="_method" value="DELETE" />
-        <input type="submit" value="Delete restaurant">
-    </form>
+
+    <a th:href="@{/products/shop/{id}(id=${restaurant[0].id})}" class="order-btn" style="text-decoration: none;">Order from this Restaurant</a>
+
+
+    <div sec:authorize="hasAnyRole('ADMIN', 'MANAGER', 'REST_OWNER')">
+        <br><br>
+        <a th:href="@{/products/manage/{id}(id=${restaurant[0].id})}" style="text-decoration: none;">Manage Products</a>
+        <br><br>
+        <a th:href="@{/restaurants/edit/{id}(id=${restaurant[0].id})}" style="text-decoration: none">Update restaurant</a>
+        <form th:action="@{/restaurants/delete/{id}(id=${restaurant[0].id})}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            <input type="submit" value="Delete restaurant">
+        </form>
+    </div>
 </section>
+
 <footer>
     <div class="footer-logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>

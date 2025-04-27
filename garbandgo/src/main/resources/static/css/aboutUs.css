@@ -8,53 +8,52 @@ body {
 .container {
     flex: 1;
 }
-.header h1{
-    position: static !important;
-    width: 2000px;
-    height: 94px;
-    top: 142px;
+.header {
+    text-align: center;
+    margin-top: 50px;
+}
+.header h1 {
     font-family: 'Original Surfer';
     font-weight: 400;
     font-size: 75px;
     line-height: 94px;
-    margin-top: 50px;
     color: #000000;
-    max-width: 100%;
+    margin: 0 auto; /* Центриране на заглавието */
+    width: 80%; /* Ограничение на широчината */
     overflow-wrap: break-word;
 }
 
-.logoContainer img{
-    position: absolute;
+.logoContainer img {
+    display: block;
+    margin: 20px auto; /* Центриране на логото */
     width: 250px;
     height: 250px;
-    left: 100px;
-    top: 30%;
-
 }
 
-.aboutus h2{
-    position: sticky;!important;
-    width: 398px;
-    height: 81px;
-    left: 582px;
-    top: 415px;
+.aboutus {
+    text-align: center;
+    margin-top: 50px;
+}
+.aboutus h2 {
     font-family: 'Original Surfer';
     font-weight: 400;
     font-size: 65px;
     line-height: 81px;
     color: #000000;
+    margin: 0 auto; /* Центриране на заглавието */
+    width: 80%; /* Ограничение на широчината */
+    overflow-wrap: break-word;
 }
 
 .aboutus p {
     text-align: justify;
-    width: 689px;
-    margin: 50px auto; /* Вместо `left` и `top` */
+    margin: 20px auto; /* Центриране на текста */
     font-family: 'Original Surfer';
     font-size: 25px;
     line-height: 31px;
     color: #000000;
+    width: 80%; /* Ограничение на широчината */
 }
-
 
 footer {
     position: relative;
@@ -81,7 +80,112 @@ footer .footer-logo .highlightSecond {
 footer .footer-data {
     display: flex;
     justify-content: center;
-    gap: 400px;
+    gap: 50px; /* Намаляване на разстоянието за по-добро разпределение */
+    flex-wrap: wrap; /* Добавяне на адаптивност */
+    margin: 20px 0;
+}
+
+footer .footer-data ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer .footer-data ul li {
+    margin-bottom: 5px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #ffa500;
+}
+
+footer a:hover {
+    color: white;
+}
+@import url("mainCSS.css");
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+.container {
+    flex: 1;
+}
+.header {
+    text-align: center;
+    margin-top: 50px;
+}
+.header h1 {
+    font-family: 'Original Surfer';
+    font-weight: 400;
+    font-size: 75px;
+    line-height: 94px;
+    color: #000000;
+    margin: 0 auto; /* Центриране на заглавието */
+    width: 80%; /* Ограничение на широчината */
+    overflow-wrap: break-word;
+}
+
+.logoContainer img {
+    display: block;
+    margin: 20px auto; /* Центриране на логото */
+    width: 250px;
+    height: 250px;
+}
+
+.aboutus {
+    text-align: center;
+    margin-top: 50px;
+}
+.aboutus h2 {
+    font-family: 'Original Surfer';
+    font-weight: 400;
+    font-size: 65px;
+    line-height: 81px;
+    color: #000000;
+    margin: 0 auto; /* Центриране на заглавието */
+    width: 80%; /* Ограничение на широчината */
+    overflow-wrap: break-word;
+}
+
+.aboutus p {
+    text-align: justify;
+    margin: 20px auto; /* Центриране на текста */
+    font-family: 'Original Surfer';
+    font-size: 25px;
+    line-height: 31px;
+    color: #000000;
+    width: 80%; /* Ограничение на широчината */
+}
+
+footer {
+    position: relative;
+    z-index: 10;
+    background: #333;
+    color: white;
+    padding: 70px;
+    text-align: left;
+}
+
+footer .footer-logo span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+footer .footer-logo .highlight {
+    color: gray;
+}
+
+footer .footer-logo .highlightSecond {
+    color: black;
+}
+
+footer .footer-data {
+    display: flex;
+    justify-content: center;
+    gap: 50px; /* Намаляване на разстоянието за по-добро разпределение */
+    flex-wrap: wrap; /* Добавяне на адаптивност */
     margin: 20px 0;
 }
 

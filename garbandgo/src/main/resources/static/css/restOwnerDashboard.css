@@ -1,0 +1,92 @@
+@import url("dashboards.css");
+.dashboard-section {
+    background-color: #fdf6ec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+    max-width: 800px;
+}
+
+.dashboard-section h1 {
+    font-size: 26px;
+    color: #2f3640;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#employees p,
+#managers p,
+#delivery p {
+    text-align: center;
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+#employees form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+#employees input[type="text"],
+#employees input[type="email"],
+#employees input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+#employees button[type="submit"] {
+    background-color: #f0a500;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#employees button[type="submit"]:hover {
+    background-color: #d18f00;
+}
+
+#managers table,
+#delivery table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+#managers th, #managers td,
+#delivery th, #delivery td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+#managers th, #delivery th {
+    background-color: #f0a500;
+    color: white;
+}
+
+#managers tbody tr:nth-child(even),
+#delivery tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#delivery th {
+    background-color: #f39c12;
+}
+
+#delivery td {
+    background-color: #fff;
+}

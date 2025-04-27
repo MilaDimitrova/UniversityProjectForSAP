@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/rootDashboard.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Grab&go</title>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/restaurants/}">Our restaurants</a></li>
+            <li><a th:href="@{/aboutUs}">About us</a></li>
+            <li><a th:href="@{/contact}">Contacts</a></li>
+            <li><a th:href="@{/profile}">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="content">
+        <div class="sidebar">
+            <button onclick="showSection('info')">Information</button>
+            <button onclick="showSection('orders')">Orders</button>
+            <button onclick="showSection('employees')">Employees</button>
+            <button onclick="showSection('managers')">Managers</button>
+            <button onclick="showSection('delivery')">Delivery</button>
+            <button onclick="showSection('profile')">Profile Settings</button>
+
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Log out</button>
+            </form>
+        </div>
+        <div class="main-content">
+            <section id="info" class="dashboard-section">
+                <h1>Admin Overview</h1>
+                <div class="stats">
+                    <div class="stat-item">
+                        <h2>Total Users</h2>
+                        <p th:text="${totalUsers}">0</p>
+                    </div>
+                    <div class="stat-item">
+                        <h2>Total Orders</h2>
+                        <p th:text="${totalOrders}">0</p>
+                    </div>
+                    <div class="stat-item">
+                        <h2>Revenue</h2>
+                        <p th:text="${totalRevenue}">$0.00</p>
+                    </div>
+                </div>
+
+                <h2>Recent Activity</h2>
+                <ul>
+                    <li th:each="order : ${recentOrders}">
+                        Order #<span th:text="${order.id}">1</span> by <span th:text="${order.user.username}">User</span>
+                    </li>
+                </ul>
+            </section>
+            <section id="orders" class="dashboard-section" style="display: none;">
+                <h1>Orders</h1>
+                <p>Your active and past orders will appear here.</p>
+            </section>
+            <section id="employees" class="dashboard-section" style="display: none;">
+                <h1>Employees</h1>
+                <p>Add a new courier (employee).</p>
+
+                <form th:action="@{/admin/addCourier}" method="post">
+                    <label for="courierUsername">Username:</label>
+                    <input type="text" id="courierUsername" name="username" required><br>
+
+                    <label for="courierEmail">Email:</label>
+                    <input type="email" id="courierEmail" name="email" required><br>
+
+                    <label for="courierPhone">Phone:</label>
+                    <input type="text" id="courierPhone" name="phone" required><br>
+
+                    <label for="courierPassword">Password:</label>
+                    <input type="password" id="courierPassword" name="password" required><br>
+
+                    <button type="submit">Add Courier</button>
+                </form>
+            </section>
+            <section id="managers" class="dashboard-section" style="display: none;">
+                <h1>Managers</h1>
+                <p>Here you can add a new manager.</p>
+
+                <form th:action="@{/admin/addManager}" method="post">
+                    <label for="managerUsername">Username:</label>
+                    <input type="text" id="managerUsername" name="username" required><br>
+
+                    <label for="managerEmail">Email:</label>
+                    <input type="email" id="managerEmail" name="email" required><br>
+
+                    <label for="managerPhone">Phone:</label>
+                    <input type="text" id="managerPhone" name="phone" required><br>
+
+                    <label for="managerPassword">Password:</label>
+                    <input type="password" id="managerPassword" name="password" required><br>
+
+                    <button type="submit">Add Manager</button>
+                </form>
+            </section>
+            <section id="delivery" class="dashboard-section" style="display: none;">
+                <h1>All Deliveries</h1>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Courier</th>
+                        <th>Status</th>
+                        <th>Ordered At</th>
+                        <th>Delivered At</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${allDeliveries}">
+                        <td th:text="${order.id}">1</td>
+                        <td th:text="${order.user.username}">John Doe</td>
+                        <td th:text="${order.deliveredBy != null ? order.deliveredBy.username : 'Not Assigned'}">Courier</td>
+                        <td th:text="${order.status}">In Delivery</td>
+                        <td th:text="${#dates.format(order.orderedAt, 'yyyy-MM-dd HH:mm')}">2025-04-24</td>
+                        <td th:text="${order.deliveredAt != null ? #dates.format(order.deliveredAt, 'yyyy-MM-dd HH:mm') : 'Pending'}">-</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="profile" class="dashboard-section" style="display: none;">
+                <h1>Profile Settings</h1>
+                <p><strong>Username:</strong> <span th:text="${user.username}">User</span></p>
+                <p><strong>Email:</strong> <span th:text="${user.email}">email@example.com</span></p>
+
+                <form th:action="@{/admin/update}" method="post" th:object="${user}">
+                    <label th:for="*{username}">New Username:</label>
+                    <input type="text" th:field="*{username}" /><br>
+
+                    <label th:for="*{password}">New Password:</label>
+                    <input type="password" th:field="*{password}" /><br>
+
+                    <button type="submit">Update</button>
+                </form>
+            </section>
+            <section id="logout" class="dashboard-section" style="display: none;">
+                <h1>Log out</h1>
+                <p>Thank you for using Grab&go. See you again soon!</p>
+            </section>
+        </div>
+    </div>
+</main>
+<script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>

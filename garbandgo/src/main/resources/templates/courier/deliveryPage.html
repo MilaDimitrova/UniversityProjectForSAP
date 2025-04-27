@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/courierDashboard.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courier Dashboard | Grab&go</title>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/restaurants/}">Our restaurants</a></li>
+            <li><a th:href="@{/aboutUs}">About us</a></li>
+            <li><a th:href="@{/contact}">Contacts</a></li>
+            <li><a th:href="@{/profile}">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="content">
+        <div class="sidebar">
+            <button onclick="showSection('info')">Information</button>
+            <button onclick="showSection('orders')">Orders</button>
+            <button onclick="showSection('delivery')">Delivery</button>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Log out</button>
+            </form>
+        </div>
+        <div class="main-content">
+            <section id="info" class="dashboard-section">
+                <h1>Welcome to Your Courier Dashboard</h1>
+                <p>Hello <span th:text="${user.username}">Courier</span>!</p>
+
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h2>Today's Deliveries</h2>
+                        <p th:text="${deliveriesToday}">5</p>
+                    </div>
+                    <div class="card">
+                        <h2>Pending Deliveries</h2>
+                        <p th:text="${pendingDeliveries}">2</p>
+                    </div>
+                    <div class="card">
+                        <h2>Completed Deliveries</h2>
+                        <p th:text="${completedDeliveries}">15</p>
+                    </div>
+                    <div class="card">
+                        <h2>Average Rating</h2>
+                        <p th:text="${courierRating}">4.8</p>
+                    </div>
+                </div>
+
+                <div class="notifications">
+                    <h2>Notifications</h2>
+                    <ul>
+                        <li>You have 2 pending deliveries.</li>
+                        <li>New delivery route assigned.</li>
+                        <li>Remember to check-in at the hub by 9 AM.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="orders" class="dashboard-section" style="display: none;">
+                <h1>Orders</h1>
+                <p>Your active and past orders will appear here.</p>
+            </section>
+
+            <section id="delivery" class="dashboard-section" style="display: none;">
+                <h1>Available Orders</h1>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Total Price</th>
+                        <th>Due Date</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${availableOrders}">
+                        <td th:text="${order.id}">1</td>
+                        <td th:text="${order.totalPrice}">20.00</td>
+                        <td th:text="${#dates.format(order.dueDate, 'yyyy-MM-dd HH:mm')}">2025-04-25</td>
+                        <td>
+                            <form th:action="@{/courier/accept}" method="post">
+                                <input type="hidden" name="orderId" th:value="${order.id}" />
+                                <button type="submit">Accept</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h2>Your Active Deliveries</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Total Price</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${myDeliveries}">
+                        <td th:text="${order.id}">1</td>
+                        <td th:text="${order.customer.username}">JohnDoe</td>
+                        <td th:text="${order.totalPrice}">20.00</td>
+                        <td>
+                            <form th:action="@{/courier/delivered}" method="post">
+                                <input type="hidden" name="orderId" th:value="${order.id}" />
+                                <button type="submit">Mark as Delivered</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="logout" class="dashboard-section" style="display: none;">
+                <h1>Log out</h1>
+                <p>Thank you for using Grab&go. See you again soon!</p>
+            </section>
+        </div>
+    </div>
+</main>
+<script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>

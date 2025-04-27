@@ -12,11 +12,11 @@
     </div>
     <nav>
         <ul>
-            <li><a href="/">Home</a></li>
+            <li><a th:href="@{/}">Home</a></li>
             <li><a th:href="@{/restaurants/}">Our restaurants</a></li>
-            <li><a href="/aboutUs">About us</a></li>
-            <li><a href="/contact">Contacts</a></li>
-            <li><a href="/profile">Profile</a></li>
+            <li><a th:href="@{/aboutUs}">About us</a></li>
+            <li><a th:href="@{/contact}">Contacts</a></li>
+            <li><a th:href="@{/login}">Profile</a></li>
         </ul>
     </nav>
 </header>
@@ -42,7 +42,7 @@
     </section>
     <section class="subscription">
         <h2>You can order just in one click!</h2>
-        <form>
+        <form action="/login">
             <input type="email" placeholder="Type your email address">
             <button type="submit">Send</button>
         </form>

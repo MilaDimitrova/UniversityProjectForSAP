@@ -1,98 +1,73 @@
 package com.example.garbandgo.entities;
 
 import jakarta.persistence.*;
-import com.example.garbandgo.entities.ProductCategory;
-import com.example.garbandgo.entities.Restaurant;
 import java.io.Serializable;
 
 @Entity(name = "Product")
 @Table(name = "products", indexes = {
-        @Index(name = "restaurant", columnList = "restaurant"),
-        @Index(name = "currency", columnList = "currency"),
-        @Index(name = "category", columnList = "category")
+        @Index(name = "idx_restaurant", columnList = "restaurant"),
+        @Index(name = "idx_currency", columnList = "currency"),
+        @Index(name = "idx_category", columnList = "category")
 })
 public class Product implements Serializable {
     private static final long serialVersionUID = 8823829297324062695L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    private String product;
+    // Полето "name" се мапва с колоната "product" в базата данни
+    @Column(name = "product", nullable = false)
+    private String name;
 
+    // Мапиране на категорията; използваме името "category", тъй като таблицата съдържа колоната "category"
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "category", nullable = false)
     private ProductCategory category;
 
-    private String image;
-
-    private String description;
-
-    private Restaurant restaurant;
-
-    private Double deliveryPrice;
-
-    private Double price;
-
-    private Integer currency;
-
-    @Column(name = "currency", nullable = false)
-    public Integer getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Integer currency) {
-        this.currency = currency;
-    }
-
-    @Column(name = "price", nullable = false)
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    @Column(name = "delivery_price", nullable = false)
-    public Double getDeliveryPrice() {
-        return deliveryPrice;
-    }
-
-    public void setDeliveryPrice(Double deliveryPrice) {
-        this.deliveryPrice = deliveryPrice;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "restaurant", nullable = false)
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
+    // Полето imageUrl се мапва към колоната "image"
+    @Lob
+    @Column(name = "image", nullable = false)
+    private String imageUrl;
 
     @Lob
     @Column(name = "description", nullable = false)
-    public String getDescription() {
-        return description;
-    }
+    private String description;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Lob
-    @Column(name = "image", nullable = false)
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
+    // Мапиране на ресторанта; използваме името "restaurant", съобразно таблицата
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category", nullable = false)
+    @JoinColumn(name = "restaurant", nullable = false)
+    private Restaurant restaurant;
+
+    @Column(name = "delivery_price", nullable = false)
+    private Double deliveryPrice;
+
+    @Column(name = "price", nullable = false)
+    private Double price;
+
+    @Column(name = "currency", nullable = false)
+    private Integer currency;
+
+    // Getters and Setters
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    // За името на продукта
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public ProductCategory getCategory() {
         return category;
     }
@@ -101,20 +76,52 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    @Column(name = "product", nullable = false)
-    public String getProduct() {
-        return product;
+    // За URL на изображението
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setProduct(String product) {
-        this.product = product;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public Integer getId() {
-        return id;
+    public String getDescription() {
+        return description;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public Double getDeliveryPrice() {
+        return deliveryPrice;
+    }
+
+    public void setDeliveryPrice(Double deliveryPrice) {
+        this.deliveryPrice = deliveryPrice;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Integer currency) {
+        this.currency = currency;
     }
 }
