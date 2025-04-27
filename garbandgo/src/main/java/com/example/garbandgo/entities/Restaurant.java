@@ -21,12 +21,15 @@ public class Restaurant implements Serializable {
     @Column(name = "restaurant", nullable = false)
     private String restaurant;
 
+    @Lob
+    @Column(name = "logo", nullable = false)
     private String logo;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "address", nullable = false)
     private Address address;
 
+    @Column(name = "reputation")
     private Double reputation;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -64,22 +67,6 @@ public class Restaurant implements Serializable {
         this.address = address;
     }
 
-    @Lob
-    @Column(name = "logo", nullable = false)
-    private String logo;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "address", nullable = false)
-    private Address address;
-
-    @Column(name = "reputation")
-    private Double reputation;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "manager", nullable = false)
-    private User manager;
-
-    // Гетъри и Сетъри
     public Integer getId() {
         return id;
     }
@@ -104,27 +91,5 @@ public class Restaurant implements Serializable {
         this.logo = logo;
     }
 
-    public Address getAddress() {
-        return address;
-    }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public Double getReputation() {
-        return reputation;
-    }
-
-    public void setReputation(Double reputation) {
-        this.reputation = reputation;
-    }
-
-    public User getManager() {
-        return manager;
-    }
-
-    public void setManager(User manager) {
-        this.manager = manager;
-    }
 }
