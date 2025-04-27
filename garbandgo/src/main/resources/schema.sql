@@ -49,23 +49,6 @@ CREATE TABLE `currencies` (
   `currency` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `discounts`
---
-
-CREATE TABLE `discounts` (
-  `id` int(11) NOT NULL,
-  `discount` float(5,2) NOT NULL,
-  `valid_from` datetime NOT NULL,
-  `valid_to` datetime NOT NULL,
-  `restautant` int(11) NOT NULL,
-  `discounted_category` int(11) DEFAULT NULL,
-  `discounted_product` int(11) DEFAULT NULL,
-  `added_by` int(11) NOT NULL,
-  `added_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -288,15 +271,6 @@ ALTER TABLE `countries`
 ALTER TABLE `currencies`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `discounts`
---
-ALTER TABLE `discounts`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `restautant` (`restautant`),
-  ADD KEY `discounted_category` (`discounted_category`),
-  ADD KEY `discounted_product` (`discounted_product`),
-  ADD KEY `added_by` (`added_by`);
 
 --
 -- Indexes for table `ingredients`
@@ -427,11 +401,6 @@ ALTER TABLE `countries`
 ALTER TABLE `currencies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `discounts`
---
-ALTER TABLE `discounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ingredients`
@@ -534,14 +503,6 @@ ALTER TABLE `cancelled_orders`
 ALTER TABLE `countries`
   ADD CONSTRAINT `countries_ibfk_1` FOREIGN KEY (`currency`) REFERENCES `currencies` (`id`);
 
---
--- Constraints for table `discounts`
---
-ALTER TABLE `discounts`
-  ADD CONSTRAINT `discounts_ibfk_1` FOREIGN KEY (`discounted_category`) REFERENCES `product_category` (`id`),
-  ADD CONSTRAINT `discounts_ibfk_2` FOREIGN KEY (`discounted_product`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `discounts_ibfk_3` FOREIGN KEY (`restautant`) REFERENCES `restaurants` (`id`),
-  ADD CONSTRAINT `discounts_ibfk_4` FOREIGN KEY (`added_by`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `orders`

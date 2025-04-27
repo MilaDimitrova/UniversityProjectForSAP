@@ -92,10 +92,7 @@ INSERT INTO `promocodes` (`id`, `promocode`, `description`, `restaurant`, `valid
 (2, 'KUMBATA15', '15% off all burgers', 2, '2025-01-01 00:00:00', '2025-06-30 23:59:59', 15),
 (3, 'SHISHKOV10', '10% off all salads', 3, '2025-03-01 00:00:00', '2025-03-31 23:59:59', 10);
 
-INSERT INTO `discounts` (`id`, `discount`, `valid_from`, `valid_to`, `restautant`, `discounted_category`, `discounted_product`, `added_by`, `added_at`) VALUES
-(1, 0.10, '2025-03-01 00:00:00', '2025-03-07 23:59:59', 1, 1, NULL, 4, '2025-02-25 10:00:00'),
-(2, 0.15, '2025-03-15 00:00:00', '2025-03-17 23:59:59', 2, NULL, 3, 4, '2025-03-01 09:30:00'),
-(3, 0.20, '2025-04-01 00:00:00', '2025-04-30 23:59:59', 3, 3, NULL, 5, '2025-03-15 14:15:00');
+
 
 INSERT INTO `restaurant_open_hours` (`id`, `restaurant`, `opens_at`, `closes_at`, `day_of_week`) VALUES
 (1, 1, '10:00:00', '22:00:00', 'Monday'),
