@@ -2,11 +2,11 @@ use grab_and_go;
 
 START TRANSACTION;
 INSERT INTO `roles` (`id`, `role`) VALUES
-(1, 'admin'),
-(2, 'user'),
-(3, 'courier'),
-(4, 'delivery'),
-(5, 'manager');
+(1, 'ADMIN'),
+(2, 'USER'),
+(3, 'COURIER'),
+(4, 'REST_OWNER'),
+(5, 'MANAGER');
 
 INSERT INTO `currencies` (`id`, `currency`) VALUES
 (1, 'BGN'),

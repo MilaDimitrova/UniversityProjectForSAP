@@ -1,6 +1,7 @@
 package com.example.garbandgo.controller;
 
 import com.example.garbandgo.dto.RestaurantWithFullData;
+import com.example.garbandgo.entities.User;
 import com.example.garbandgo.service.RestaurantService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -69,9 +70,9 @@ public class RestaurantController {
                         @RequestParam(required = false) String closesSat,
                         @RequestParam(required = false) String opensSun,
                         @RequestParam(required = false) String closesSun,
-                        //Authentication authentication,
+                        Authentication authentication,
                         RedirectAttributes redirectAttributes) {
-        //User manager = (User) authentication.getPrincipal();
+        User manager = (User) authentication.getPrincipal();
 
         try {
             Time tOpensMon = (opensMon == null || opensMon.trim().isEmpty()) ? null : Time.valueOf(opensMon);
@@ -90,8 +91,7 @@ public class RestaurantController {
             Time tClosesSun = (closesSun == null || closesSun.trim().isEmpty()) ? null : Time.valueOf(closesSun);
 
             restaurantService.addRestaurant(
-                    //restaurant, logo, address, town, Integer.parseInt(country), zipCode, reputation, manager.getId(),
-                    restaurant, logo, address, town, Integer.parseInt(country), zipCode, reputation, 1,
+                    restaurant, logo, address, town, Integer.parseInt(country), zipCode, reputation, manager.getId(),
                     tOpensMon, tClosesMon,
                     tOpensTue, tClosesTue,
                     tOpensWed, tClosesWed,
@@ -143,7 +143,7 @@ public class RestaurantController {
             Authentication authentication,
             RedirectAttributes redirectAttributes) {
 
-        //User manager = (User) authentication.getPrincipal();
+        User manager = (User) authentication.getPrincipal();
 
         try {
             Time tOpensMon = (opensMon == null || opensMon.trim().isEmpty()) ? null : Time.valueOf(opensMon);
@@ -163,8 +163,7 @@ public class RestaurantController {
 
             restaurantService.updateRestaurant(
                     restaurantId, restaurant, logo, reputation,
-                    //address, town, Integer.parseInt(country), zipCode, manager.getId(),
-                    address, town, Integer.parseInt(country), zipCode, 1,
+                    address, town, Integer.parseInt(country), zipCode, manager.getId(),
                     tOpensMon, tClosesMon,
                     tOpensTue, tClosesTue,
                     tOpensWed, tClosesWed,
