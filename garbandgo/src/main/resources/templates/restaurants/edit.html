@@ -9,7 +9,6 @@
 <body>
 <h1>Edit Restaurant</h1>
 <form th:action="@{/restaurants/edit/{id}(id=${restaurantDetails[0].id})}" method="post">
-    <!-- Hidden field to override HTTP method to PUT -->
     <input type="hidden" name="_method" value="PUT" />
 
     <!-- Display restaurant details for editing -->

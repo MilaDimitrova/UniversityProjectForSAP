@@ -1,9 +1,11 @@
 package com.example.garbandgo.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import com.example.garbandgo.entities.Address;
 import com.example.garbandgo.entities.User;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity(name = "Restaurant")
 @Table(name = "restaurants", indexes = {
@@ -21,14 +23,21 @@ public class Restaurant implements Serializable {
 
     private String logo;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "address", nullable = false)
     private Address address;
 
     private Double reputation;
 
-    private User manager;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "manager", nullable = false)
+    private User manager;
+
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Promocode> promocodes;
+
+
     public User getManager() {
         return manager;
     }
@@ -46,8 +55,7 @@ public class Restaurant implements Serializable {
         this.reputation = reputation;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "address", nullable = false)
+
     public Address getAddress() {
         return address;
     }

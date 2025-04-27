@@ -21,18 +21,15 @@ public class RestaurantService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    // Retrieve all restaurants
     public List<RestaurantWithFullData> getAllRestaurants() {
         return restaurantRepository.findAllRestaurantsWithFullData();
     }
 
-    // Retrieve a specific restaurant by its ID
     public List<RestaurantWithFullData> getRestaurantById(Integer id) {
         List<RestaurantWithFullData> restaurants = restaurantRepository.findRestaurantWithFullData(id);
-        return restaurants != null ? restaurants : Collections.emptyList(); // Avoid returning null
+        return restaurants != null ? restaurants : Collections.emptyList();
     }
 
-    // Save a new restaurant
     public void addRestaurant(String restaurant, String logo, String address,
                               String town, Integer country, String zipCode,
                               Double reputation, Integer manager,
@@ -58,7 +55,6 @@ public class RestaurantService {
     }
 
 
-    // Update an existing restaurant
     public void updateRestaurant(int restaurantId, String restaurant, String logo, double reputation,
                                  String address, String town, int country, String zipCode, int manager,
                                  Time opensMon, Time closesMon,
@@ -83,7 +79,6 @@ public class RestaurantService {
     }
 
 
-    // Delete a restaurant by its ID
     public void deleteRestaurant(int restaurantId) {
         // Retrieve the address ID for the restaurant
         String getAddressQuery = "SELECT address FROM restaurants WHERE id = ?";
@@ -99,5 +94,22 @@ public class RestaurantService {
             String deleteAddressQuery = "DELETE FROM addresses WHERE id = ?";
             jdbcTemplate.update(deleteAddressQuery, addressId);
         }
+    }
+
+
+    public List<Restaurant> findAll() {
+        return restaurantRepository.findAll();
+    }
+
+    public Optional<Restaurant> findById(Integer id) {
+        return restaurantRepository.findById(id);
+    }
+
+    public Restaurant save(Restaurant restaurant) {
+        return restaurantRepository.save(restaurant);
+    }
+
+    public void deleteById(Integer id) {
+        restaurantRepository.deleteById(id);
     }
 }

@@ -1,10 +1,6 @@
 package com.example.garbandgo.controller;
 
 import com.example.garbandgo.dto.RestaurantWithFullData;
-import com.example.garbandgo.entities.Address;
-import com.example.garbandgo.entities.Country;
-import com.example.garbandgo.entities.Restaurant;
-import com.example.garbandgo.entities.User;
 import com.example.garbandgo.service.RestaurantService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -13,16 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.sql.Time;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/restaurants")
@@ -31,7 +23,6 @@ public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
-    // GET /restaurants - Index: Retrieve all restaurants
     @GetMapping("/")
     public String index(Model model) {
         List<RestaurantWithFullData> restaurants = restaurantService.getAllRestaurants();
@@ -39,7 +30,6 @@ public class RestaurantController {
         return "restaurants/index";
     }
 
-    // GET /restaurants/{id} - Show: Retrieve a single restaurant by its ID
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model) {
         List<RestaurantWithFullData> restaurant = restaurantService.getRestaurantById(id);
@@ -57,7 +47,6 @@ public class RestaurantController {
     }
 
 
-    // POST /restaurants - Add: Create a new restaurant
     @PostMapping("/add")
     public String add ( @RequestParam String restaurant,
                         @RequestParam String logo,
@@ -127,7 +116,6 @@ public class RestaurantController {
     }
 
 
-    // PUT /restaurants/{id} - Update: Update an existing restaurant
     @PutMapping("/edit/{id}")
     public String updateRestaurant(
             @PathVariable("id") Integer restaurantId,
@@ -194,7 +182,6 @@ public class RestaurantController {
     }
 
 
-    // DELETE /restaurants/{id} - Delete: Remove a restaurant by its ID
     @DeleteMapping("/delete/{id}")
     public String deleteRestaurant(@PathVariable("id") int restaurantId, RedirectAttributes redirectAttributes) {
         try {
