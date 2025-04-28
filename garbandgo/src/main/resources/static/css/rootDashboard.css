@@ -95,6 +95,7 @@ nav ul li a:hover {
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
+    text-decoration: none;
 }
 
 .sidebar button:hover {
