@@ -108,7 +108,14 @@ INSERT INTO `restaurant_open_hours` (`id`, `restaurant`, `opens_at`, `closes_at`
 (11, 2, '09:00:00', '22:00:00', 'Thursday'),
 (12, 2, '09:00:00', '22:00:00', 'Friday'),
 (13, 2, '10:00:00', '22:00:00', 'Saturday'),
-(14, 2, '10:00:00', '21:00:00', 'Sunday');
+(14, 3, '10:00:00', '21:00:00', 'Sunday'),
+(15, 3, '09:00:00', '21:00:00', 'Monday'),
+(16, 3, '09:00:00', '21:00:00', 'Tuesday'),
+(17, 3, '09:00:00', '21:00:00', 'Wednesday'),
+(18, 3, '09:00:00', '22:00:00', 'Thursday'),
+(19, 3, '09:00:00', '22:00:00', 'Friday'),
+(20, 3, '10:00:00', '22:00:00', 'Saturday'),
+(21, 3, '10:00:00', '21:00:00', 'Sunday');
 
 INSERT INTO `orders` (`id`, `restaurant`, `user`, `address`, `promocode`, `additional_discount`, `total_price`, `ordered_at`, `due_to_delivery`, `packed_at`, `packed_by`, `delivered_at`, `delivered_by`, `cancelled_id`) 
 VALUES 

@@ -189,6 +189,6 @@ public class RestaurantController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error deleting restaurant: " + e.getMessage());
         }
-        return "redirect:/restaurants";
+        return "redirect:/restaurants/";
     }
 }

@@ -80,20 +80,9 @@ public class RestaurantService {
 
 
     public void deleteRestaurant(int restaurantId) {
-        // Retrieve the address ID for the restaurant
-        String getAddressQuery = "SELECT address FROM restaurants WHERE id = ?";
-        Integer addressId = jdbcTemplate.queryForObject(getAddressQuery, Integer.class, restaurantId);
+        String deleteRestaurantQuery = "UPDATE `restaurants` SET `deleted_at`= NOW() WHERE id = ?";
+        jdbcTemplate.update(deleteRestaurantQuery, restaurantId);
 
-        if (addressId != null) {
-            String deleteOpenHoursQuery = "DELETE FROM restaurant_open_hours WHERE restaurant = ?";
-            jdbcTemplate.update(deleteOpenHoursQuery, restaurantId);
-
-            String deleteRestaurantQuery = "DELETE FROM restaurants WHERE id = ?";
-            jdbcTemplate.update(deleteRestaurantQuery, restaurantId);
-
-            String deleteAddressQuery = "DELETE FROM addresses WHERE id = ?";
-            jdbcTemplate.update(deleteAddressQuery, addressId);
-        }
     }
 
 

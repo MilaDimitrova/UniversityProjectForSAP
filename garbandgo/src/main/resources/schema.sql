@@ -169,7 +169,8 @@ CREATE TABLE `restaurants` (
   `logo` text NOT NULL,
   `address` int(11) NOT NULL,
   `reputation` float(5,1) DEFAULT NULL,
-  `manager` int(11) NOT NULL
+  `manager` int(11) NOT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
