@@ -11,7 +11,6 @@
 <form th:action="@{/restaurants/edit/{id}(id=${restaurantDetails[0].id})}" method="post">
     <input type="hidden" name="_method" value="PUT" />
 
-    <!-- Display restaurant details for editing -->
     <label for="restaurant">Restaurant Name:</label>
     <input type="text" id="restaurant" name="restaurant" th:value="${restaurantDetails[0].restaurant}" required /><br/>
 
@@ -24,7 +23,7 @@
     <label for="town">Town:</label>
     <input type="text" id="town" name="town" th:value="${restaurantDetails[0].town}" required /><br/>
 
-    <input type="hidden" id="country" name="country" th:value="${restaurantDetails[0].country}" required /><br/>
+    <input type="hidden" id="country" name="country" value="1" required /><br/>
 
     <label for="zipCode">Zip Code:</label>
     <input type="text" id="zipCode" name="zipCode" th:value="${restaurantDetails[0].zipCode}" required /><br/>

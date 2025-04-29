@@ -26,8 +26,8 @@ public class RestaurantService {
     }
 
     public List<RestaurantWithFullData> getRestaurantById(Integer id) {
-        List<RestaurantWithFullData> restaurants = restaurantRepository.findRestaurantWithFullData(id);
-        return restaurants != null ? restaurants : Collections.emptyList();
+        List<RestaurantWithFullData> restaurant = restaurantRepository.findRestaurantWithFullData(id);
+        return restaurant != null ? restaurant : Collections.emptyList();
     }
 
     public void addRestaurant(String restaurant, String logo, String address,
@@ -76,6 +76,7 @@ public class RestaurantService {
                 opensSat, closesSat,
                 opensSun, closesSun
         );
+
     }
 
 
