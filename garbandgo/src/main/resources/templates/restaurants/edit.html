@@ -5,6 +5,11 @@
     <title>Grab and go - Restaurant</title>
     <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
     <link rel="stylesheet" th:href="@{/css/form.css}">
+    <style>
+        form {
+            position: absolute;
+        }
+    </style>
 </head>
 <body>
 <h1>Edit Restaurant</h1>
@@ -77,12 +82,12 @@
 
     <button type="submit">Update Restaurant</button>
 </form>
-
-<div th:if="${message}">
-    <p th:text="${message}" style="color:green;"></p>
-</div>
-<div th:if="${error}">
-    <p th:text="${error}" style="color:red;"></p>
-</div>
+    <button onclick="window.location.href='../'" style="position: absolute;">Go back</button>
+    <div th:if="${message}">
+        <p th:text="${message}" style="color:green;"></p>
+    </div>
+    <div th:if="${error}">
+        <p th:text="${error}" style="color:red;"></p>
+    </div>
 </body>
 </html>
