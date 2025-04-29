@@ -14,13 +14,17 @@ import java.util.Set;
 })
 public class CancelledOrder implements Serializable {
     private static final long serialVersionUID = 5297276254395683337L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
+    @Column(name = "canceled_at", nullable = false)
     private Instant canceledAt;
 
     private String reason;
@@ -32,22 +36,23 @@ public class CancelledOrder implements Serializable {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public CancelledOrder setOrders(Set<Order> orders) {
         this.orders = orders;
+        return this;
     }
 
     @Lob
     @Column(name = "reason", nullable = false)
-    public String getReason() {
-        return reason;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setReason(String reason) {
+    public CancelledOrder setReason(String reason) {
         this.reason = reason;
+        return this;
     }
 
-    @Convert(disableConversion = true)
-    @Column(name = "canceled_at", nullable = false)
     public Instant getCanceledAt() {
         return canceledAt;
     }
@@ -62,15 +67,14 @@ public class CancelledOrder implements Serializable {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public CancelledOrder setOrder(Order order) {
         this.order = order;
+        return this;
     }
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
+    public CancelledOrder setId(Integer id) {
         this.id = id;
+        return this;
     }
 }

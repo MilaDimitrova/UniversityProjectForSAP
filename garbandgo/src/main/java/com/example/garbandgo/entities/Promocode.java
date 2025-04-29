@@ -1,5 +1,6 @@
 package com.example.garbandgo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import com.example.garbandgo.entities.Restaurant;
 import java.io.Serializable;
@@ -23,7 +24,7 @@ public class Promocode implements Serializable {
 
     private String description;
 
-    private Restaurant restaurant;
+    private Integer restaurant;
 
     private Instant validFrom;
 
@@ -31,16 +32,6 @@ public class Promocode implements Serializable {
 
     private Integer discount;
 
-    private Set<Order> orders = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "promocode")
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
 
     @Column(name = "discount", nullable = false)
     public Integer getDiscount() {
@@ -72,12 +63,13 @@ public class Promocode implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "restaurant", nullable = false)
-    public Restaurant getRestaurant() {
+    @JoinColumn(name = "restaurant", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
+    public Integer getRestaurant() {
         return restaurant;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
+    public void setRestaurant(Integer restaurant) {
         this.restaurant = restaurant;
     }
 

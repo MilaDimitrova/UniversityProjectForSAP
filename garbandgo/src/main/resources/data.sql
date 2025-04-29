@@ -2,11 +2,11 @@ use grab_and_go;
 
 START TRANSACTION;
 INSERT INTO `roles` (`id`, `role`) VALUES
-(1, 'admin'),
-(2, 'user'),
-(3, 'courier'),
-(4, 'delivery'),
-(5, 'manager');
+(1, 'ADMIN'),
+(2, 'USER'),
+(3, 'COURIER'),
+(4, 'REST_OWNER'),
+(5, 'MANAGER');
 
 INSERT INTO `currencies` (`id`, `currency`) VALUES
 (1, 'BGN'),
@@ -92,10 +92,7 @@ INSERT INTO `promocodes` (`id`, `promocode`, `description`, `restaurant`, `valid
 (2, 'KUMBATA15', '15% off all burgers', 2, '2025-01-01 00:00:00', '2025-06-30 23:59:59', 15),
 (3, 'SHISHKOV10', '10% off all salads', 3, '2025-03-01 00:00:00', '2025-03-31 23:59:59', 10);
 
-INSERT INTO `discounts` (`id`, `discount`, `valid_from`, `valid_to`, `restautant`, `discounted_category`, `discounted_product`, `added_by`, `added_at`) VALUES
-(1, 0.10, '2025-03-01 00:00:00', '2025-03-07 23:59:59', 1, 1, NULL, 4, '2025-02-25 10:00:00'),
-(2, 0.15, '2025-03-15 00:00:00', '2025-03-17 23:59:59', 2, NULL, 3, 4, '2025-03-01 09:30:00'),
-(3, 0.20, '2025-04-01 00:00:00', '2025-04-30 23:59:59', 3, 3, NULL, 5, '2025-03-15 14:15:00');
+
 
 INSERT INTO `restaurant_open_hours` (`id`, `restaurant`, `opens_at`, `closes_at`, `day_of_week`) VALUES
 (1, 1, '10:00:00', '22:00:00', 'Monday'),
@@ -111,7 +108,14 @@ INSERT INTO `restaurant_open_hours` (`id`, `restaurant`, `opens_at`, `closes_at`
 (11, 2, '09:00:00', '22:00:00', 'Thursday'),
 (12, 2, '09:00:00', '22:00:00', 'Friday'),
 (13, 2, '10:00:00', '22:00:00', 'Saturday'),
-(14, 2, '10:00:00', '21:00:00', 'Sunday');
+(14, 3, '10:00:00', '21:00:00', 'Sunday'),
+(15, 3, '09:00:00', '21:00:00', 'Monday'),
+(16, 3, '09:00:00', '21:00:00', 'Tuesday'),
+(17, 3, '09:00:00', '21:00:00', 'Wednesday'),
+(18, 3, '09:00:00', '22:00:00', 'Thursday'),
+(19, 3, '09:00:00', '22:00:00', 'Friday'),
+(20, 3, '10:00:00', '22:00:00', 'Saturday'),
+(21, 3, '10:00:00', '21:00:00', 'Sunday');
 
 INSERT INTO `orders` (`id`, `restaurant`, `user`, `address`, `promocode`, `additional_discount`, `total_price`, `ordered_at`, `due_to_delivery`, `packed_at`, `packed_by`, `delivered_at`, `delivered_by`, `cancelled_id`) 
 VALUES 

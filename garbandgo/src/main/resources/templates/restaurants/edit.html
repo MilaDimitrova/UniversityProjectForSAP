@@ -5,14 +5,17 @@
     <title>Grab and go - Restaurant</title>
     <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
     <link rel="stylesheet" th:href="@{/css/form.css}">
+    <style>
+        form {
+            position: absolute;
+        }
+    </style>
 </head>
 <body>
 <h1>Edit Restaurant</h1>
 <form th:action="@{/restaurants/edit/{id}(id=${restaurantDetails[0].id})}" method="post">
-    <!-- Hidden field to override HTTP method to PUT -->
     <input type="hidden" name="_method" value="PUT" />
 
-    <!-- Display restaurant details for editing -->
     <label for="restaurant">Restaurant Name:</label>
     <input type="text" id="restaurant" name="restaurant" th:value="${restaurantDetails[0].restaurant}" required /><br/>
 
@@ -25,7 +28,7 @@
     <label for="town">Town:</label>
     <input type="text" id="town" name="town" th:value="${restaurantDetails[0].town}" required /><br/>
 
-    <input type="hidden" id="country" name="country" th:value="${restaurantDetails[0].country}" required /><br/>
+    <input type="hidden" id="country" name="country" value="1" required /><br/>
 
     <label for="zipCode">Zip Code:</label>
     <input type="text" id="zipCode" name="zipCode" th:value="${restaurantDetails[0].zipCode}" required /><br/>
@@ -79,12 +82,12 @@
 
     <button type="submit">Update Restaurant</button>
 </form>
-
-<div th:if="${message}">
-    <p th:text="${message}" style="color:green;"></p>
-</div>
-<div th:if="${error}">
-    <p th:text="${error}" style="color:red;"></p>
-</div>
+    <button onclick="window.location.href='../'" style="position: absolute;">Go back</button>
+    <div th:if="${message}">
+        <p th:text="${message}" style="color:green;"></p>
+    </div>
+    <div th:if="${error}">
+        <p th:text="${error}" style="color:red;"></p>
+    </div>
 </body>
 </html>

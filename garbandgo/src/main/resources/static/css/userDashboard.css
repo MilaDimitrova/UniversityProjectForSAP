@@ -1,0 +1,315 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #E6AF2E;
+    margin: 0;
+    color: #333;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #E6AF2E;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    margin-left: 0;
+    display: flex;
+    gap: 5px;
+}
+
+.logo .highlight {
+    color: gray;
+}
+
+.logo .highlightSecond {
+    color: black;
+}
+
+nav {
+    background: transparent;
+    padding: 15px;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    background-color: #ffa500;
+    color: white;
+}
+
+.content {
+    background-color: #E8C78D;
+    width: 1000px; /* Запазвам ширината */
+    min-height: 600px; /* Удължавам височината */
+    padding: 20px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row; /* Подреждане на елементите в редица */
+    border-radius: 10px;
+
+}
+
+.sidebar {
+    width: 250px; /* Ширина на sidebar */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #F5E8D0;
+    padding: 20px;
+    margin: 0; /* Без външни отстояния */
+    border-right: 2px solid #D69D2B;
+}
+
+.sidebar button {
+    background-color: white;
+    border: 1px solid #D69D2B;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.sidebar button:hover {
+    background-color: #E8C78D;
+    border-color: #E6AF2E;
+}
+
+.main-content {
+    width: calc(100% - 270px); /* Приспособявам останалото пространство за main content */
+    padding: 20px;
+    text-align: left;
+}
+
+.main-content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+#profile {
+    background-color: #fdf6ec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+}
+
+#profile h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#profile p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+#profile form {
+    margin-top: 20px;
+}
+
+#profile label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+#profile input[type="text"],
+#profile input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+#profile button[type="submit"] {
+    background-color: #f0a500;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#profile button[type="submit"]:hover {
+    background-color: #d18f00;
+}
+
+.dashboard-section h2 {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #b66a00;
+}
+
+.dashboard-section ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.dashboard-section ul li {
+    margin-bottom: 8px;
+}
+
+.dashboard-section p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.form-panel {
+    background-color: #fdf6ec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+}
+
+.form-panel h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-panel p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.form-panel form {
+    margin-top: 20px;
+}
+
+.form-panel label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-panel input[type="text"],
+.form-panel input[type="password"],
+.form-panel input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.form-panel button[type="submit"] {
+    background-color: #f0a500;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.form-panel button[type="submit"]:hover {
+    background-color: #d18f00;
+}
+
+.dashboard-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.dashboard-section th, .dashboard-section td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.dashboard-section th {
+    background-color: #f0a500;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.dashboard-section tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.dashboard-section tr:hover {
+    background-color: #f1f1f1;
+}
+
+.dashboard-section td a {
+    color: #f0a500;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.dashboard-section td a:hover {
+    color: #d18f00;
+    text-decoration: underline;
+}
+
+.menu-button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #c87d0a;
+    background-color: white;
+    color: #c87d0a;
+    font-weight: bold;
+    cursor: pointer;
+}
+.menu-button:hover {
+    background-color: #f2b648;
+    color: white;
+}

@@ -136,3 +136,13 @@ footer a {
 footer a:hover {
     color: white;
 }
+
+section a, section form input[type=submit], section button {
+    display: inline-block;
+    margin: 10px 5px;
+}
+
+section form {
+    display: inline-block;
+    margin: 0;
+}

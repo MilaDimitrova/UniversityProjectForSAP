@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Grab and Go - Reviews</title>
+    <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
+    <style>
+        .rating-stars {
+            color: gold;
+            font-size: 1.3rem;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 120px; /* коригирай при нужда спрямо header височината */
+            left: 30px;
+            padding: 10px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background-color: #45a049;
+        }
+
+        .review-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .review-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            width: 300px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .review-date {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .review-form {
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 2px solid #ddd;
+            background-color: #f9f9f9;
+        }
+
+        .review-form textarea,
+        .review-form input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .review-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .review-form button:hover {
+            background-color: #45a049;
+        }
+
+        .star-rating {
+            direction: rtl;
+            display: inline-flex;
+            font-size: 1.5rem;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/restaurants">Our restaurants</a></li>
+            <li><a href="/aboutUs">About us</a></li>
+            <li><a href="/contact">Contacts</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Бутон в горен ляв ъгъл -->
+<a href="/orders" class="back-button">⬅ Back to Orders</a>
+
+<section>
+    <h2>Customer Reviews</h2>
+
+    <div class="review-container">
+        <div th:each="review : ${reviews}" class="review-card">
+            <h3 th:text="'Order #' + ${review.orderId}">Order ID</h3>
+
+            <!-- Rating звезди -->
+            <p th:if="${review.review != null}" class="rating-stars">
+                <span th:each="i : ${#numbers.sequence(1, 5)}"
+                      th:text="${i <= review.review ? '★' : '☆'}">★</span>
+            </p>
+            <p th:unless="${review.review != null}" class="rating-stars">No rating</p>
+
+            <!-- Текст на ревюто -->
+            <p th:text="${review.reviewText != null ? review.reviewText : 'No comment'}">This place is awesome!</p>
+
+            <!-- Дата -->
+            <p class="review-date" th:if="${review.dateCreated != null}"
+               th:text="${#temporals.format(review.dateCreated, 'dd MMM yyyy')}">01 Jan 2025</p>
+            <p class="review-date" th:unless="${review.dateCreated != null}">Date unknown</p>
+        </div>
+    </div>
+
+    <div class="review-form">
+        <h3>Leave a Review</h3>
+        <form th:action="@{/reviews/create}" th:object="${review}" method="post">
+            <label>Rating:</label>
+            <div class="star-rating">
+                <input type="radio" th:field="*{review}" id="star5" value="5"/><label for="star5">&#9733;</label>
+                <input type="radio" th:field="*{review}" id="star4" value="4"/><label for="star4">&#9733;</label>
+                <input type="radio" th:field="*{review}" id="star3" value="3"/><label for="star3">&#9733;</label>
+                <input type="radio" th:field="*{review}" id="star2" value="2"/><label for="star2">&#9733;</label>
+                <input type="radio" th:field="*{review}" id="star1" value="1"/><label for="star1">&#9733;</label>
+            </div><br/><br/>
+
+            <label>Comment:</label>
+            <textarea th:field="*{reviewText}" rows="4" placeholder="Write your experience here..."></textarea>
+
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <div class="footer-data">
+        <div class="links">
+            <h4>Links</h4>
+            <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Frequently asked questions</a></li>
+            </ul>
+        </div>
+        <div class="social">
+            <h4>Social</h4>
+            <ul>
+                <li><a href="facebook.com">Facebook</a></li>
+                <li><a href="instagram.com">Instagram</a></li>
+                <li><a href="linkedin.com">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,8 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
     <title>Grab and go - Restaurant view</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: auto;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            background: white;
+        }
+
+        th {
+            background-color: #ffa500;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -12,28 +34,58 @@
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/restaurants">Our restaurants</a></li>
+            <li><a href="/restaurants/">Our restaurants</a></li>
             <li><a href="/aboutUs">About us</a></li>
             <li><a href="/contact">Contacts</a></li>
-            <li><a href="/profile">Profile</a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/profile">Profile</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
         </ul>
     </nav>
 </header>
+
 <section>
     <h2 th:text="${restaurant[0].restaurant}"></h2>
     <br>
     <img th:src="${restaurant[0].logo}" alt="Restaurant" width="250px">
-    <ul style="list-style-type: none">
-        <li th:each="open_hour : ${restaurant}">
-            <b th:text="${open_hour.dayOfWeek}">: </b>  <span th:text="${open_hour.opensAt}"></span>-<span th:text="${open_hour.closesAt}"></span>
-        </li>
-    </ul>
-    <a th:href="@{/restaurants/edit/{id}(id=${restaurant[0].id})}" style="text-decoration: none">Update restaurant</a>
-    <form th:action="@{/restaurants/delete/{id}(id=${restaurant[0].id})}" method="post">
-        <input type="hidden" name="_method" value="DELETE" />
-        <input type="submit" value="Delete restaurant">
-    </form>
+    <table>
+        <tr>
+            <th>Address</th>
+            <td th:text="${restaurant[0].address}"></td>
+        </tr>
+        <tr>
+            <th>Town</th>
+            <td th:text="${restaurant[0].town}"></td>
+        </tr>
+        <tr>
+            <th>Country</th>
+            <td th:text="${restaurant[0].country}"></td>
+        </tr>
+        <tr>
+            <th colspan="2" style="text-align: center">Working hours</th>
+        </tr>
+        <tr th:each="open_hour : ${restaurant}">
+            <th th:text="${open_hour.dayOfWeek}"></th>
+            <td>
+                <span th:text="${open_hour.opensAt}"></span>-<span th:text="${open_hour.closesAt}"></span>
+            </td>
+        </tr>
+    </table>
+
+    <a th:href="@{/products/shop/{id}(id=${restaurant[0].id})}" class="order-btn" style="text-decoration: none;">Order from this Restaurant</a>
+
+
+    <div sec:authorize="hasAnyRole('ADMIN', 'MANAGER', 'REST_OWNER')">
+        <br><br>
+        <a th:href="@{/products/manage/{id}(id=${restaurant[0].id})}" style="text-decoration: none;">Manage Products</a>
+        <br><br>
+        <a th:href="@{/restaurants/edit/{id}(id=${restaurant[0].id})}" style="text-decoration: none">Update restaurant</a>
+        <form th:action="@{/restaurants/delete/{id}(id=${restaurant[0].id})}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            <input type="submit" value="Delete restaurant">
+        </form>
+    </div>
 </section>
+
 <footer>
     <div class="footer-logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>

@@ -1,0 +1,311 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #E6AF2E;
+    margin: 0;
+    color: #333;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #E6AF2E;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    margin-left: 0;
+    display: flex;
+    gap: 5px;
+}
+
+.logo .highlight {
+    color: gray;
+}
+
+.logo .highlightSecond {
+    color: black;
+}
+
+nav {
+    background: transparent;
+    padding: 15px;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    background-color: #ffa500;
+    color: white;
+}
+
+.content {
+    background-color: #E8C78D;
+    width: 1000px; /* Запазвам ширината */
+    min-height: 600px; /* Удължавам височината */
+    padding: 20px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row; /* Подреждане на елементите в редица */
+    border-radius: 10px;
+
+}
+
+.sidebar {
+    width: 250px; /* Ширина на sidebar */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #F5E8D0;
+    padding: 20px;
+    margin: 0; /* Без външни отстояния */
+    border-right: 2px solid #D69D2B;
+}
+
+.sidebar button {
+    background-color: white;
+    border: 1px solid #D69D2B;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.sidebar button:hover {
+    background-color: #E8C78D;
+    border-color: #E6AF2E;
+}
+
+.main-content {
+    width: calc(100% - 270px); /* Приспособявам останалото пространство за main content */
+    padding: 20px;
+    text-align: left;
+}
+
+.main-content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+#profile {
+    background-color: #fdf6ec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+}
+
+#profile h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#profile p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+#profile form {
+    margin-top: 20px;
+}
+
+#profile label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+#profile input[type="text"],
+#profile input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+#profile button[type="submit"] {
+    background-color: #f0a500;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#profile button[type="submit"]:hover {
+    background-color: #d18f00;
+}
+
+.dashboard-section {
+    display: none;
+}
+
+.dashboard-section.active {
+    display: block;
+}
+
+.dashboard-section h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.dashboard-section form {
+    background-color: #fdf6ec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin-top: 20px;
+}
+
+.dashboard-section label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.dashboard-section input[type="text"],
+.dashboard-section input[type="password"],
+.dashboard-section input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.dashboard-section button[type="submit"] {
+    background-color: #f0a500;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+
+.dashboard-section button[type="submit"]:hover {
+    background-color: #d18f00;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    background: #fdf6ec;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    flex: 1;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.stat-item h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.stat-item p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+#delivery {
+    background-color: #fdf6ec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+#delivery h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#delivery table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#delivery table th, #delivery table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+#delivery table th {
+    background-color: #f0a500;
+    color: white;
+}
+
+#delivery table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#delivery table tr:hover {
+    background-color: #f1f1f1;
+}
+
+#delivery .status {
+    font-weight: bold;
+}
+
+#delivery .status.in-delivery {
+    color: #f0a500;
+}
+
+#delivery .status.delivered {
+    color: #28a745;
+}
+
+#delivery .status.cancelled {
+    color: #dc3545;
+}

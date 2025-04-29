@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/registrationPage.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/restaurants}">Our restaurants</a></li>
+            <li><a th:href="@{/aboutUs}">About us</a></li>
+            <li><a th:href="@{/contact}">Contacts</a></li>
+            <li><a th:href="@{/profile}">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="login">
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <h2>Registration</h2>
+
+        <!-- Скритото поле за Role ID -->
+        <input type="hidden" name="role.id" value="2" />
+
+        <label th:for="*{username}">Name:</label><br>
+        <input type="text" th:field="*{username}" placeholder="JohnDoe" required /><br><br>
+
+        <label th:for="*{email}">Email address:</label><br>
+        <input type="email" th:field="*{email}" placeholder="Enter your email" required /><br><br>
+
+        <label th:for="*{phone}">Phone number:</label><br>
+        <input type="tel" th:field="*{phone}" placeholder="Enter your phone number" pattern="\d{10}" required /><br><br>
+
+        <label th:for="*{password}">Password:</label><br>
+        <input type="password" th:field="*{password}" placeholder="Enter password" required /><br><br>
+
+        <button type="submit">Register me</button>
+
+        <div th:if="${param.error}">
+            <p style="color: red;">Error: Registration failed. Please try again.</p>
+        </div>
+
+        <a th:href="@{/login}">
+            <p>Already registered? Log In!</p>
+        </a>
+    </form>
+</div>
+</body>
+</html>

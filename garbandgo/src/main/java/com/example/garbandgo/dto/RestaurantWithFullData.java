@@ -25,8 +25,10 @@ public class RestaurantWithFullData {
                                       String dayOfWeek,
                                       String address,
                                       String town,
-                                      String country,
-                                      String zipCode) {
+                                      String zipCode,
+                                      String country
+        ) {
+
                 this.id = id;
                 this.restaurant = restaurant;
                 this.logo = logo;
@@ -36,8 +38,8 @@ public class RestaurantWithFullData {
                 this.dayOfWeek = dayOfWeek;
                 this.address = address;
                 this.town = town;
-                this.zipCode = zipCode;
                 this.country  = country;
+                this.zipCode = zipCode;
         }
 
         public Integer getId() {

@@ -11,27 +11,31 @@
   </div>
   <nav>
     <ul>
-      <li><a href="/">Home</a></li>
+      <li><a th:href="@{/}">Home</a></li>
       <li><a th:href="@{/restaurants/}">Our restaurants</a></li>
-      <li><a href="/aboutUs">About us</a></li>
-      <li><a href="/contact">Contacts</a></li>
-      <li><a href="/profile">Profile</a></li>
+      <li><a th:href="@{/aboutUs}">About us</a></li>
+      <li><a th:href="@{/contact}">Contacts</a></li>
+      <li><a th:href="@{/profile}">Profile</a></li>
     </ul>
   </nav>
 </header>
 <div class="form-contact">
   <h2>You can fill out our contact form if you have any questions!</h2>
-  <form action="/contact">
-  <label for="fname">First Name:</label><br>
-  <input type="text" id="fname" placeholder="Ivan"><br><br>
-  <label for="lname">Last Name:</label><br>
-  <input type="text"  id="lname" placeholder="Ivanov"><br><br>
-  <label for="email">Enter your email:</label><br>
-  <input type="email" id="email" name="email" placeholder="Enter your email address"><br>
-  <label for="subject">Subject:</label><br>
-  <textarea id="subject" name="subject" placeholder="Write something.."></textarea><br>
-  <input type="submit" value="Submit">
-</form>
+  <form th:action="@{/contact}" method="post" th:object="${contactMessage}">
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" th:field="*{firstName}" placeholder="Ivan" />
+
+    <label for="lname">Last Name:</label>
+    <input type="text" id="lname" th:field="*{lastName}" placeholder="Ivanov" />
+
+    <label for="email">Enter your email:</label>
+    <input type="email" id="email" th:field="*{email}" placeholder="Enter your email address" />
+
+    <label for="subject">Subject:</label>
+    <textarea id="subject" th:field="*{subject}" placeholder="Write something.."></textarea>
+
+    <input type="submit" value="Submit" />
+  </form>
 </div>
 <footer>
   <div class="footer-logo">

@@ -1,6 +1,8 @@
 package com.example.garbandgo;
 
+import com.example.garbandgo.entities.ContactMessage;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -16,18 +18,20 @@ public class WebController {
         return "aboutUs";
     }
 
-    @GetMapping("/contact")
-    public String contactUs() {
-        return "contactUs";
-    }
-
     @GetMapping("/profile")
     public String profilePage() {
-        return "profilePage";
+        return "users/login"; // Ако login.html е профилната страница
     }
 
     @GetMapping("/registration")
     public String registrationPage() {
-        return "registrationPage";
+        return "register";
     }
+
+    @GetMapping("/users/rootPage")
+    public String rootPageProfile() {
+        return "rootPage";
+    }
+
+
 }

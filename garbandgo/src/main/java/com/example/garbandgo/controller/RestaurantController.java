@@ -1,28 +1,24 @@
 package com.example.garbandgo.controller;
 
 import com.example.garbandgo.dto.RestaurantWithFullData;
-import com.example.garbandgo.entities.Address;
-import com.example.garbandgo.entities.Country;
-import com.example.garbandgo.entities.Restaurant;
 import com.example.garbandgo.entities.User;
+import com.example.garbandgo.repositories.UserRepository;
 import com.example.garbandgo.service.RestaurantService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.sql.Time;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/restaurants")
@@ -30,8 +26,12 @@ public class RestaurantController {
 
     @Autowired
     private RestaurantService restaurantService;
+    private UserRepository userRepository;
 
-    // GET /restaurants - Index: Retrieve all restaurants
+    public RestaurantController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @GetMapping("/")
     public String index(Model model) {
         List<RestaurantWithFullData> restaurants = restaurantService.getAllRestaurants();
@@ -39,7 +39,6 @@ public class RestaurantController {
         return "restaurants/index";
     }
 
-    // GET /restaurants/{id} - Show: Retrieve a single restaurant by its ID
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model) {
         List<RestaurantWithFullData> restaurant = restaurantService.getRestaurantById(id);
@@ -53,11 +52,10 @@ public class RestaurantController {
 
     @GetMapping("/add")
     public String getAddRestaurantView() {
-        return "restaurants/add"; // Thymeleaf will look for 'add.html' in '/resources/templates/restaurants/'
+        return "restaurants/add";
     }
 
 
-    // POST /restaurants - Add: Create a new restaurant
     @PostMapping("/add")
     public String add ( @RequestParam String restaurant,
                         @RequestParam String logo,
@@ -80,9 +78,10 @@ public class RestaurantController {
                         @RequestParam(required = false) String closesSat,
                         @RequestParam(required = false) String opensSun,
                         @RequestParam(required = false) String closesSun,
-                        Authentication authentication,
+                        @AuthenticationPrincipal UserDetails userDetails,
                         RedirectAttributes redirectAttributes) {
-        //User manager = (User) authentication.getPrincipal();
+        User manager = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new IllegalArgumentException("Something went wrong!"));
 
         try {
             Time tOpensMon = (opensMon == null || opensMon.trim().isEmpty()) ? null : Time.valueOf(opensMon);
@@ -101,8 +100,7 @@ public class RestaurantController {
             Time tClosesSun = (closesSun == null || closesSun.trim().isEmpty()) ? null : Time.valueOf(closesSun);
 
             restaurantService.addRestaurant(
-                    //restaurant, logo, address, town, Integer.parseInt(country), zipCode, reputation, manager.getId(),
-                    restaurant, logo, address, town, Integer.parseInt(country), zipCode, reputation, 1,
+                    restaurant, logo, address, town, Integer.parseInt(country), zipCode, reputation, manager.getId(),
                     tOpensMon, tClosesMon,
                     tOpensTue, tClosesTue,
                     tOpensWed, tClosesWed,
@@ -115,21 +113,18 @@ public class RestaurantController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error adding restaurant: " + e.getMessage());
         }
-        return "redirect:/restaurants/index";
+        return "redirect:/restaurants/";
 
     }
 
     @GetMapping("/edit/{id}")
     public String showEditRestaurantForm(@PathVariable("id") int restaurantId, Model model) {
-        // In a real application, retrieve existing details from a repository/service.
-        // Here we assume restaurantService.getRestaurantDetails(id) returns a Map containing values.
         List<RestaurantWithFullData> restaurantDetails = restaurantService.getRestaurantById(restaurantId);
         model.addAttribute("restaurantDetails", restaurantDetails);
         return "restaurants/edit";
     }
 
 
-    // PUT /restaurants/{id} - Update: Update an existing restaurant
     @PutMapping("/edit/{id}")
     public String updateRestaurant(
             @PathVariable("id") Integer restaurantId,
@@ -154,10 +149,11 @@ public class RestaurantController {
             @RequestParam(required = false) String closesSat,
             @RequestParam(required = false) String opensSun,
             @RequestParam(required = false) String closesSun,
-            //Authentication authentication,
+            @AuthenticationPrincipal UserDetails userDetails,
             RedirectAttributes redirectAttributes) {
 
-        //User manager = (User) authentication.getPrincipal();
+        User manager = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new IllegalArgumentException("Something went wrong!"));
 
         try {
             Time tOpensMon = (opensMon == null || opensMon.trim().isEmpty()) ? null : Time.valueOf(opensMon);
@@ -177,8 +173,7 @@ public class RestaurantController {
 
             restaurantService.updateRestaurant(
                     restaurantId, restaurant, logo, reputation,
-                    //address, town, Integer.parseInt(country), zipCode, manager.getId(),
-                    address, town, Integer.parseInt(country), zipCode, 1,
+                    address, town, Integer.parseInt(country), zipCode, manager.getId(),
                     tOpensMon, tClosesMon,
                     tOpensTue, tClosesTue,
                     tOpensWed, tClosesWed,
@@ -196,7 +191,6 @@ public class RestaurantController {
     }
 
 
-    // DELETE /restaurants/{id} - Delete: Remove a restaurant by its ID
     @DeleteMapping("/delete/{id}")
     public String deleteRestaurant(@PathVariable("id") int restaurantId, RedirectAttributes redirectAttributes) {
         try {
@@ -205,6 +199,6 @@ public class RestaurantController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error deleting restaurant: " + e.getMessage());
         }
-        return "redirect:/restaurants";
+        return "redirect:/restaurants/";
     }
 }

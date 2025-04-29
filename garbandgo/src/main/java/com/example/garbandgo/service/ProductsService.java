@@ -13,11 +13,32 @@ public class ProductsService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getProductRepository() {
+    public List<Product> findAllProducts() {
+        return productRepository.findAll();
+    }
+
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
     public void saveProduct(Product product) {
         productRepository.save(product);
+    }
+
+    public List<Product> findProductsByRestaurantId(Integer restaurantId) {
+        return productRepository.findByRestaurantId(restaurantId);
+    }
+
+    public Product getProductById(Integer id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found with id " + id));
+    }
+
+    public void deleteProductById(Integer id) {
+        productRepository.deleteById(id);
+    }
+
+    public List<Product> getProductsByRestaurant(int restaurantId) {
+        return productRepository.findByRestaurantId(restaurantId);
     }
 }

@@ -1,0 +1,98 @@
+@import url("dashboards.css");
+
+.dashboard-cards {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #f1f2f6;
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1 1 200px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    margin-bottom: 10px;
+    color: #192a56;
+    font-size: 18px;
+}
+
+.card p {
+    font-size: 22px;
+    font-weight: bold;
+    color: #44bd32;
+}
+
+.notifications {
+    margin-top: 30px;
+}
+
+.notifications h2 {
+    font-size: 20px;
+    color: #b66a00;
+    margin-bottom: 10px;
+}
+
+.notifications ul {
+    list-style: disc inside;
+    padding: 0;
+    color: #333;
+}
+
+.notifications ul li {
+    margin-bottom: 5px;
+}
+
+#delivery {
+    background-color: #fffaf0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+}
+
+#delivery h1, #delivery h2 {
+    color: #2f3640;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#delivery table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+#delivery th, #delivery td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+#delivery th {
+    background-color: #f0a500;
+    color: white;
+}
+
+#delivery tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#delivery form button {
+    background-color: #44bd32;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#delivery form button:hover {
+    background-color: #4cd137;
+}

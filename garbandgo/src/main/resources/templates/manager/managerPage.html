@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/managerDashboard.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard | Grab&go</title>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/restaurants/}">Our restaurants</a></li>
+            <li><a th:href="@{/aboutUs}">About us</a></li>
+            <li><a th:href="@{/contact}">Contacts</a></li>
+            <li><a th:href="@{/profile}">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="content">
+        <div class="sidebar">
+            <button onclick="showSection('info')">Information</button>
+            <button onclick="showSection('orders')">Orders</button>
+            <button onclick="showSection('employees')">Employees</button>
+            <button onclick="showSection('delivery')">Delivery</button>
+            <button onclick="showSection('profile')">Profile Settings</button>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Log out</button>
+            </form>
+        </div>
+        <div class="main-content">
+            <section id="info" class="dashboard-section">
+                <h1>Manager Dashboard Overview</h1>
+                <p>Welcome, <span th:text="${user.username}">Manager</span>!</p>
+
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h2>Total Orders Today</h2>
+                        <p th:text="${totalOrdersToday}">123</p>
+                    </div>
+                    <div class="card">
+                        <h2>Pending Deliveries</h2>
+                        <p th:text="${pendingDeliveries}">12</p>
+                    </div>
+                    <div class="card">
+                        <h2>Active Couriers</h2>
+                        <p th:text="${activeCouriers}">5</p>
+                    </div>
+                    <div class="card">
+                        <h2>Restaurant Reputation</h2>
+                        <p th:if="${restaurant != null}" th:text="${restaurant.reputation}">4.5</p>
+                        <p th:if="${restaurant == null}">No restaurant info available.</p>
+                    </div>
+                </div>
+
+                <div class="notifications">
+                    <h2>Notifications</h2>
+                    <ul>
+                        <li>New courier added successfully.</li>
+                        <li>3 new orders received in the last hour.</li>
+                        <li>Inventory check is due tomorrow.</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="orders" class="dashboard-section" style="display: none;">
+                <h1>Orders</h1>
+                <p>Your active and past orders will appear here.</p>
+            </section>
+            <section id="employees" class="dashboard-section" style="display: none;">
+                <h1>Employees</h1>
+                <p>Add a new courier (employee).</p>
+                <form th:action="@{/manager/addCourier}" method="post">
+                    <label for="courierUsername">Username:</label>
+                    <input type="text" id="courierUsername" name="username" required><br>
+
+                    <label for="courierEmail">Email:</label>
+                    <input type="email" id="courierEmail" name="email" required><br>
+
+                    <label for="courierPhone">Phone:</label>
+                    <input type="text" id="courierPhone" name="phone" required><br>
+
+                    <label for="courierPassword">Password:</label>
+                    <input type="password" id="courierPassword" name="password" required><br>
+
+                    <button type="submit">Add Courier</button>
+                </form>
+            </section>
+            <section id="delivery" class="dashboard-section" style="display: none;">
+                <h1>Delivery Overview</h1>
+                <p>Here you can see all active deliveries.</p>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Delivery ID</th>
+                        <th>Order ID</th>
+                        <th>Courier</th>
+                        <th>Status</th>
+                        <th>Estimated Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1001</td>
+                        <td>501</td>
+                        <td>John Doe</td>
+                        <td>In Transit</td>
+                        <td>15 min</td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>502</td>
+                        <td>Jane Smith</td>
+                        <td>Delivered</td>
+                        <td>—</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="profile" class="dashboard-section" style="display: none;">
+                <h1>Profile Settings</h1>
+                <p><strong>Username:</strong> <span th:text="${user.username}">User</span></p>
+                <p><strong>Email:</strong> <span th:text="${user.email}">email@example.com</span></p>
+
+                <form th:action="@{/manager/update}" method="post" th:object="${user}">
+                    <label th:for="*{username}">New Username:</label>
+                    <input type="text" th:field="*{username}" /><br>
+
+                    <label th:for="*{password}">New Password:</label>
+                    <input type="password" th:field="*{password}" /><br>
+
+                    <button type="submit">Update</button>
+                </form>
+            </section>
+            <section id="logout" class="dashboard-section" style="display: none;">
+                <h1>Log out</h1>
+                <p>Thank you for using Grab&go. See you again soon!</p>
+            </section>
+        </div>
+    </div>
+</main>
+<script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>

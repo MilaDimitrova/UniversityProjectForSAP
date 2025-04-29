@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Shopping Cart</title>
+    <link rel="stylesheet" th:href="@{/css/cart.css}" />
+</head>
+<body>
+<h1>Your Shopping Cart</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price per Unit</th>
+        <th>Subtotal</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${cartItems}">
+        <td th:text="${item.product.name}">Product Name</td>
+        <td th:text="${item.quantity}">Quantity</td>
+        <td th:text="${item.product.price}">Price</td>
+        <!-- За по-опростено тестване, използваме директно умножение -->
+        <td th:text="${item.product.price * item.quantity}">Subtotal</td>
+        <td>
+            <form th:action="@{'/cart/remove/' + ${item.product.id}}" method="post">
+                <button type="submit">Remove</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/products/shop">Continue Shopping</a>
+</body>
+</html>
