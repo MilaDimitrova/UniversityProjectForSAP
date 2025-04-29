@@ -76,7 +76,6 @@
         <a th:href="@{/reviews}" class="rating-button">⭐ Rate Order</a>
     </div>
 </section>
-
 <footer>
     <div class="footer-logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
@@ -85,10 +84,8 @@
         <div class="links">
             <h4>Links</h4>
             <ul>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Frequently asked questions</a></li>
+                <li><a th:href="@{/aboutUs}">About us</a></li>
+                <li><a th:href="@{/contact}">Contacts</a></li>
             </ul>
         </div>
         <div class="social">
@@ -102,9 +99,9 @@
         <div class="policies">
             <h4>Policies</h4>
             <ul>
-                <li><a href="#">Terms and conditions</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Cookie Policy</a></li>
+                <li><a th:href="@{/termsAndConditions}">Terms and conditions</a></li>
+                <li><a th:href="@{/privacyPolicy}">Privacy Policy</a></li>
+                <li><a th:href="@{/cookiePolicy}">Cookie Policy</a></li>
             </ul>
         </div>
     </div>

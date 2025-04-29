@@ -146,3 +146,7 @@ section form {
     display: inline-block;
     margin: 0;
 }
+
+li {
+    list-style: none !important;
+}

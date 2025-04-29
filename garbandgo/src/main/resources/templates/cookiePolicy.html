@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy | Grab & Go</title>
     <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
-    <title>Grab and go - Restaurants</title>
 </head>
 <body>
+
 <header>
     <div class="logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
@@ -20,17 +22,35 @@
         </ul>
     </nav>
 </header>
+
 <section>
-    <h2>Our restaurants</h2>
+    <h1>Cookie Policy</h1>
+    <p>At Grab & Go, we use cookies to enhance your browsing experience. This policy explains how we use cookies and how you can manage them.</p>
+
+    <h2>1. What Are Cookies?</h2>
+    <p>Cookies are small text files stored on your device when you visit a website. They help improve user experience by remembering preferences and enabling certain functionalities.</p>
+
+    <h2>2. Types of Cookies We Use</h2>
     <ul>
-        <li th:each="restaurant : ${restaurants}">
-            <h3>
-                <a th:text="${restaurant.restaurant}" th:href="@{/restaurants/{id}(id=${restaurant.id})}"></a>
-            </h3>
-        <img th:src="${restaurant.logo}" alt="Restaurant">
-        </li>
+        <li><strong>Essential Cookies:</strong> Necessary for website functionality, such as logging in or making purchases.</li>
+        <li><strong>Performance Cookies:</strong> Help analyze website traffic to optimize performance.</li>
+        <li><strong>Functional Cookies:</strong> Enhance usability by remembering preferences.</li>
+        <li><strong>Advertising Cookies:</strong> Used for personalized ads and marketing.</li>
     </ul>
+
+    <h2>3. Managing Cookies</h2>
+    <p>You can control and delete cookies through your browser settings. Disabling cookies may impact website functionality.</p>
+
+    <h2>4. Third-Party Cookies</h2>
+    <p>Some cookies may be set by external services (e.g., analytics or social media). These third parties have their own privacy policies.</p>
+
+    <h2>5. Updates to This Policy</h2>
+    <p>We may update our Cookie Policy from time to time. Continued use of our website implies acceptance of updates.</p>
+
+    <h2>6. Contact Us</h2>
+    <p>If you have questions about our Cookie Policy, please <a href="/contact">contact us</a>.</p>
 </section>
+
 <footer>
     <div class="footer-logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
@@ -61,5 +81,6 @@
         </div>
     </div>
 </footer>
+
 </body>
 </html>
