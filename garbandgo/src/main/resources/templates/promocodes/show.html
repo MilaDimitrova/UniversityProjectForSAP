@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Grab and go - Promocodes</title>
+    <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a th:href="@{/restaurants/}">Our restaurants</a></li>
+            <li><a href="/aboutUs">About us</a></li>
+            <li><a href="/contact">Contacts</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+<section>
+    <h1>Promocodes</h1>
+    <a th:href="@{/promocodes/add}">Create New Promocode</a>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Promocode</th>
+            <th>Description</th>
+            <th>Restaurant</th>
+            <th>Valid From</th>
+            <th>Valid To</th>
+            <th>Discount</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${promocode.promocode}">Promocode</td>
+            <td th:text="${promocode.description}">Description</td>
+            <td th:text="${promocode.restaurant}">Restaurant</td>
+            <td th:text="${promocode.validFrom}">Valid From</td>
+            <td th:text="${promocode.validTo}">Valid To</td>
+            <td th:text="${promocode.discount}">Discount</td>
+            <td>
+                <a th:href="@{'/promocodes/edit/' + ${promocode.id}}">Edit</a> |
+                <form th:action="@{/promocodes/delete/{id}(id=${promocode.id})}" method="post">
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+<footer>
+    <div class="footer-logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <div class="footer-data">
+        <div class="links">
+            <h4>Links</h4>
+            <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Frequently asked questions</a></li>
+            </ul>
+        </div>
+        <div class="social">
+            <h4>Social</h4>
+            <ul>
+                <li><a href="facebook.com">Facebook</a></li>
+                <li><a href="instagram.com">Instagram</a></li>
+                <li><a href="linkedin.com">LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="policies">
+            <h4>Policies</h4>
+            <ul>
+                <li><a href="#">Terms and conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

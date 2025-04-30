@@ -49,23 +49,6 @@ CREATE TABLE `currencies` (
   `currency` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `discounts`
---
-
-CREATE TABLE `discounts` (
-  `id` int(11) NOT NULL,
-  `discount` float(5,2) NOT NULL,
-  `valid_from` datetime NOT NULL,
-  `valid_to` datetime NOT NULL,
-  `restautant` int(11) NOT NULL,
-  `discounted_category` int(11) DEFAULT NULL,
-  `discounted_product` int(11) DEFAULT NULL,
-  `added_by` int(11) NOT NULL,
-  `added_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -162,7 +145,8 @@ CREATE TABLE `restaurants` (
   `logo` text NOT NULL,
   `address` int(11) NOT NULL,
   `reputation` float(5,1) DEFAULT NULL,
-  `manager` int(11) NOT NULL
+  `manager` int(11) NOT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -232,6 +216,15 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+
+CREATE TABLE contact_message (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    subject TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -264,16 +257,6 @@ ALTER TABLE `countries`
 ALTER TABLE `currencies`
   ADD PRIMARY KEY (`id`);
 
-<<<<<<< Updated upstream
---
--- Indexes for table `discounts`
---
-ALTER TABLE `discounts`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `restautant` (`restautant`),
-  ADD KEY `discounted_category` (`discounted_category`),
-  ADD KEY `discounted_product` (`discounted_product`),
-  ADD KEY `added_by` (`added_by`);
 
 --
 -- Indexes for table `ingredients`
@@ -281,8 +264,6 @@ ALTER TABLE `discounts`
 ALTER TABLE `ingredients`
   ADD PRIMARY KEY (`id`);
 
-=======
->>>>>>> Stashed changes
 --
 -- Indexes for table `orders`
 --
@@ -397,21 +378,7 @@ ALTER TABLE `countries`
 ALTER TABLE `currencies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-<<<<<<< Updated upstream
 --
--- AUTO_INCREMENT for table `discounts`
---
-ALTER TABLE `discounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ingredients`
---
-ALTER TABLE `ingredients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-=======
->>>>>>> Stashed changes
 --
 -- AUTO_INCREMENT for table `orders`
 --
@@ -501,14 +468,6 @@ ALTER TABLE `cancelled_orders`
 ALTER TABLE `countries`
   ADD CONSTRAINT `countries_ibfk_1` FOREIGN KEY (`currency`) REFERENCES `currencies` (`id`);
 
---
--- Constraints for table `discounts`
---
-ALTER TABLE `discounts`
-  ADD CONSTRAINT `discounts_ibfk_1` FOREIGN KEY (`discounted_category`) REFERENCES `product_category` (`id`),
-  ADD CONSTRAINT `discounts_ibfk_2` FOREIGN KEY (`discounted_product`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `discounts_ibfk_3` FOREIGN KEY (`restautant`) REFERENCES `restaurants` (`id`),
-  ADD CONSTRAINT `discounts_ibfk_4` FOREIGN KEY (`added_by`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `orders`
@@ -599,30 +558,25 @@ BEGIN
     DECLARE v_address_id INT;
     DECLARE v_restaurant_id INT;
 
-    -- Try to find an existing town by name
     SELECT id INTO v_town_id
     FROM towns
     WHERE town = p_town
     LIMIT 1;
 
     IF v_town_id IS NULL THEN
-        -- Insert new town if not exists
         INSERT INTO towns (town, country, zip_code)
         VALUES (p_town, p_country, p_zip_code);
         SET v_town_id = LAST_INSERT_ID();
     END IF;
 
-    -- Insert new address using the town id and the manager as the user owner
     INSERT INTO addresses (address, town, user)
     VALUES (p_address, v_town_id, NULL);
     SET v_address_id = LAST_INSERT_ID();
 
-    -- Insert a new restaurant record
     INSERT INTO restaurants (restaurant, logo, address, reputation, manager)
     VALUES (p_restaurant, p_logo, v_address_id, p_reputation, p_manager);
     SET v_restaurant_id = LAST_INSERT_ID();
 
-    -- Insert open hours for every day (handle nulls for days off)
     INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
         VALUES (v_restaurant_id, p_opens_mon, p_closes_mon, 'Monday');
 
@@ -697,7 +651,7 @@ BEGIN
     UPDATE addresses
     SET address = p_address,
         town = v_town_id,
-        user = p_manager
+        user = NULL
     WHERE id = v_address_id;
 
     UPDATE restaurants

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Grab and go - Promocodes</title>
+    <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a th:href="@{/restaurants/}">Our restaurants</a></li>
+            <li><a href="/aboutUs">About us</a></li>
+            <li><a href="/contact">Contacts</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+<section>
+    <h1 th:text="${promocode.id} != null ? 'Edit Promocode' : 'New Promocode'"></h1>
+    <form th:action="@{/promocodes}" th:object="${promocode}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div>
+            <label>Promocode:</label>
+            <input type="text" th:field="*{promocode}" required maxlength="60"/>
+        </div>
+        <div>
+            <label>Description:</label>
+            <textarea th:field="*{description}"></textarea>
+        </div>
+        <div>
+            <label>Restaurant:</label>
+            <select name="restaurantID" required>
+                <option th:each="rest : ${restaurants}"
+                        th:value="${rest.id}"
+                        th:text="${rest.restaurant}"
+                        th:selected="${promocode.restaurant != null} ? (${rest.id} == ${promocode.restaurantID}) : false">
+                </option>
+            </select>
+        </div>
+        <div>
+            <label>Valid From:</label>
+            <input type="datetime-local" th:field="*{validFrom}" required/>
+        </div>
+        <div>
+            <label>Valid To:</label>
+            <input type="datetime-local" th:field="*{validTo}" required/>
+        </div>
+        <div>
+            <label>Discount:</label>
+            <input type="number" th:field="*{discount}" required min="0" max="99"/>
+        </div>
+        <div>
+            <input type="submit" value="Save">
+        </div>
+    </form>
+    <a th:href=${"/promocodes"}>Back to list</a>
+</section>
+<footer>
+    <div class="footer-logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <div class="footer-data">
+        <div class="links">
+            <h4>Links</h4>
+            <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Frequently asked questions</a></li>
+            </ul>
+        </div>
+        <div class="social">
+            <h4>Social</h4>
+            <ul>
+                <li><a href="facebook.com">Facebook</a></li>
+                <li><a href="instagram.com">Instagram</a></li>
+                <li><a href="linkedin.com">LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="policies">
+            <h4>Policies</h4>
+            <ul>
+                <li><a href="#">Terms and conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

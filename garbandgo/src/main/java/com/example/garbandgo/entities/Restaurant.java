@@ -1,7 +1,10 @@
 package com.example.garbandgo.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
+import java.util.Set;
 
 @Entity(name = "Restaurant")
 @Table(name = "restaurants", indexes = {
@@ -34,7 +37,40 @@ public class Restaurant implements Serializable {
     @JoinColumn(name = "manager", nullable = false)
     private User manager;
 
-    // Гетъри и Сетъри
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Promocode> promocodes;
+
+    @Convert(disableConversion = true)
+    @Column(name = "deleted_at", nullable = true)
+    private Instant deletedAt;
+
+
+    public User getManager() {
+        return manager;
+    }
+
+    public void setManager(User manager) {
+        this.manager = manager;
+    }
+
+    @Column(name = "reputation")
+    public Double getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(Double reputation) {
+        this.reputation = reputation;
+    }
+    
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -59,27 +95,11 @@ public class Restaurant implements Serializable {
         this.logo = logo;
     }
 
-    public Address getAddress() {
-        return address;
+    public Instant getDeletedAt() {
+        return deletedAt;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public Double getReputation() {
-        return reputation;
-    }
-
-    public void setReputation(Double reputation) {
-        this.reputation = reputation;
-    }
-
-    public User getManager() {
-        return manager;
-    }
-
-    public void setManager(User manager) {
-        this.manager = manager;
+    public void setDeletedAt(Instant deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

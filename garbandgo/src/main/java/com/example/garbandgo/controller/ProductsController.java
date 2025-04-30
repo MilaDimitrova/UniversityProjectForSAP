@@ -113,4 +113,16 @@ public class ProductsController {
         model.addAttribute("groupedProducts", groupedProducts);
         return "products/shop";
     }
+
+    @GetMapping("/shop/{restaurantId}")
+    public String showProductsForRestaurant(@PathVariable Integer restaurantId, Model model) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new IllegalArgumentException("Restaurant not found"));
+
+        List<Product> products = productsService.findProductsByRestaurantId(restaurantId);
+        model.addAttribute("restaurant", restaurant);
+        model.addAttribute("products", products);
+
+        return "products/shopByRestaurant"; // създай отделен Thymeleaf шаблон ако искаш за конкретен ресторант
+    }
 }
