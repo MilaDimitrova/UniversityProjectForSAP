@@ -2,9 +2,12 @@ package com.example.garbandgo.controller;
 
 import com.example.garbandgo.dto.RestaurantWithFullData;
 import com.example.garbandgo.entities.User;
+import com.example.garbandgo.repositories.UserRepository;
 import com.example.garbandgo.service.RestaurantService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,11 @@ public class RestaurantController {
 
     @Autowired
     private RestaurantService restaurantService;
+    private UserRepository userRepository;
+
+    public RestaurantController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/")
     public String index(Model model) {
@@ -70,9 +78,10 @@ public class RestaurantController {
                         @RequestParam(required = false) String closesSat,
                         @RequestParam(required = false) String opensSun,
                         @RequestParam(required = false) String closesSun,
-                        Authentication authentication,
+                        @AuthenticationPrincipal UserDetails userDetails,
                         RedirectAttributes redirectAttributes) {
-        User manager = (User) authentication.getPrincipal();
+        User manager = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new IllegalArgumentException("Something went wrong!"));
 
         try {
             Time tOpensMon = (opensMon == null || opensMon.trim().isEmpty()) ? null : Time.valueOf(opensMon);
@@ -140,10 +149,11 @@ public class RestaurantController {
             @RequestParam(required = false) String closesSat,
             @RequestParam(required = false) String opensSun,
             @RequestParam(required = false) String closesSun,
-            Authentication authentication,
+            @AuthenticationPrincipal UserDetails userDetails,
             RedirectAttributes redirectAttributes) {
 
-        User manager = (User) authentication.getPrincipal();
+        User manager = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new IllegalArgumentException("Something went wrong!"));
 
         try {
             Time tOpensMon = (opensMon == null || opensMon.trim().isEmpty()) ? null : Time.valueOf(opensMon);
@@ -189,6 +199,6 @@ public class RestaurantController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error deleting restaurant: " + e.getMessage());
         }
-        return "redirect:/restaurants";
+        return "redirect:/restaurants/";
     }
 }

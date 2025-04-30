@@ -169,7 +169,8 @@ CREATE TABLE `restaurants` (
   `logo` text NOT NULL,
   `address` int(11) NOT NULL,
   `reputation` float(5,1) DEFAULT NULL,
-  `manager` int(11) NOT NULL
+  `manager` int(11) NOT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -609,30 +610,25 @@ BEGIN
     DECLARE v_address_id INT;
     DECLARE v_restaurant_id INT;
 
-    -- Try to find an existing town by name
     SELECT id INTO v_town_id
     FROM towns
     WHERE town = p_town
     LIMIT 1;
 
     IF v_town_id IS NULL THEN
-        -- Insert new town if not exists
         INSERT INTO towns (town, country, zip_code)
         VALUES (p_town, p_country, p_zip_code);
         SET v_town_id = LAST_INSERT_ID();
     END IF;
 
-    -- Insert new address using the town id and the manager as the user owner
     INSERT INTO addresses (address, town, user)
     VALUES (p_address, v_town_id, NULL);
     SET v_address_id = LAST_INSERT_ID();
 
-    -- Insert a new restaurant record
     INSERT INTO restaurants (restaurant, logo, address, reputation, manager)
     VALUES (p_restaurant, p_logo, v_address_id, p_reputation, p_manager);
     SET v_restaurant_id = LAST_INSERT_ID();
 
-    -- Insert open hours for every day (handle nulls for days off)
     INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
         VALUES (v_restaurant_id, p_opens_mon, p_closes_mon, 'Monday');
 
@@ -707,7 +703,7 @@ BEGIN
     UPDATE addresses
     SET address = p_address,
         town = v_town_id,
-        user = p_manager
+        user = NULL
     WHERE id = v_address_id;
 
     UPDATE restaurants
