@@ -257,13 +257,6 @@ ALTER TABLE `countries`
 ALTER TABLE `currencies`
   ADD PRIMARY KEY (`id`);
 
-
---
--- Indexes for table `ingredients`
---
-ALTER TABLE `ingredients`
-  ADD PRIMARY KEY (`id`);
-
 --
 -- Indexes for table `orders`
 --

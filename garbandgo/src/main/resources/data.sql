@@ -46,10 +46,10 @@ INSERT INTO `product_category` (`id`, `category`, `image`) VALUES
 (5, 'Drink', 'drink.jpg');
 
 
-INSERT INTO `restaurants` (`id`, `restaurant`, `logo`, `address`, `reputation`, `manager`) VALUES
-(1, 'Pizza Heaven', 'pizza_heaven.jpg', 2, 4.5, 4),
-(2, 'Burger King', 'burger_king.jpg', 3, 4.2, 4),
-(3, 'Healthy Salads', 'healthy_salads.jpg', 4, 4.7, 5);
+INSERT INTO `restaurants` (`id`, `restaurant`, `logo`, `address`, `reputation`, `manager`, `deleted_at`) VALUES
+(1, 'Pizza Heaven', 'pizza_heaven.jpg', 2, 4.5, 4, NULL),
+(2, 'Burger King', 'burger_king.jpg', 3, 4.2, 4, NULL),
+(3, 'Healthy Salads', 'healthy_salads.jpg', 4, 4.7, 5, NULL);
 
 INSERT INTO `products` (`id`, `product`, `category`, `image`, `description`, `restaurant`, `delivery_price`, `price`, `currency`) VALUES
 (1, 'Margherita Pizza', 1, 'margherita.jpg', 'Classic pizza with tomato sauce and mozzarella', 1, 2.50, 10.99, 1),
