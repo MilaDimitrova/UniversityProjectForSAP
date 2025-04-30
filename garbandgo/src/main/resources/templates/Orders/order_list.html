@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grab and go - Orders</title>
     <style>
         .button {
@@ -16,39 +18,28 @@
             font-size: 14px;
             transition: background-color 0.3s ease;
         }
-
         .button:hover {
             background-color: #45a049;
         }
-
         .button.cancel {
             background-color: #f44336;
         }
-
         .button.cancel:hover {
             background-color: #d32f2f;
         }
-
-        .top-buttons {
-            margin-top: 15px;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 15px;
         }
-
         th, td {
             padding: 12px;
             text-align: center;
             border-bottom: 1px solid #ddd;
         }
-
         th {
             background-color: #f2f2f2;
         }
-
         h2 {
             margin-bottom: 10px;
         }
@@ -62,50 +53,69 @@
     </div>
     <nav>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/restaurants">Our restaurants</a></li>
-            <li><a href="/aboutUs">About us</a></li>
-            <li><a href="/contact">Contacts</a></li>
-            <li><a href="/profile">Profile</a></li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/restaurants}">Our restaurants</a></li>
+            <li><a th:href="@{/aboutUs}">About us</a></li>
+            <li><a th:href="@{/contact}">Contacts</a></li>
+            <li><a th:href="@{/profile}">Profile</a></li>
         </ul>
     </nav>
 </header>
 
-<section>
-    <h2>All Orders</h2>
+<main>
+    <div class="content">
+        <div class="sidebar">
+            <button onclick="showSection('orders')">Orders</button>
+            <button onclick="showSection('newOrder')">Add Order</button>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Log out</button>
+            </form>
+        </div>
 
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Date</th>
-            <th>Price</th>
-            <th>Status</th>
-            <th>Promo code</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${orders == null or #lists.isEmpty(orders)}">
-            <td colspan="6">No orders found.</td>
-        </tr>
-        <tr th:each="order : ${orders}">
-            <td th:text="${order.id}">1</td>
-            <td th:text="${order.orderDate}">2025-04-21</td>
-            <td th:text="${order.totalPrice}">100.00</td>
-            <td th:text="${order.status}">Confirmed</td>
-            <td th:text="${order.promocode}">SPRING2025</td>
-            <td>
-                <a th:href="@{/cancelled_orders}" class="button cancel">❌ Cancel Order</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <div class="main-content">
+            <!-- Orders Section -->
+            <section id="orders" class="dashboard-section">
+                <h2>All Orders</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Cancelled</th>
+                        <th>Products</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${orders == null or #lists.isEmpty(orders)}">
+                        <td colspan="6">No orders found.</td>
+                    </tr>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.id}">1</td>
+                        <td th:text="${order.orderDate != null ? #temporals.format(order.orderDate, 'yyyy-MM-dd') : 'N/A'}">2025-04-21</td>
+                        <td th:text="${order.totalPrice}">100.00</td>
+                        <td th:text="${order.cancelled != null ? 'Yes' : 'No'}">No</td>
 
-    <div class="top-buttons">
-        <a th:href="@{/order_products}" class="button">➕ Add New Order</a>
+                        <td>
+                            <a th:href="@{'/order_products/index?orderId=' + ${order.id}}" class="button">🛒 Products</a>
+                        </td>
+
+                        <td>
+                            <a th:href="@{/orders/delete/{id}(id=${order.id})}" class="button cancel">❌ Cancel</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="newOrder" class="dashboard-section" style="display: none;">
+                <h2>Create New Order</h2>
+                <a th:href="@{/order_products}" class="button">➕ Start New Order</a>
+            </section>
+        </div>
     </div>
-</section>
+</main>
 
 <footer>
     <div class="footer-logo">
@@ -115,8 +125,8 @@
         <div class="links">
             <h4>Links</h4>
             <ul>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Contact us</a></li>
+                <li><a th:href="@{/aboutUs}">About us</a></li>
+                <li><a th:href="@{/contact}">Contact us</a></li>
                 <li><a href="#">Blog</a></li>
                 <li><a href="#">Frequently asked questions</a></li>
             </ul>
@@ -124,9 +134,9 @@
         <div class="social">
             <h4>Social</h4>
             <ul>
-                <li><a href="facebook.com">Facebook</a></li>
-                <li><a href="instagram.com">Instagram</a></li>
-                <li><a href="linkedin.com">LinkedIn</a></li>
+                <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+                <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+                <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
             </ul>
         </div>
         <div class="policies">
@@ -140,5 +150,6 @@
     </div>
 </footer>
 
+<script th:src="@{/js/dashboard.js}"></script>
 </body>
 </html>
