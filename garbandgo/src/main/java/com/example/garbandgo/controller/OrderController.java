@@ -31,7 +31,7 @@ public class OrderController {
     @GetMapping("/add")
     public String showForm(Model model) {
         model.addAttribute("order", new Order());
-        return "Orders/order_form"; // <-- поправено име на директорията
+        return "Orders/order_form";
     }
 
     @PostMapping
@@ -45,7 +45,7 @@ public class OrderController {
         Order order = orderService.getOrderById(id).orElse(null);
         if (order != null) {
             model.addAttribute("order", order);
-            return "Orders/order_form"; // <-- поправено име на директорията
+            return "Orders/order_form";
         }
         return "redirect:/orders/index";
     }

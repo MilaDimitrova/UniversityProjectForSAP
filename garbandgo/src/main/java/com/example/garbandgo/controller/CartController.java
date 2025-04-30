@@ -67,6 +67,6 @@ public class CartController {
         shoppingCart.clear();
 
         redirectAttributes.addFlashAttribute("successMessage", "Поръчката е приета успешно!");
-        return "redirect:/products/shop"; // Или към страница за потвърждение
+        return "redirect:/products/shop";
     }
 }

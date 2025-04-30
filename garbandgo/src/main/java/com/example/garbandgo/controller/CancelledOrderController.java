@@ -17,7 +17,6 @@ public class CancelledOrderController {
     @Autowired
     private CancelledOrderService cancelledOrderService;
 
-    // GET /cancelled_orders/index - Show all cancelled orders
     @GetMapping("/index")
     public String index(Model model) {
         List<CancelledOrder> cancelledOrders = cancelledOrderService.getAllCancelledOrders();
@@ -30,7 +29,7 @@ public class CancelledOrderController {
         return "redirect:/cancelled_orders/index";
     }
 
-    // GET /cancelled_orders/{id} - Retrieve a specific cancelled order by ID
+
     @GetMapping("/{id}")
     public ResponseEntity<CancelledOrder> show(@PathVariable Integer id) {
         CancelledOrder order = cancelledOrderService.getCancelledOrderById(id);
@@ -41,13 +40,13 @@ public class CancelledOrderController {
         }
     }
 
-    // POST /cancelled_orders - Create a new cancelled order
+
     @PostMapping
     public CancelledOrder add(@RequestBody CancelledOrder newOrder) {
         return cancelledOrderService.saveCancelledOrder(newOrder);
     }
 
-    // PUT /cancelled_orders/{id} - Update existing cancelled order
+
     @PutMapping("/{id}")
     public ResponseEntity<CancelledOrder> update(@PathVariable Integer id, @RequestBody CancelledOrder updatedOrder) {
         CancelledOrder order = cancelledOrderService.updateCancelledOrder(id, updatedOrder);
@@ -58,7 +57,7 @@ public class CancelledOrderController {
         }
     }
 
-    // DELETE /cancelled_orders/{id} - Delete a cancelled order
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         boolean deleted = cancelledOrderService.deleteCancelledOrder(id);

@@ -17,7 +17,7 @@ public class ProductIngredientsController {
 
     @GetMapping
     public String index() {
-        return "index";  // Начална страница.
+        return "index";
     }
 
     @GetMapping("/list")
