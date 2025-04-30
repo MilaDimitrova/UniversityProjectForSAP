@@ -1,4 +1,4 @@
-package com.example.garbandgo.service;
+package templates.courier;
 
 import com.example.garbandgo.entities.Order;
 import com.example.garbandgo.repositories.OrderRepository;
@@ -53,7 +53,7 @@ public class OrderService {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (optionalOrder.isPresent()) {
             Order order = optionalOrder.get();
-            order.setCancelled(new byte[]{1});
+            order.setCancelled(new byte[]{1}); // маркираме като отменена
             orderRepository.save(order);
             return true;
         }
