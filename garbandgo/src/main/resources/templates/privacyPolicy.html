@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Grab & Go</title>
     <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
-    <title>Grab and go - Restaurants</title>
 </head>
 <body>
+
 <header>
     <div class="logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
@@ -20,17 +22,42 @@
         </ul>
     </nav>
 </header>
+
 <section>
-    <h2>Our restaurants</h2>
+    <h1>Privacy Policy</h1>
+    <p>At Grab & Go, we are committed to protecting your privacy. This policy explains how we handle your personal information.</p>
+
+    <h2>1. Information We Collect</h2>
     <ul>
-        <li th:each="restaurant : ${restaurants}">
-            <h3>
-                <a th:text="${restaurant.restaurant}" th:href="@{/restaurants/{id}(id=${restaurant.id})}"></a>
-            </h3>
-        <img th:src="${restaurant.logo}" alt="Restaurant">
-        </li>
+        <li>Personal details such as name, email, and phone number when you register or place an order.</li>
+        <li>Payment details for secure transactions.</li>
+        <li>Usage data such as website interactions and preferences.</li>
     </ul>
+
+    <h2>2. How We Use Your Information</h2>
+    <ul>
+        <li>To process orders and payments.</li>
+        <li>To improve our website and customer experience.</li>
+        <li>To send promotional offers (if opted in).</li>
+    </ul>
+
+    <h2>3. Data Security</h2>
+    <p>We take appropriate security measures to protect personal data from unauthorized access or misuse.</p>
+
+    <h2>4. Sharing of Data</h2>
+    <p>We do not sell or rent personal data. Your information may be shared with third parties **only** when necessary for service fulfillment (e.g., payment processing).</p>
+
+    <h2>5. Cookies & Tracking</h2>
+    <p>We use cookies to improve your browsing experience. You can manage cookie preferences in your browser settings.</p>
+
+    <h2>6. Your Rights</h2>
+    <p>You have the right to request access, correction, or deletion of your data. To exercise these rights, contact us at.</p>
+
+    <h2>7. Changes to This Policy</h2>
+    <p>We may update our Privacy Policy from time to time. Continued use of our services means acceptance of changes.</p>
+
 </section>
+
 <footer>
     <div class="footer-logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>

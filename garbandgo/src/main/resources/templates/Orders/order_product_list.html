@@ -125,7 +125,6 @@
         <a href="/reviews" class="complete-order-button">✅ Complete Order</a>
     </section>
 </main>
-
 <footer>
     <div class="footer-logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
@@ -134,26 +133,24 @@
         <div class="links">
             <h4>Links</h4>
             <ul>
-                <li><a href="/aboutUs">About Us</a></li>
-                <li><a href="/contact">Contact Us</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">FAQ</a></li>
+                <li><a th:href="@{/aboutUs}">About us</a></li>
+                <li><a th:href="@{/contact}">Contacts</a></li>
             </ul>
         </div>
         <div class="social">
             <h4>Social</h4>
             <ul>
-                <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
-                <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-                <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+                <li><a href="https://facebook.com">Facebook</a></li>
+                <li><a href="https://instagram.com">Instagram</a></li>
+                <li><a href="https://linkedin.com">LinkedIn</a></li>
             </ul>
         </div>
         <div class="policies">
             <h4>Policies</h4>
             <ul>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Cookie Policy</a></li>
+                <li><a th:href="@{/termsAndConditions}">Terms and conditions</a></li>
+                <li><a th:href="@{/privacyPolicy}">Privacy Policy</a></li>
+                <li><a th:href="@{/cookiePolicy}">Cookie Policy</a></li>
             </ul>
         </div>
     </div>
