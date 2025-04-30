@@ -16,7 +16,7 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    // GET /roles/register – показва формата за регистрация (пример: регистрация на потребител с роля)
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         User user = new User();
