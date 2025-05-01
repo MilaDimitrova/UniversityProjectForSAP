@@ -35,12 +35,12 @@ public class UserDashboardController {
         User user = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new IllegalArgumentException("Потребителят не е намерен."));
 
-        // Актуализиране на username
+
         if (updatedUser.getUsername() != null && !updatedUser.getUsername().isEmpty()) {
             user.setUsername(updatedUser.getUsername());
         }
 
-        // Актуализиране на password
+
         if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
             String encodedPassword = userService.getPasswordEncoder().encode(updatedUser.getPassword());
             user.setPassword(encodedPassword);

@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/towns")  // Unique base path to resolve ambiguity
+@RequestMapping("/towns")
 public class TownController {
     public final TownService townService;
 
@@ -17,18 +17,18 @@ public class TownController {
 
     @GetMapping
     public String index() {
-        return "index";  // Path: /towns
+        return "index";
     }
 
-    @GetMapping("/list")  // Updated mapping for listing towns
+    @GetMapping("/list")
     public String listTowns(Model model) {
         model.addAttribute("town", townService.getTownRepository());
-        return "town";  // Path: /towns/list
+        return "town";
     }
 
-    @PostMapping("/add")  // Updated mapping for adding towns
+    @PostMapping("/add")
     public String addTown(@ModelAttribute Town town) {
         townService.saveTown(town);
-        return "redirect:/towns/list";  // Redirects to /towns/list
+        return "redirect:/towns/list";
     }
 }

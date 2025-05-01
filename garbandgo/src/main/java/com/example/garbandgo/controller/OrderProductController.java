@@ -24,7 +24,7 @@ public class OrderProductController {
     @Autowired
     private ProductRepository productRepository;
 
-    // GET /order_products/index - показва всички orderProducts + форма за добавяне
+
     @GetMapping("/index")
     public String index(@RequestParam(required = false) Integer productId, Model model) {
         List<OrderProduct> orderProducts = orderProductService.getAll();
@@ -42,13 +42,13 @@ public class OrderProductController {
         return "Orders/order_product_list";
     }
 
-    // Redirect към /index
+
     @GetMapping
     public String redirectToIndex() {
         return "redirect:/order_products/index";
     }
 
-    // Връща JSON за един OrderProduct по ID
+
     @GetMapping("/{id}")
     public ResponseEntity<OrderProduct> show(@PathVariable Integer id) {
         OrderProduct orderProduct = orderProductService.getById(id);
@@ -59,7 +59,7 @@ public class OrderProductController {
         }
     }
 
-    // Добавяне на нов OrderProduct
+
     @PostMapping("/add")
     public String addProductToOrder(@RequestParam("productId") Integer productId,
                                     @RequestParam("quantity") Integer quantity,
@@ -72,7 +72,7 @@ public class OrderProductController {
         op.setQuantity(quantity);
         op.setPrice(price);
 
-        Order dummyOrder = new Order(); // временно
+        Order dummyOrder = new Order();
         dummyOrder.setId(1);
         op.setOrder(dummyOrder);
 
