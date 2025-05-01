@@ -45,22 +45,11 @@ INSERT INTO `product_category` (`id`, `category`, `image`) VALUES
 (4, 'Dessert', 'dessert.jpg'),
 (5, 'Drink', 'drink.jpg');
 
-INSERT INTO `ingredients` (`id`, `ingredient`, `alergen`) VALUES
-(1, 'Flour', 1),
-(2, 'Tomato sauce', 0),
-(3, 'Mozzarella', 1),
-(4, 'Pepperoni', 0),
-(5, 'Beef patty', 0),
-(6, 'Lettuce', 0),
-(7, 'Tomato', 0),
-(8, 'Onion', 0),
-(9, 'Chicken', 0),
-(10, 'Chocolate', 1);
 
-INSERT INTO `restaurants` (`id`, `restaurant`, `logo`, `address`, `reputation`, `manager`) VALUES
-(1, 'Pizza Heaven', 'pizza_heaven.jpg', 2, 4.5, 4),
-(2, 'Burger King', 'burger_king.jpg', 3, 4.2, 4),
-(3, 'Healthy Salads', 'healthy_salads.jpg', 4, 4.7, 5);
+INSERT INTO `restaurants` (`id`, `restaurant`, `logo`, `address`, `reputation`, `manager`, `deleted_at`) VALUES
+(1, 'Pizza Heaven', 'pizza_heaven.jpg', 2, 4.5, 4, NULL),
+(2, 'Burger King', 'burger_king.jpg', 3, 4.2, 4, NULL),
+(3, 'Healthy Salads', 'healthy_salads.jpg', 4, 4.7, 5, NULL);
 
 INSERT INTO `products` (`id`, `product`, `category`, `image`, `description`, `restaurant`, `delivery_price`, `price`, `currency`) VALUES
 (1, 'Margherita Pizza', 1, 'margherita.jpg', 'Classic pizza with tomato sauce and mozzarella', 1, 2.50, 10.99, 1),
@@ -69,23 +58,6 @@ INSERT INTO `products` (`id`, `product`, `category`, `image`, `description`, `re
 (4, 'Chicken Salad', 3, 'chicken_salad.jpg', 'Fresh salad with grilled chicken', 3, 1.50, 9.50, 1),
 (5, 'Chocolate Cake', 4, 'chocolate_cake.jpg', 'Delicious chocolate dessert', 1, 1.00, 5.99, 1);
 
-INSERT INTO `product_ingredients` (`id`, `product`, `ingredient`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 2, 1),
-(5, 2, 2),
-(6, 2, 3),
-(7, 2, 4),
-(8, 3, 5),
-(9, 3, 6),
-(10, 3, 7),
-(11, 3, 8),
-(12, 4, 6),
-(13, 4, 7),
-(14, 4, 8),
-(15, 4, 9),
-(16, 5, 10);
 
 INSERT INTO `promocodes` (`id`, `promocode`, `description`, `restaurant`, `valid_from`, `valid_to`, `discount`) VALUES
 (1, 'BEIBE20', '20% off all pizzas', 1, '2025-01-01 00:00:00', '2025-12-31 23:59:59', 20),
