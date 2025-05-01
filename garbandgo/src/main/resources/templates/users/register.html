@@ -25,8 +25,6 @@
 <div class="login">
     <form th:action="@{/register}" th:object="${user}" method="post">
         <h2>Registration</h2>
-
-        <!-- Скритото поле за Role ID -->
         <input type="hidden" name="role.id" value="2" />
 
         <label th:for="*{username}">Name:</label><br>
