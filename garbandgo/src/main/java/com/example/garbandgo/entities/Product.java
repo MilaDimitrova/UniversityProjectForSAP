@@ -17,16 +17,16 @@ public class Product implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    // Полето "name" се мапва с колоната "product" в базата данни
+
     @Column(name = "product", nullable = false)
     private String name;
 
-    // Мапиране на категорията; използваме името "category", тъй като таблицата съдържа колоната "category"
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category", nullable = false)
     private ProductCategory category;
 
-    // Полето imageUrl се мапва към колоната "image"
+
     @Lob
     @Column(name = "image", nullable = false)
     private String imageUrl;
@@ -35,7 +35,7 @@ public class Product implements Serializable {
     @Column(name = "description", nullable = false)
     private String description;
 
-    // Мапиране на ресторанта; използваме името "restaurant", съобразно таблицата
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "restaurant", nullable = false)
     private Restaurant restaurant;
@@ -49,7 +49,7 @@ public class Product implements Serializable {
     @Column(name = "currency", nullable = false)
     private Integer currency;
 
-    // Getters and Setters
+
 
     public Integer getId() {
         return id;
@@ -59,7 +59,7 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    // За името на продукта
+
     public String getName() {
         return name;
     }
@@ -76,7 +76,7 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    // За URL на изображението
+
     public String getImageUrl() {
         return imageUrl;
     }
