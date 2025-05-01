@@ -53,18 +53,6 @@ CREATE TABLE `currencies` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ingredients`
---
-
-CREATE TABLE `ingredients` (
-  `id` int(11) NOT NULL,
-  `ingredient` varchar(255) NOT NULL,
-  `alergen` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `orders`
 --
 
@@ -128,18 +116,6 @@ CREATE TABLE `product_category` (
   `category` varchar(255) NOT NULL,
   `image` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_ingredients`
---
-
-CREATE TABLE `product_ingredients` (
-  `id` int(11) NOT NULL,
-  `product` int(11) NOT NULL,
-  `ingredient` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -281,13 +257,6 @@ ALTER TABLE `countries`
 ALTER TABLE `currencies`
   ADD PRIMARY KEY (`id`);
 
-
---
--- Indexes for table `ingredients`
---
-ALTER TABLE `ingredients`
-  ADD PRIMARY KEY (`id`);
-
 --
 -- Indexes for table `orders`
 --
@@ -323,15 +292,6 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_category`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `product_ingredients`
---
-ALTER TABLE `product_ingredients`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `ingredient` (`ingredient`),
-  ADD KEY `product` (`product`);
-
 --
 -- Indexes for table `promocodes`
 --
@@ -411,13 +371,7 @@ ALTER TABLE `countries`
 ALTER TABLE `currencies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-
 --
--- AUTO_INCREMENT for table `ingredients`
---
-ALTER TABLE `ingredients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `orders`
 --
@@ -440,12 +394,6 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `product_ingredients`
---
-ALTER TABLE `product_ingredients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -539,13 +487,6 @@ ALTER TABLE `order_products`
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`restaurant`) REFERENCES `restaurants` (`id`),
   ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category`) REFERENCES `product_category` (`id`);
-
---
--- Constraints for table `product_ingredients`
---
-ALTER TABLE `product_ingredients`
-  ADD CONSTRAINT `product_ingredients_ibfk_1` FOREIGN KEY (`ingredient`) REFERENCES `ingredients` (`id`),
-  ADD CONSTRAINT `product_ingredients_ibfk_2` FOREIGN KEY (`product`) REFERENCES `products` (`id`);
 
 --
 -- Constraints for table `promocodes`
