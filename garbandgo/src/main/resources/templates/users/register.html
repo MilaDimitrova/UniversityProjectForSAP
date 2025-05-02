@@ -24,7 +24,9 @@
 
 <div class="login">
     <form th:action="@{/register}" th:object="${user}" method="post">
+
         <h2>Registration</h2>
+
         <input type="hidden" name="role.id" value="2" />
 
         <label th:for="*{username}">Name:</label><br>

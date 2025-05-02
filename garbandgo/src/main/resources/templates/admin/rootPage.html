@@ -26,8 +26,7 @@
         <div class="sidebar">
             <button onclick="showSection('info')">Information</button>
             <button onclick="showSection('orders')">Orders</button>
-            <button onclick="showSection('employees')">Employees</button>
-            <button onclick="showSection('managers')">Managers</button>
+            <button onclick="showSection('managers')">User Management</button>
             <button onclick="showSection('delivery')">Delivery</button>
             <button onclick="showSection('profile')">Profile Settings</button>
             <button onclick="window.location.href='../restaurants/add'">Add restaurant</button>
@@ -36,6 +35,7 @@
                 <button type="submit">Log out</button>
             </form>
         </div>
+
         <div class="main-content">
             <section id="info" class="dashboard-section">
                 <h1>Admin Overview</h1>
@@ -61,50 +61,43 @@
                     </li>
                 </ul>
             </section>
+
             <section id="orders" class="dashboard-section" style="display: none;">
                 <h1>Orders</h1>
                 <p>Your active and past orders will appear here.</p>
             </section>
-            <section id="employees" class="dashboard-section" style="display: none;">
-                <h1>Employees</h1>
-                <p>Add a new courier (employee).</p>
 
-                <form th:action="@{/admin/addCourier}" method="post">
-                    <label for="courierUsername">Username:</label>
-                    <input type="text" id="courierUsername" name="username" required><br>
-
-                    <label for="courierEmail">Email:</label>
-                    <input type="email" id="courierEmail" name="email" required><br>
-
-                    <label for="courierPhone">Phone:</label>
-                    <input type="text" id="courierPhone" name="phone" required><br>
-
-                    <label for="courierPassword">Password:</label>
-                    <input type="password" id="courierPassword" name="password" required><br>
-
-                    <button type="submit">Add Courier</button>
-                </form>
-            </section>
             <section id="managers" class="dashboard-section" style="display: none;">
-                <h1>Managers</h1>
-                <p>Here you can add a new manager.</p>
+                <h1>Add User</h1>
+                <p>Here you can add a new manager, courier or restaurant owner.</p>
 
-                <form th:action="@{/admin/addManager}" method="post">
-                    <label for="managerUsername">Username:</label>
-                    <input type="text" id="managerUsername" name="username" required><br>
+                <div th:if="${success}" style="color: green; font-weight: bold;" th:text="${success}"></div>
+                <div th:if="${error}" style="color: red; font-weight: bold;" th:text="${error}"></div>
 
-                    <label for="managerEmail">Email:</label>
-                    <input type="email" id="managerEmail" name="email" required><br>
+                <form th:action="@{/admin/register-user}" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required><br>
 
-                    <label for="managerPhone">Phone:</label>
-                    <input type="text" id="managerPhone" name="phone" required><br>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required><br>
 
-                    <label for="managerPassword">Password:</label>
-                    <input type="password" id="managerPassword" name="password" required><br>
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" name="phone" required><br>
 
-                    <button type="submit">Add Manager</button>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required><br>
+
+                    <label for="role">Role:</label>
+                    <select id="role" name="role" required>
+                        <option value="MANAGER">Manager</option>
+                        <option value="COURIER">Courier</option>
+                        <option value="REST_OWNER">Restaurant Owner</option>
+                    </select><br><br>
+
+                    <button type="submit">Add User</button>
                 </form>
             </section>
+
             <section id="delivery" class="dashboard-section" style="display: none;">
                 <h1>All Deliveries</h1>
                 <table>
@@ -130,6 +123,7 @@
                     </tbody>
                 </table>
             </section>
+
             <section id="profile" class="dashboard-section" style="display: none;">
                 <h1>Profile Settings</h1>
                 <p><strong>Username:</strong> <span th:text="${user.username}">User</span></p>
@@ -145,6 +139,7 @@
                     <button type="submit">Update</button>
                 </form>
             </section>
+
             <section id="logout" class="dashboard-section" style="display: none;">
                 <h1>Log out</h1>
                 <p>Thank you for using Grab&go. See you again soon!</p>

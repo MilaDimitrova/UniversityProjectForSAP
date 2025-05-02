@@ -42,7 +42,7 @@ public class UserDashboardController {
 
 
         if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
-            String encodedPassword = userService.getPasswordEncoder().encode(updatedUser.getPassword());
+            String encodedPassword = userService.encodePassword(updatedUser.getPassword());
             user.setPassword(encodedPassword);
         }
 
