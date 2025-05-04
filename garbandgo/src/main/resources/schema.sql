@@ -53,18 +53,6 @@ CREATE TABLE `currencies` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ingredients`
---
-
-CREATE TABLE `ingredients` (
-  `id` int(11) NOT NULL,
-  `ingredient` varchar(255) NOT NULL,
-  `alergen` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `orders`
 --
 
@@ -132,18 +120,6 @@ CREATE TABLE `product_category` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_ingredients`
---
-
-CREATE TABLE `product_ingredients` (
-  `id` int(11) NOT NULL,
-  `product` int(11) NOT NULL,
-  `ingredient` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `promocodes`
 --
 
@@ -169,7 +145,8 @@ CREATE TABLE `restaurants` (
   `logo` text NOT NULL,
   `address` int(11) NOT NULL,
   `reputation` float(5,1) DEFAULT NULL,
-  `manager` int(11) NOT NULL
+  `manager` int(11) NOT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -280,13 +257,6 @@ ALTER TABLE `countries`
 ALTER TABLE `currencies`
   ADD PRIMARY KEY (`id`);
 
-
---
--- Indexes for table `ingredients`
---
-ALTER TABLE `ingredients`
-  ADD PRIMARY KEY (`id`);
-
 --
 -- Indexes for table `orders`
 --
@@ -322,15 +292,6 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_category`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `product_ingredients`
---
-ALTER TABLE `product_ingredients`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `ingredient` (`ingredient`),
-  ADD KEY `product` (`product`);
-
 --
 -- Indexes for table `promocodes`
 --
@@ -410,13 +371,7 @@ ALTER TABLE `countries`
 ALTER TABLE `currencies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-
 --
--- AUTO_INCREMENT for table `ingredients`
---
-ALTER TABLE `ingredients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `orders`
 --
@@ -439,12 +394,6 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `product_ingredients`
---
-ALTER TABLE `product_ingredients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -540,13 +489,6 @@ ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category`) REFERENCES `product_category` (`id`);
 
 --
--- Constraints for table `product_ingredients`
---
-ALTER TABLE `product_ingredients`
-  ADD CONSTRAINT `product_ingredients_ibfk_1` FOREIGN KEY (`ingredient`) REFERENCES `ingredients` (`id`),
-  ADD CONSTRAINT `product_ingredients_ibfk_2` FOREIGN KEY (`product`) REFERENCES `products` (`id`);
-
---
 -- Constraints for table `promocodes`
 --
 ALTER TABLE `promocodes`
@@ -609,30 +551,25 @@ BEGIN
     DECLARE v_address_id INT;
     DECLARE v_restaurant_id INT;
 
-    -- Try to find an existing town by name
     SELECT id INTO v_town_id
     FROM towns
     WHERE town = p_town
     LIMIT 1;
 
     IF v_town_id IS NULL THEN
-        -- Insert new town if not exists
         INSERT INTO towns (town, country, zip_code)
         VALUES (p_town, p_country, p_zip_code);
         SET v_town_id = LAST_INSERT_ID();
     END IF;
 
-    -- Insert new address using the town id and the manager as the user owner
     INSERT INTO addresses (address, town, user)
     VALUES (p_address, v_town_id, NULL);
     SET v_address_id = LAST_INSERT_ID();
 
-    -- Insert a new restaurant record
     INSERT INTO restaurants (restaurant, logo, address, reputation, manager)
     VALUES (p_restaurant, p_logo, v_address_id, p_reputation, p_manager);
     SET v_restaurant_id = LAST_INSERT_ID();
 
-    -- Insert open hours for every day (handle nulls for days off)
     INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
         VALUES (v_restaurant_id, p_opens_mon, p_closes_mon, 'Monday');
 
@@ -707,7 +644,7 @@ BEGIN
     UPDATE addresses
     SET address = p_address,
         town = v_town_id,
-        user = p_manager
+        user = NULL
     WHERE id = v_address_id;
 
     UPDATE restaurants

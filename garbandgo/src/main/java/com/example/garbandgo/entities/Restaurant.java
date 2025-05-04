@@ -3,6 +3,7 @@ package com.example.garbandgo.entities;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Set;
 
 @Entity(name = "Restaurant")
@@ -40,6 +41,10 @@ public class Restaurant implements Serializable {
     @JsonManagedReference
     private Set<Promocode> promocodes;
 
+    @Convert(disableConversion = true)
+    @Column(name = "deleted_at", nullable = true)
+    private Instant deletedAt;
+
 
     public User getManager() {
         return manager;
@@ -57,8 +62,7 @@ public class Restaurant implements Serializable {
     public void setReputation(Double reputation) {
         this.reputation = reputation;
     }
-
-
+    
     public Address getAddress() {
         return address;
     }
@@ -91,5 +95,11 @@ public class Restaurant implements Serializable {
         this.logo = logo;
     }
 
+    public Instant getDeletedAt() {
+        return deletedAt;
+    }
 
+    public void setDeletedAt(Instant deletedAt) {
+        this.deletedAt = deletedAt;
+    }
 }
