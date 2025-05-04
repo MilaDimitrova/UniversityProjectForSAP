@@ -22,7 +22,6 @@
         <td th:text="${item.product.name}">Product Name</td>
         <td th:text="${item.quantity}">Quantity</td>
         <td th:text="${item.product.price}">Price</td>
-        <!-- За по-опростено тестване, използваме директно умножение -->
         <td th:text="${item.product.price * item.quantity}">Subtotal</td>
         <td>
             <form th:action="@{'/cart/remove/' + ${item.product.id}}" method="post">
