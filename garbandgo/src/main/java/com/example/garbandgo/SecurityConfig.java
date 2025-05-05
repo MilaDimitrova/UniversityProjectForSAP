@@ -30,7 +30,7 @@ public class SecurityConfig {
                         .requestMatchers("/restaurants/**", "/products/shop/**", "/cart/**").hasAnyRole("USER", "ADMIN", "MANAGER", "REST_OWNER")
                         .requestMatchers("/products/manage/**", "/products/add/**", "/products/edit/**", "/products/delete/**").hasAnyRole("ADMIN", "MANAGER", "REST_OWNER")
                         .requestMatchers("/restaurants/edit/**", "/restaurants/delete/**").hasAnyRole("ADMIN", "MANAGER", "REST_OWNER")
-                        .requestMatchers("/orders/**").hasRole("COURIER")
+                        .requestMatchers("/orders/**").hasAnyRole("COURIER", "ADMIN")
                         .requestMatchers("/promocodes/**").hasAnyRole("ADMIN", "MANAGER")
                         .anyRequest().authenticated()
                 )
