@@ -70,6 +70,9 @@
             <section id="orders" class="dashboard-section" style="display: none;">
                 <h1>Orders</h1>
                 <p>Your active and past orders will appear here.</p>
+                <form th:action="@{/orders/index}" method ="get">
+                    <button type="order">Go to orders</button>
+                </form>
             </section>
             <section id="employees" class="dashboard-section" style="display: none;">
                 <h1>Employees</h1>
