@@ -32,5 +32,9 @@
     </tbody>
 </table>
 <a href="/products/shop">Continue Shopping</a>
+<form th:action="@{/cart/checkout}" method="post">
+    <button type="submit">Поръчай</button>
+</form>
+
 </body>
 </html>

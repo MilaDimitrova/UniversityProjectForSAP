@@ -20,27 +20,21 @@ public class OrderProductService {
     @Autowired
     private ProductRepository productRepository;
 
-
     public List<OrderProduct> getAll() {
         return orderProductRepository.findAll();
     }
-
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
-
     public OrderProduct getById(Integer id) {
-        Optional<OrderProduct> orderProduct = orderProductRepository.findById(id);
-        return orderProduct.orElse(null);
+        return orderProductRepository.findById(id).orElse(null);
     }
-
 
     public OrderProduct save(OrderProduct orderProduct) {
         return orderProductRepository.save(orderProduct);
     }
-
 
     public OrderProduct update(Integer id, OrderProduct updated) {
         Optional<OrderProduct> existingOrderProduct = orderProductRepository.findById(id);
@@ -51,12 +45,16 @@ public class OrderProductService {
         return null;
     }
 
-
     public boolean delete(Integer id) {
         if (orderProductRepository.existsById(id)) {
             orderProductRepository.deleteById(id);
             return true;
         }
         return false;
+    }
+
+    // ✅ Нов метод: извлича артикулите от дадена поръчка
+    public List<OrderProduct> getByOrderId(Integer orderId) {
+        return orderProductRepository.findByOrderId(orderId);
     }
 }
