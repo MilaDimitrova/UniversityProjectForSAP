@@ -60,6 +60,7 @@
                     <li>🍣 Happy Bar & Grill</li>
                 </ul>
             </section>
+
             <section id="orders" class="dashboard-section" style="display: none;">
                 <table>
                     <thead>
@@ -74,8 +75,15 @@
                     <tbody>
                     <tr th:each="order : ${orders}">
                         <td th:text="${order.id}">1</td>
-                        <td th:text="${#dates.format(order.orderedAt, 'yyyy-MM-dd')}">2025-04-20</td>
-                        <td th:text="${order.status}">Delivered</td>
+                        <td th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}">2025-04-20</td>
+                        <td>
+                            <span th:switch="${order.status}">
+                                <span th:case="'CANCELLED'" style="color: red;">🔴 Cancelled</span>
+                                <span th:case="'DELIVERED'" style="color: green;">🟢 Delivered</span>
+                                <span th:case="'PENDING'" style="color: orange;">🟡 Pending</span>
+                                <span th:case="*">⚪ Unknown</span>
+                            </span>
+                        </td>
                         <td th:text="${order.totalPrice}">25.00</td>
                         <td><a th:href="@{'/user/order/' + ${order.id}}">View</a></td>
                     </tr>
@@ -85,6 +93,7 @@
                     <button class="menu-button">Shop</button>
                 </a>
             </section>
+
             <section id="profile" class="dashboard-section" style="display: none;">
                 <h1>Profile Settings</h1>
                 <p><strong>Username:</strong> <span th:text="${user.username}">User</span></p>
