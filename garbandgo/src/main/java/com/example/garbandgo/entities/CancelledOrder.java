@@ -25,7 +25,6 @@ public class CancelledOrder implements Serializable {
     @Column(name = "reason", nullable = false)
     private String reason;
 
-    // Getters and setters...
 
     public Integer getId() {
         return id;

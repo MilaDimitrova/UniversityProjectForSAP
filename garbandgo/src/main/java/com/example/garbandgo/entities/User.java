@@ -31,7 +31,6 @@ public class User implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    // Getters and Setters
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
     public String getUsername() { return username; }
