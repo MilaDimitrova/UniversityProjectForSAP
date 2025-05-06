@@ -5,6 +5,8 @@ import com.example.garbandgo.repositories.CancelledOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,22 +16,18 @@ public class CancelledOrderService {
     @Autowired
     private CancelledOrderRepository cancelledOrderRepository;
 
-
     public List<CancelledOrder> getAllCancelledOrders() {
         return cancelledOrderRepository.findAll();
     }
-
 
     public CancelledOrder getCancelledOrderById(Integer id) {
         Optional<CancelledOrder> cancelledOrder = cancelledOrderRepository.findById(id);
         return cancelledOrder.orElse(null);
     }
 
-
     public CancelledOrder saveCancelledOrder(CancelledOrder cancelledOrder) {
         return cancelledOrderRepository.save(cancelledOrder);
     }
-
 
     public CancelledOrder updateCancelledOrder(Integer id, CancelledOrder updatedOrder) {
         Optional<CancelledOrder> existing = cancelledOrderRepository.findById(id);
@@ -40,12 +38,19 @@ public class CancelledOrderService {
         return null;
     }
 
-
     public boolean deleteCancelledOrder(Integer id) {
         if (cancelledOrderRepository.existsById(id)) {
             cancelledOrderRepository.deleteById(id);
             return true;
         }
         return false;
+    }
+
+    // ✅ Коригиран метод: преобразува датите към Instant
+    public List<CancelledOrder> getCancelledOrdersByDateRange(LocalDateTime from, LocalDateTime to) {
+        return cancelledOrderRepository.findByCanceledAtBetween(
+                from.atZone(java.time.ZoneId.systemDefault()).toInstant(),
+                to.atZone(java.time.ZoneId.systemDefault()).toInstant()
+        );
     }
 }

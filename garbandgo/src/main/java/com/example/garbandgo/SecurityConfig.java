@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.http.HttpMethod;
+
 
 @Configuration
 @EnableWebSecurity
@@ -27,11 +29,13 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/images/**", "/", "/aboutUs", "/contact", "/register", "/login").permitAll()
-                        .requestMatchers("/restaurants/**", "/products/shop/**", "/cart/**").hasAnyRole("USER", "ADMIN", "MANAGER", "REST_OWNER")
+                        .requestMatchers("/restaurants/**", "/products/shop/**").hasAnyRole("USER", "ADMIN", "MANAGER", "REST_OWNER")
+                        .requestMatchers("/cart/**").permitAll()
                         .requestMatchers("/products/manage/**", "/products/add/**", "/products/edit/**", "/products/delete/**").hasAnyRole("ADMIN", "MANAGER", "REST_OWNER")
                         .requestMatchers("/restaurants/edit/**", "/restaurants/delete/**").hasAnyRole("ADMIN", "MANAGER", "REST_OWNER")
-                        .requestMatchers("/orders/**").hasRole("COURIER")
+                        .requestMatchers("/orders/**").hasAnyRole("COURIER", "ADMIN")
                         .requestMatchers("/promocodes/**").hasAnyRole("ADMIN", "MANAGER")
+                        .requestMatchers(HttpMethod.POST, "/cart/checkout").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -51,6 +55,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

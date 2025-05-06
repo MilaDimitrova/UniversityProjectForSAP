@@ -2,43 +2,124 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Grab and Go - Order Products</title>
+    <title>Grab and Go - Order Details</title>
     <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
     <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        h2, h3 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
         .back-button {
-            position: absolute;
-            top: 120px;
-            left: 30px;
+            display: inline-block;
+            margin: 30px;
             padding: 10px 16px;
             background-color: #4CAF50;
             color: white;
             border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
-            z-index: 10;
         }
 
         .back-button:hover {
             background-color: #45a049;
         }
 
-        .complete-order-button {
-            display: inline-block;
+        .order-info {
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .order-info p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
-            padding: 10px 16px;
-            background-color: #008CBA;
-            color: white;
             border-radius: 6px;
-            text-decoration: none;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            color: #333;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-logo span {
+            font-size: 24px;
             font-weight: bold;
         }
 
-        .complete-order-button:hover {
-            background-color: #007bb5;
+        .footer-data {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 20px;
         }
 
-        .content {
-            margin: 0 30px;
+        .footer-data div h4 {
+            margin-bottom: 12px;
+            color: #ddd;
+        }
+
+        .footer-data ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-data ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-data ul li a {
+            color: #bbb;
+            text-decoration: none;
+        }
+
+        .footer-data ul li a:hover {
+            color: #fff;
         }
     </style>
 </head>
@@ -59,71 +140,44 @@
     </nav>
 </header>
 
-
 <a href="/orders" class="back-button">⬅ Back to Orders</a>
 
 <main>
-    <section class="content">
-        <h2>Select Product to Add</h2>
+    <h2>Order Details</h2>
 
-        <form th:action="@{/order_products/index}" method="get">
-            <label for="productSelect">Choose a product:</label>
-            <select name="productId" id="productSelect" onchange="this.form.submit()">
-                <option value="">-- Select --</option>
-                <option th:each="p : ${products}"
-                        th:value="${p.id}"
-                        th:text="${p.name}"
-                        th:selected="${selectedProduct != null} ? ${p.id} == ${selectedProduct.id} : false">
-                </option>
-            </select>
-        </form>
+    <div class="order-info">
+        <p><strong>Order ID:</strong> <span th:text="${order.id}">0</span></p>
+        <p><strong>Date:</strong> <span th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}">N/A</span></p>
+        <p><strong>Total Price:</strong> <span th:text="${order.totalPrice}">0.00</span> лв.</p>
+        <p><strong>Status:</strong>
+            <span th:switch="${order.status}">
+                <span th:case="'DELIVERED'">✅ Delivered</span>
+                <span th:case="'PENDING'">🕓 Pending</span>
+                <span th:case="'CANCELLED'">❌ Cancelled</span>
+                <span th:case="*">⚪ Unknown</span>
+            </span>
+        </p>
+    </div>
 
-        <div th:if="${selectedProduct != null}">
-            <h3>Product Details</h3>
-            <p><strong>Name:</strong> <span th:text="${selectedProduct.name}">Product Name</span></p>
-            <p><strong>Description:</strong> <span th:text="${selectedProduct.description}">Description</span></p>
-            <p><strong>Category:</strong> <span th:text="${selectedProduct.category}">Category</span></p>
-
-            <form th:action="@{/order_products/add}" method="post">
-                <input type="hidden" name="productId" th:value="${selectedProduct.id}" />
-
-                <label for="quantity">Quantity:</label>
-                <input type="number" name="quantity" id="quantity" min="1" value="1" required />
-
-                <label for="price">Price:</label>
-                <input type="number" step="0.01" name="price" id="price" required />
-
-                <button type="submit">Add</button>
-            </form>
-        </div>
-
-        <hr>
-
-        <h2>Products in Order</h2>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="op : ${orderProducts}">
-                    <td th:text="${op.id}">1</td>
-                    <td th:text="${op.product.name}">Product Name</td>
-                    <td th:text="${op.quantity}">2</td>
-                    <td th:text="${op.price}">9.99</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-
-        <a href="/reviews" class="complete-order-button">✅ Complete Order</a>
-    </section>
+    <h3>Products in this Order</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price (лв)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="op, stat : ${orderProducts}">
+            <td th:text="${stat.count}">1</td>
+            <td th:text="${op.product.name}">Product Name</td>
+            <td th:text="${op.quantity}">1</td>
+            <td th:text="${op.price}">0.00</td>
+        </tr>
+        </tbody>
+    </table>
 </main>
 
 <footer>
