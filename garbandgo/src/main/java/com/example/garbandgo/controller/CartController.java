@@ -41,11 +41,33 @@ public class CartController {
     }
 
     @GetMapping
-    public String viewCart(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model) {
+    public String viewCart(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart,
+                           @RequestParam(value = "promoCode", required = false) String promoCode,
+                           Model model) {
+        double discount = 0.0;
+
+        if (promoCode != null && !promoCode.isBlank()) {
+            var nowInstant = java.time.Instant.now();
+            var allCodes = promocodeRepository.findAll();
+
+            for (var code : allCodes) {
+                if (code.getPromocode().equalsIgnoreCase(promoCode.trim()) &&
+                        nowInstant.isAfter(code.getValidFrom()) &&
+                        nowInstant.isBefore(code.getValidTo())) {
+                    discount = (code.getDiscount() / 100.0) * shoppingCart.getTotalPrice();
+                    model.addAttribute("promoCodeApplied", true);
+                    model.addAttribute("promoCodeValue", promoCode);
+                    break;
+                }
+            }
+        }
+
         model.addAttribute("cartItems", shoppingCart.getItems());
         model.addAttribute("totalPrice", shoppingCart.getTotalPrice());
+        model.addAttribute("additionalDiscount", discount);
         return "cart/viewCart";
     }
+
 
     @PostMapping("/add/{productId}")
     public String addToCart(@PathVariable Integer productId,
@@ -74,10 +96,15 @@ public class CartController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private com.example.garbandgo.repositories.PromocodeRepository promocodeRepository;
+
     @PostMapping("/checkout")
     public String checkout(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart,
+                           @RequestParam(value = "promoCode", required = false) String promoCodeInput,
                            @AuthenticationPrincipal UserDetails userDetails,
                            RedirectAttributes redirectAttributes) {
+
         if (shoppingCart.getItems().isEmpty()) {
             redirectAttributes.addFlashAttribute("errorMessage", "Количката ви е празна.");
             return "redirect:/cart";
@@ -89,11 +116,36 @@ public class CartController {
         Order order = new Order();
         LocalDateTime now = LocalDateTime.now();
 
+        double discount = 0.0;
+        com.example.garbandgo.entities.Promocode appliedPromocode = null;
+
+        if (promoCodeInput != null && !promoCodeInput.isBlank()) {
+            List<com.example.garbandgo.entities.Promocode> allCodes = promocodeRepository.findAll();
+
+            for (var code : allCodes) {
+                if (code.getPromocode().equalsIgnoreCase(promoCodeInput.trim())) {
+                    var nowInstant = java.time.Instant.now();
+                    if (nowInstant.isAfter(code.getValidFrom()) && nowInstant.isBefore(code.getValidTo())) {
+                        appliedPromocode = code;
+                        discount = (code.getDiscount() / 100.0) * shoppingCart.getTotalPrice();
+                        redirectAttributes.addFlashAttribute("successMessage", "Промокодът е приложен успешно!");
+                    } else {
+                        redirectAttributes.addFlashAttribute("errorMessage", "Промокодът е невалиден или изтекъл.");
+                    }
+                    break;
+                }
+            }
+
+            if (appliedPromocode == null) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Промокодът не беше намерен.");
+            }
+        }
+
         order.setOrderDate(now);
         order.setCancelled(new byte[]{0});
-        order.setStatus("PENDING"); // ✅ Статус на английски
-        order.setTotalPrice(shoppingCart.getTotalPrice());
-        order.setAdditionalDiscount(0.0);
+        order.setStatus("PENDING");
+        order.setTotalPrice(shoppingCart.getTotalPrice() - discount);
+        order.setAdditionalDiscount(discount);
         order.setDueToDelivery(now.plusMinutes(30));
         order.setPackedAt(now.plusMinutes(10));
         order.setDeliveredAt(now.plusMinutes(40));
@@ -102,11 +154,11 @@ public class CartController {
         address.setId(1);
         order.setAddress(address);
 
-        var deliveryUser = new com.example.garbandgo.entities.User();
+        var deliveryUser = new User();
         deliveryUser.setId(1);
         order.setDeliveredBy(deliveryUser);
 
-        var packer = new com.example.garbandgo.entities.User();
+        var packer = new User();
         packer.setId(1);
         order.setPackedBy(packer);
 
@@ -116,9 +168,9 @@ public class CartController {
 
         order.setUser(customer);
 
-        var promocode = new com.example.garbandgo.entities.Promocode();
-        promocode.setId(1);
-        order.setPromocode(promocode);
+        if (appliedPromocode != null) {
+            order.setPromocode(appliedPromocode);
+        }
 
         List<OrderProduct> orderProducts = new ArrayList<>();
         for (CartItem cartItem : shoppingCart.getItems()) {
@@ -134,7 +186,7 @@ public class CartController {
         orderService.saveOrder(order);
 
         shoppingCart.clear();
-        redirectAttributes.addFlashAttribute("successMessage", "Поръчката беше направена успешно!");
         return "redirect:/user/userPage";
     }
+
 }
