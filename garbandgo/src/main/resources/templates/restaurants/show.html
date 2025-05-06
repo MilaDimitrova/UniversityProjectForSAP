@@ -37,8 +37,10 @@
             <li><a href="/restaurants/">Our restaurants</a></li>
             <li><a href="/aboutUs">About us</a></li>
             <li><a href="/contact">Contacts</a></li>
-            <li sec:authorize="isAuthenticated()"><a href="/profile">Profile</a></li>
-            <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+            <div th:replace="fragments/header :: header"></div>
+
+          <!-- <li sec:authorize="isAuthenticated()"><a href="/profile">Profile</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li> -->
         </ul>
     </nav>
 </header>
