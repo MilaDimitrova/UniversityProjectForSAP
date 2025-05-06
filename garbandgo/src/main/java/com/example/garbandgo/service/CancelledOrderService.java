@@ -46,7 +46,6 @@ public class CancelledOrderService {
         return false;
     }
 
-    // ✅ Коригиран метод: преобразува датите към Instant
     public List<CancelledOrder> getCancelledOrdersByDateRange(LocalDateTime from, LocalDateTime to) {
         return cancelledOrderRepository.findByCanceledAtBetween(
                 from.atZone(java.time.ZoneId.systemDefault()).toInstant(),
