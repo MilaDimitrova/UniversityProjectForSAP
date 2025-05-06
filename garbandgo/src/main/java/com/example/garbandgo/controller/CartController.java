@@ -91,7 +91,7 @@ public class CartController {
 
         order.setOrderDate(now);
         order.setCancelled(new byte[]{0});
-        order.setStatus("PENDING"); // ✅ Статус на английски
+        order.setStatus("PENDING");
         order.setTotalPrice(shoppingCart.getTotalPrice());
         order.setAdditionalDiscount(0.0);
         order.setDueToDelivery(now.plusMinutes(30));

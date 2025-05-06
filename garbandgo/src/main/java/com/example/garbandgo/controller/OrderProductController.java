@@ -41,7 +41,6 @@ public class OrderProductController {
             selectedProduct = productRepository.findById(productId).orElse(null);
         }
 
-        // ✅ Вземаме и подаваме самата поръчка
         Order order = orderService.getOrderById(orderId).orElse(null);
         if (order == null) {
             return "redirect:/orders/index"; // fallback ако поръчката липсва
@@ -69,7 +68,7 @@ public class OrderProductController {
                 ResponseEntity.notFound().build();
     }
 
-    // ✅ Добавяне на продукт към конкретна поръчка
+
     @PostMapping("/add")
     public String addProductToOrder(@RequestParam("orderId") Integer orderId,
                                     @RequestParam("productId") Integer productId,
