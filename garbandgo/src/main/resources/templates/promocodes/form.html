@@ -17,7 +17,7 @@
             <li><a th:href="@{/restaurants/}">Our restaurants</a></li>
             <li><a href="/aboutUs">About us</a></li>
             <li><a href="/contact">Contacts</a></li>
-            <div th:replace="fragments/header :: header"></div>
+            <th:block th:replace="fragments/header :: header"></th:block>
         </ul>
     </nav>
 </header>
