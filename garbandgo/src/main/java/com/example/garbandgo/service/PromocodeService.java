@@ -31,19 +31,16 @@ public class PromocodeService {
         return promocode;
     }
 
-    public void saveDTO(PromocodeDTO promocodeDTO, Integer restaurantId, Integer id ) {
+    public void saveDTO(PromocodeDTO promocodeDTO, Integer restaurantId, Optional<Integer> id ) {
         Optional<Restaurant> restaurantOpt = restaurantRepository.findById(restaurantId);
+        Optional<Promocode> promocodeOpt = promocodeRepository.findById(id.get().intValue());
         Promocode promocode;
-        if (id == null) {
-            promocode = new Promocode();
-        }
-        else {
-            Optional<Promocode> promocodeOpt = promocodeRepository.findById(id);
-            promocode = promocodeOpt.get();
-        }
-
-
         if (restaurantOpt.isPresent()) {
+            if (promocodeOpt.isPresent()){
+                promocode = promocodeOpt.get();
+            }else {
+                promocode = new Promocode();
+            }
 
             promocode.setPromocode(promocodeDTO.getPromocode());
             promocode.setDescription(promocodeDTO.getDescription());

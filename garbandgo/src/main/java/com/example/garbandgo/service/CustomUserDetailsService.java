@@ -2,7 +2,6 @@ package com.example.garbandgo.service;
 
 import com.example.garbandgo.entities.User;
 import com.example.garbandgo.repositories.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;

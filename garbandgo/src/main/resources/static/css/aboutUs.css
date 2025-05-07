@@ -18,14 +18,14 @@ body {
     font-size: 75px;
     line-height: 94px;
     color: #000000;
-    margin: 0 auto;
-    width: 80%;
+    margin: 0 auto; /* Центриране на заглавието */
+    width: 80%; /* Ограничение на широчината */
     overflow-wrap: break-word;
 }
 
 .logoContainer img {
     display: block;
-    margin: 20px auto;
+    margin: 20px auto; /* Центриране на логото */
     width: 250px;
     height: 250px;
 }
@@ -40,19 +40,19 @@ body {
     font-size: 65px;
     line-height: 81px;
     color: #000000;
-    margin: 0 auto;
-    width: 80%;
+    margin: 0 auto; /* Центриране на заглавието */
+    width: 80%; /* Ограничение на широчината */
     overflow-wrap: break-word;
 }
 
 .aboutus p {
     text-align: justify;
-    margin: 20px auto;
+    margin: 20px auto; /* Центриране на текста */
     font-family: 'Original Surfer';
     font-size: 25px;
     line-height: 31px;
     color: #000000;
-    width: 80%;
+    width: 80%; /* Ограничение на широчината */
 }
 
 footer {
@@ -80,8 +80,8 @@ footer .footer-logo .highlightSecond {
 footer .footer-data {
     display: flex;
     justify-content: center;
-    gap: 50px;
-    flex-wrap: wrap;
+    gap: 50px; /* Намаляване на разстоянието за по-добро разпределение */
+    flex-wrap: wrap; /* Добавяне на адаптивност */
     margin: 20px 0;
 }
 
@@ -122,14 +122,14 @@ body {
     font-size: 75px;
     line-height: 94px;
     color: #000000;
-    margin: 0 auto;
-    width: 80%;
+    margin: 0 auto; /* Центриране на заглавието */
+    width: 80%; /* Ограничение на широчината */
     overflow-wrap: break-word;
 }
 
 .logoContainer img {
     display: block;
-    margin: 20px auto;
+    margin: 20px auto; /* Центриране на логото */
     width: 250px;
     height: 250px;
 }
@@ -144,19 +144,19 @@ body {
     font-size: 65px;
     line-height: 81px;
     color: #000000;
-    margin: 0 auto;
-    width: 80%;
+    margin: 0 auto; /* Центриране на заглавието */
+    width: 80%; /* Ограничение на широчината */
     overflow-wrap: break-word;
 }
 
 .aboutus p {
     text-align: justify;
-    margin: 20px auto;
+    margin: 20px auto; /* Центриране на текста */
     font-family: 'Original Surfer';
     font-size: 25px;
     line-height: 31px;
     color: #000000;
-    width: 80%;
+    width: 80%; /* Ограничение на широчината */
 }
 
 footer {
@@ -184,8 +184,8 @@ footer .footer-logo .highlightSecond {
 footer .footer-data {
     display: flex;
     justify-content: center;
-    gap: 50px;
-    flex-wrap: wrap;
+    gap: 50px; /* Намаляване на разстоянието за по-добро разпределение */
+    flex-wrap: wrap; /* Добавяне на адаптивност */
     margin: 20px 0;
 }
 

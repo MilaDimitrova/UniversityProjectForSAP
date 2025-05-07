@@ -12,7 +12,7 @@
 
         .back-button {
             position: absolute;
-            top: 120px;
+            top: 120px; /* коригирай при нужда спрямо header височината */
             left: 30px;
             padding: 10px 16px;
             background-color: #4CAF50;
@@ -110,12 +110,12 @@
             <li><a href="/restaurants">Our restaurants</a></li>
             <li><a href="/aboutUs">About us</a></li>
             <li><a href="/contact">Contacts</a></li>
-            <th:block th:replace="fragments/header :: header"></th:block>
+            <li><a href="/profile">Profile</a></li>
         </ul>
     </nav>
 </header>
 
-
+<!-- Бутон в горен ляв ъгъл -->
 <a href="/orders" class="back-button">⬅ Back to Orders</a>
 
 <section>
@@ -125,16 +125,17 @@
         <div th:each="review : ${reviews}" class="review-card">
             <h3 th:text="'Order #' + ${review.orderId}">Order ID</h3>
 
-
+            <!-- Rating звезди -->
             <p th:if="${review.review != null}" class="rating-stars">
                 <span th:each="i : ${#numbers.sequence(1, 5)}"
                       th:text="${i <= review.review ? '★' : '☆'}">★</span>
             </p>
             <p th:unless="${review.review != null}" class="rating-stars">No rating</p>
 
-
+            <!-- Текст на ревюто -->
             <p th:text="${review.reviewText != null ? review.reviewText : 'No comment'}">This place is awesome!</p>
 
+            <!-- Дата -->
             <p class="review-date" th:if="${review.dateCreated != null}"
                th:text="${#temporals.format(review.dateCreated, 'dd MMM yyyy')}">01 Jan 2025</p>
             <p class="review-date" th:unless="${review.dateCreated != null}">Date unknown</p>

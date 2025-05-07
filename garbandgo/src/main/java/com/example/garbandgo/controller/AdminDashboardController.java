@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AdminDashboardController {
@@ -45,27 +44,21 @@ public class AdminDashboardController {
         return "redirect:/admin/rootPage?success";
     }
 
-    @PostMapping("/admin/register-user")
-    public String registerUserFromDashboard(@RequestParam String username,
-                                            @RequestParam String email,
-                                            @RequestParam String password,
-                                            @RequestParam String phone,
-                                            @RequestParam String role,
-                                            RedirectAttributes redirectAttributes) {
-        try {
-            User user = new User();
-            user.setUsername(username);
-            user.setEmail(email);
-            user.setPassword(password);
-            user.setPhone(phone);
+    @PostMapping("/admin/addManager")
+    public String addManager(@RequestParam String username,
+                             @RequestParam String email,
+                             @RequestParam String password,
+                             @RequestParam String phone) {
+        userService.registerManager(username, email, password, phone);
+        return "redirect:/admin/rootPage?managerAdded";
+    }
 
-            userService.registerUser(user, role);
-            redirectAttributes.addFlashAttribute("success", "Потребителят е добавен успешно!");
-
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Грешка: " + e.getMessage());
-        }
-
-        return "redirect:/admin/rootPage";
+    @PostMapping("/admin/addCourier")
+    public String addCourier(@RequestParam String username,
+                             @RequestParam String email,
+                             @RequestParam String password,
+                             @RequestParam String phone) {
+        userService.registerCourier(username, email, password, phone);
+        return "redirect:/admin/rootPage?courierAdded";
     }
 }

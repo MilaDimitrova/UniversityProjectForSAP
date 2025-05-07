@@ -91,6 +91,7 @@ section a,  section button, section input[type=submit] {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+/* Footer */
 footer {
     background: #333;
     color: white;

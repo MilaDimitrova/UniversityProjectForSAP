@@ -34,7 +34,7 @@ public class CourierDashboardController {
         List<Order> availableOrders = orderRepository.findByDeliveredByIsNull();
         List<Order> myDeliveries = orderRepository.findByDeliveredBy(courier);
 
-        model.addAttribute("user", courier);
+        model.addAttribute("user", courier); // Добавен user за Thymeleaf шаблона
         model.addAttribute("availableOrders", availableOrders);
         model.addAttribute("myDeliveries", myDeliveries);
 
@@ -51,7 +51,7 @@ public class CourierDashboardController {
                 .orElseThrow(() -> new IllegalArgumentException("Потребителят не е намерен."));
 
         order.setDeliveredBy(courier);
-        order.setDeliveredAt(LocalDateTime.now());
+        order.setDeliveredAt(LocalDateTime.now()); // Използваме LocalDateTime.now() директно
         orderRepository.save(order);
 
         return "redirect:/courier/deliveryPage";
@@ -62,7 +62,7 @@ public class CourierDashboardController {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new IllegalArgumentException("Поръчката не е намерена."));
 
-        order.setDeliveredAt(LocalDateTime.now());
+        order.setDeliveredAt(LocalDateTime.now()); // Използваме LocalDateTime.now() директно
         orderRepository.save(order);
 
         return "redirect:/courier/deliveryPage";

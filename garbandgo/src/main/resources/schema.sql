@@ -53,6 +53,18 @@ CREATE TABLE `currencies` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ingredients`
+--
+
+CREATE TABLE `ingredients` (
+  `id` int(11) NOT NULL,
+  `ingredient` varchar(255) NOT NULL,
+  `alergen` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -116,6 +128,18 @@ CREATE TABLE `product_category` (
   `category` varchar(255) NOT NULL,
   `image` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_ingredients`
+--
+
+CREATE TABLE `product_ingredients` (
+  `id` int(11) NOT NULL,
+  `product` int(11) NOT NULL,
+  `ingredient` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -257,6 +281,13 @@ ALTER TABLE `countries`
 ALTER TABLE `currencies`
   ADD PRIMARY KEY (`id`);
 
+
+--
+-- Indexes for table `ingredients`
+--
+ALTER TABLE `ingredients`
+  ADD PRIMARY KEY (`id`);
+
 --
 -- Indexes for table `orders`
 --
@@ -292,6 +323,15 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_category`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_ingredients`
+--
+ALTER TABLE `product_ingredients`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ingredient` (`ingredient`),
+  ADD KEY `product` (`product`);
+
 --
 -- Indexes for table `promocodes`
 --
@@ -371,7 +411,13 @@ ALTER TABLE `countries`
 ALTER TABLE `currencies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+
 --
+-- AUTO_INCREMENT for table `ingredients`
+--
+ALTER TABLE `ingredients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `orders`
 --
@@ -394,6 +440,12 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_category`
 --
 ALTER TABLE `product_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_ingredients`
+--
+ALTER TABLE `product_ingredients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -489,6 +541,13 @@ ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category`) REFERENCES `product_category` (`id`);
 
 --
+-- Constraints for table `product_ingredients`
+--
+ALTER TABLE `product_ingredients`
+  ADD CONSTRAINT `product_ingredients_ibfk_1` FOREIGN KEY (`ingredient`) REFERENCES `ingredients` (`id`),
+  ADD CONSTRAINT `product_ingredients_ibfk_2` FOREIGN KEY (`product`) REFERENCES `products` (`id`);
+
+--
 -- Constraints for table `promocodes`
 --
 ALTER TABLE `promocodes`
@@ -547,63 +606,49 @@ CREATE PROCEDURE add_restaurant_with_open_hours(
     IN p_closes_sun TIME
 )
 BEGIN
-    BEGIN
     DECLARE v_town_id INT;
     DECLARE v_address_id INT;
     DECLARE v_restaurant_id INT;
 
-    SELECT r.id INTO v_restaurant_id
-	FROM
-    restaurants r
-	JOIN addresses a ON r.address = a.id
-	JOIN towns t ON a.town = t.id
-	WHERE r.restaurant = p_restaurant AND a.address = p_address AND t.town = p_town AND r.manager = p_manager LIMIT 1;
+    SELECT id INTO v_town_id
+    FROM towns
+    WHERE town = p_town
+    LIMIT 1;
 
-    IF v_restaurant_id IS NULL OR v_restaurant_id = 0 THEN
-
-        SELECT id INTO v_town_id
-        FROM towns
-        WHERE town = p_town
-        LIMIT 1;
-
-        IF v_town_id IS NULL THEN
-            INSERT INTO towns (town, country, zip_code)
-            VALUES (p_town, p_country, p_zip_code);
-            SET v_town_id = LAST_INSERT_ID();
-        END IF;
-
-        INSERT INTO addresses (address, town, user)
-        VALUES (p_address, v_town_id, NULL);
-        SET v_address_id = LAST_INSERT_ID();
-
-        INSERT INTO restaurants (restaurant, logo, address, reputation, manager)
-        VALUES (p_restaurant, p_logo, v_address_id, p_reputation, p_manager);
-        SET v_restaurant_id = LAST_INSERT_ID();
-
-        INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
-            VALUES (v_restaurant_id, p_opens_mon, p_closes_mon, 'Monday');
-
-        INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
-            VALUES (v_restaurant_id, p_opens_tue, p_closes_tue, 'Tuesday');
-
-        INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
-            VALUES (v_restaurant_id, p_opens_wed, p_closes_wed, 'Wednesday');
-
-        INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
-            VALUES (v_restaurant_id, p_opens_thu, p_closes_thu, 'Thursday');
-
-        INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
-            VALUES (v_restaurant_id, p_opens_fri, p_closes_fri, 'Friday');
-
-        INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
-            VALUES (v_restaurant_id, p_opens_sat, p_closes_sat, 'Saturday');
-
-        INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
-            VALUES (v_restaurant_id, p_opens_sun, p_closes_sun, 'Sunday');
-    ELSE
-    	UPDATE restaurants SET deleted_at = NULL WHERE id = v_restaurant_id;
+    IF v_town_id IS NULL THEN
+        INSERT INTO towns (town, country, zip_code)
+        VALUES (p_town, p_country, p_zip_code);
+        SET v_town_id = LAST_INSERT_ID();
     END IF;
 
+    INSERT INTO addresses (address, town, user)
+    VALUES (p_address, v_town_id, NULL);
+    SET v_address_id = LAST_INSERT_ID();
+
+    INSERT INTO restaurants (restaurant, logo, address, reputation, manager)
+    VALUES (p_restaurant, p_logo, v_address_id, p_reputation, p_manager);
+    SET v_restaurant_id = LAST_INSERT_ID();
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_mon, p_closes_mon, 'Monday');
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_tue, p_closes_tue, 'Tuesday');
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_wed, p_closes_wed, 'Wednesday');
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_thu, p_closes_thu, 'Thursday');
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_fri, p_closes_fri, 'Friday');
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_sat, p_closes_sat, 'Saturday');
+
+    INSERT INTO restaurant_open_hours (restaurant, opens_at, closes_at, day_of_week)
+        VALUES (v_restaurant_id, p_opens_sun, p_closes_sun, 'Sunday');
 END //
 
 DELIMITER ;
