@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Grab and Go - Order Details</title>
+  <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
+  <style>
+    .back-button {
+      position: absolute;
+      top: 120px;
+      left: 30px;
+      padding: 10px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    .back-button:hover {
+      background-color: #45a049;
+    }
+
+    .content {
+      margin: 0 30px;
+    }
+
+    .order-info {
+      margin-bottom: 20px;
+    }
+
+    .order-info p {
+      margin: 6px 0;
+    }
+
+    .status {
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 5px;
+      color: white;
+    }
+
+    .status.accepted { background-color: #ff9800; }
+    .status.delivered { background-color: #4CAF50; }
+    .status.canceled { background-color: #f44336; }
+    .status.unknown { background-color: #9e9e9e; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/restaurants/index">Our Restaurants</a></li>
+      <li><a href="/aboutUs">About Us</a></li>
+      <li><a href="/contact">Contacts</a></li>
+      <th:block th:replace="fragments/header :: header"></th:block>
+    </ul>
+  </nav>
+</header>
+
+<a href="/user/userPage" class="back-button">⬅ Back to Dashboard</a>
+
+<main>
+  <section class="content">
+    <h2>Order Details</h2>
+
+    <div class="order-info">
+      <p><strong>Order ID:</strong> <span th:text="${order.id}"></span></p>
+      <p><strong>Date:</strong> <span th:text="${order.orderDate}"></span></p>
+      <p><strong>Total Price:</strong> <span th:text="${order.totalPrice}">0.00</span> лв.</p>
+      <p><strong>Статус:</strong>
+        <span th:switch="${order.status}">
+          <span th:case="'CANCELLED'" class="status canceled">🔴 Отказана</span>
+          <span th:case="'DELIVERED'" class="status delivered">🟢 Доставена</span>
+          <span th:case="'PENDING'" class="status accepted">🟡 Изчакване</span>
+          <span th:case="*"
+                class="status unknown">⚪ Неизвестен</span>
+        </span>
+      </p>
+    </div>
+
+    <h3>Products in this Order</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price (лв)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="op : ${orderProducts}">
+          <td th:text="${op.id}">1</td>
+          <td th:text="${op.product.name}">Product Name</td>
+          <td th:text="${op.quantity}">1</td>
+          <td th:text="${op.price}">0.00</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-logo">
+    <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+  </div>
+  <div class="footer-data">
+    <div class="links">
+      <h4>Links</h4>
+      <ul>
+        <li><a href="/aboutUs">About Us</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="social">
+      <h4>Social</h4>
+      <ul>
+        <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+        <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+        <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div class="policies">
+      <h4>Policies</h4>
+      <ul>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

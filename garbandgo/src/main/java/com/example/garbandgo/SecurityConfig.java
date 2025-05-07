@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.http.HttpMethod;
 
 @Configuration
 @EnableWebSecurity
@@ -26,12 +27,18 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/images/**", "/", "/aboutUs", "/contact", "/register", "/login").permitAll()
-                        .requestMatchers("/restaurants/**", "/products/shop/**", "/cart/**").hasAnyRole("USER", "ADMIN", "MANAGER", "REST_OWNER")
-                        .requestMatchers("/products/manage/**", "/products/add/**", "/products/edit/**", "/products/delete/**").hasAnyRole("ADMIN", "MANAGER", "REST_OWNER")
-                        .requestMatchers("/restaurants/edit/**", "/restaurants/delete/**").hasAnyRole("ADMIN", "MANAGER", "REST_OWNER")
-                        .requestMatchers("/orders/**").hasAnyRole("COURIER", "ADMIN")
-                        .requestMatchers("/promocodes/**").hasAnyRole("ADMIN", "MANAGER")
+                        .requestMatchers("/", "/aboutUs", "/contact", "/register", "/login", "/css/**", "/images/**", "/js/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/products/**", "/restaurants/**").permitAll()
+                        .requestMatchers("/user/**", "/cart/**", "/products/shop/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/cart/checkout").hasRole("USER")
+                        .requestMatchers("/manager/**","/orders/**", "/products/manage/**", "/products/add/**", "/products/edit/**", "/products/delete/**").hasRole("MANAGER")
+                        .requestMatchers("/restaurants/edit/**", "/restaurants/delete/**").hasRole("MANAGER")
+                        .requestMatchers("/rest_owner/**").hasRole("REST_OWNER")
+                        .requestMatchers("/admin/**", "/promocodes/**").hasRole("ADMIN")
+                        .requestMatchers("/products/manage/**", "/products/add/**", "/products/edit/**", "/products/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/restaurants/edit/**", "/restaurants/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/orders/**").hasRole("ADMIN")
+                        .requestMatchers("/courier/**", "/orders/**").hasRole("COURIER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <title>Products To Cart - Grab &amp; go</title>
     <style>
-        /* Основен стил за тялото */
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #E6AF2E;
             margin: 0;
         }
-        /* Header и навигация */
+
         header {
             display: flex;
             align-items: center;
@@ -72,7 +72,7 @@
         nav ul li:hover::after {
             width: 100%;
         }
-        /* Стилове за продуктовата решетка и картите */
+
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -124,7 +124,7 @@
         .product-card form button:hover {
             background-color: #cca117;
         }
-        /* Footer стилове */
+
         footer {
             background: #E6AF2E;
             padding: 20px;
@@ -134,7 +134,6 @@
     </style>
 </head>
 <body>
-<!-- Header с навигация -->
 <header>
     <div class="logo">
         Grab <span class="highlight">&amp;</span> <span class="highlightSecond">go</span>
@@ -145,33 +144,25 @@
             <li><a th:href="@{/templates/restaurants}">Our restaurants</a></li>
             <li><a th:href="@{/aboutUs}">About us</a></li>
             <li><a th:href="@{/contact}">Contacts</a></li>
-            <li><a th:href="@{/profile}">Profile</a></li>
+            <th:block th:replace="fragments/header :: header"></th:block>
             <li><a th:href="@{/cart}">Cart</a></li>
         </ul>
     </nav>
 </header>
 
-<!-- Основната част – визуализиране на продуктите -->
 <main>
     <h1 style="color: white; margin: 20px 0;">Our Products</h1>
     <div class="products-grid">
-        <!-- Обхождаме списъка от продукти, подаден от контролера -->
         <div class="product-card" th:each="product : ${products}">
-            <!-- Изображение на продукта – приемаме, че полето 'image' съдържа името на файла, напр. 'margherita.jpg' -->
             <img th:src="@{'/images/' + ${product.image}}" alt="Product Image">
-            <!-- Име на продукта -->
             <h2 th:text="${product.product}">Product Name</h2>
-            <!-- Описание -->
             <p th:text="${product.description}">Product description...</p>
-            <!-- Цена с валута -->
             <p class="price">
                 €<span th:text="${#numbers.formatDecimal(product.price, 2, 'POINT', ',')}">10.99</span>
             </p>
-            <!-- Цена за доставка -->
             <p>
                 Delivery: €<span th:text="${#numbers.formatDecimal(product.delivery_price, 2, 'POINT', ',')}">2.50</span>
             </p>
-            <!-- Форма за добавяне в количката -->
             <form th:action="@{/cart/add}" method="post">
                 <input type="hidden" name="productId" th:value="${product.id}">
                 <button type="submit">Add to Cart</button>
@@ -180,7 +171,6 @@
     </div>
 </main>
 
-<!-- Footer -->
 <footer>
     <div class="footer-logo">
         Grab <span class="highlight">&amp;</span> <span class="highlightSecond">go</span>

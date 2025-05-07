@@ -1,87 +1,115 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
-    <title>Grab and go - New Order</title>
+    <meta charset="UTF-8">
+    <title>Order Form</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 30px;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="datetime-local"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .back-button {
+            background-color: #999;
+            margin-right: 10px;
+        }
+
+        .back-button:hover {
+            background-color: #777;
+        }
+
+        .form-buttons {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">
-        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+<form th:action="@{/orders}" th:object="${order}" method="post">
+    <h2 th:text="${order.id != null} ? 'Edit Order' : 'New Order'"></h2>
+
+    <input type="hidden" th:field="*{id}" />
+
+    <label for="restaurant">Restaurant ID</label>
+    <input type="number" id="restaurant" th:field="*{restaurant}" required/>
+
+    <label for="user">User ID</label>
+    <input type="number" id="user" th:field="*{user}" required/>
+
+    <label for="address">Address ID</label>
+    <input type="number" id="address" th:field="*{address}" required/>
+
+    <label for="promocode">Promocode ID</label>
+    <input type="number" id="promocode" th:field="*{promocode}" required/>
+
+    <label for="additionalDiscount">Additional Discount (%)</label>
+    <input type="number" id="additionalDiscount" step="0.01" th:field="*{additionalDiscount}" />
+
+    <label for="totalPrice">Total Price</label>
+    <input type="number" id="totalPrice" step="0.01" th:field="*{totalPrice}" required/>
+
+    <label for="status">Status</label>
+    <select id="status" th:field="*{status}">
+        <option value="PENDING" th:selected="${order.status == 'PENDING'}">Pending</option>
+        <option value="DELIVERED" th:selected="${order.status == 'DELIVERED'}">Delivered</option>
+        <option value="CANCELLED" th:selected="${order.status == 'CANCELLED'}">Cancelled</option>
+    </select>
+
+    <div class="form-buttons">
+        <a th:href="@{/orders/index}" class="button back-button">⬅ Back</a>
+        <button type="submit">💾 Save</button>
     </div>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/restaurants">Our restaurants</a></li>
-            <li><a href="/aboutUs">About us</a></li>
-            <li><a href="/contact">Contacts</a></li>
-            <li><a href="/profile">Profile</a></li>
-        </ul>
-    </nav>
-</header>
-
-<section>
-    <h2>New Order</h2>
-
-    <form th:action="@{/orders}" th:object="${order}" method="post">
-        <label>Date:
-            <input type="date" th:field="*{orderDate}" required/>
-        </label><br/><br/>
-
-        <label>Total Price:
-            <input type="number" step="0.01" th:field="*{totalPrice}" required/>
-        </label><br/><br/>
-
-        <label>Status:
-            <input type="text" th:field="*{status}" required/>
-        </label><br/><br/>
-
-        <label>Promo Code:
-            <input type="text" th:field="*{promocode}"/>
-        </label><br/><br/>
-
-        <button type="submit">Save Order</button>
-    </form>
-
-    <br><br>
-
-    <div>
-        <a th:href="@{/reviews}" class="button-link">Go to Reviews</a> |
-        <a th:href="@{/cancelled_orders}" class="button-link">Cancel Order</a>
-    </div>
-</section>
-
-<footer>
-    <div class="footer-logo">
-        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
-    </div>
-    <div class="footer-data">
-        <div class="links">
-            <h4>Links</h4>
-            <ul>
-                <li><a th:href="@{/aboutUs}">About us</a></li>
-                <li><a th:href="@{/contact}">Contacts</a></li>
-            </ul>
-        </div>
-        <div class="social">
-            <h4>Social</h4>
-            <ul>
-                <li><a href="https://facebook.com">Facebook</a></li>
-                <li><a href="https://instagram.com">Instagram</a></li>
-                <li><a href="https://linkedin.com">LinkedIn</a></li>
-            </ul>
-        </div>
-        <div class="policies">
-            <h4>Policies</h4>
-            <ul>
-                <li><a th:href="@{/termsAndConditions}">Terms and conditions</a></li>
-                <li><a th:href="@{/privacyPolicy}">Privacy Policy</a></li>
-                <li><a th:href="@{/cookiePolicy}">Cookie Policy</a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
+</form>
 
 </body>
 </html>

@@ -55,7 +55,7 @@ public class PromocodeController {
 
     @PostMapping
     public String save(@ModelAttribute("promocode") PromocodeDTO promocodeDTO, @RequestParam("restaurantID") Integer restaurantId) {
-        promocodeService.saveDTO(promocodeDTO, restaurantId, Optional.ofNullable(promocodeDTO.getId() != null ? promocodeDTO.getId() : null));
+        promocodeService.saveDTO(promocodeDTO, restaurantId, promocodeDTO.getId());
 
         return "redirect:/promocodes";
     }
