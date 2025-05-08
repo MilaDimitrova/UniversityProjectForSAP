@@ -3,8 +3,6 @@ package com.example.garbandgo.entities;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -13,53 +11,57 @@ public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant")
+    @JoinColumn(name = "restaurant", referencedColumnName = "id")
     private Restaurant restaurant;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "user", referencedColumnName = "id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address")
+    @JoinColumn(name = "address", referencedColumnName = "id")
     private Address address;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "promocode")
+    @JoinColumn(name = "promocode", referencedColumnName = "id")
     private Promocode promocode;
 
+    @Column(name = "additional_discount")
     private Double additionalDiscount;
+
+    @Column(name = "total_price")
     private Double totalPrice;
+
+    @Column(name = "ordered_at")
     private LocalDateTime orderDate;
+
+    @Column(name = "due_to_delivery")
     private LocalDateTime dueToDelivery;
+
+    @Column(name = "packed_at")
     private LocalDateTime packedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "packed_by")
+    @JoinColumn(name = "packed_by", referencedColumnName = "id")
     private User packedBy;
 
+    @Column(name = "delivered_at")
     private LocalDateTime deliveredAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "delivered_by")
+    @JoinColumn(name = "delivered_by", referencedColumnName = "id")
     private User deliveredBy;
 
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cancelled_id", referencedColumnName = "id")
     private CancelledOrder cancelledOrder;
 
+    @Column(name = "cancelled")
     private byte[] cancelled;
-
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "ordered_at", nullable = false)
-    private LocalDateTime orderedAt;
-
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderProduct> items = new ArrayList<>();
 
 
     public Integer getId() {
@@ -198,32 +200,6 @@ public class Order implements Serializable {
     }
 
     public boolean isCancelled() {
-        return cancelled != null && cancelled.length > 0 && cancelled[0] == 1;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public Order setStatus(String status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getOrderedAt() {
-        return orderedAt;
-    }
-
-    public Order setOrderedAt(LocalDateTime orderedAt) {
-        this.orderedAt = orderedAt;
-        return this;
-    }
-
-    public List<OrderProduct> getItems() {
-        return items;
-    }
-
-    public void setItems(List<OrderProduct> items) {
-        this.items = items;
+        return cancelled != null;
     }
 }

@@ -8,9 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 @Controller
@@ -20,12 +17,10 @@ public class CancelledOrderController {
     @Autowired
     private CancelledOrderService cancelledOrderService;
 
+    // GET /cancelled_orders/index - Show all cancelled orders
     @GetMapping("/index")
     public String index(Model model) {
-        LocalDateTime startOfDay = LocalDate.now().atStartOfDay();
-        LocalDateTime endOfDay = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
-
-        List<CancelledOrder> cancelledOrders = cancelledOrderService.getCancelledOrdersByDateRange(startOfDay, endOfDay);
+        List<CancelledOrder> cancelledOrders = cancelledOrderService.getAllCancelledOrders();
         model.addAttribute("cancelledOrders", cancelledOrders);
         return "Orders/cancelled_orders";
     }
@@ -35,32 +30,42 @@ public class CancelledOrderController {
         return "redirect:/cancelled_orders/index";
     }
 
+    // GET /cancelled_orders/{id} - Retrieve a specific cancelled order by ID
     @GetMapping("/{id}")
     public ResponseEntity<CancelledOrder> show(@PathVariable Integer id) {
         CancelledOrder order = cancelledOrderService.getCancelledOrderById(id);
-        return order != null ?
-                ResponseEntity.ok(order) :
-                ResponseEntity.notFound().build();
+        if (order != null) {
+            return ResponseEntity.ok(order);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
+    // POST /cancelled_orders - Create a new cancelled order
     @PostMapping
     public CancelledOrder add(@RequestBody CancelledOrder newOrder) {
         return cancelledOrderService.saveCancelledOrder(newOrder);
     }
 
+    // PUT /cancelled_orders/{id} - Update existing cancelled order
     @PutMapping("/{id}")
     public ResponseEntity<CancelledOrder> update(@PathVariable Integer id, @RequestBody CancelledOrder updatedOrder) {
         CancelledOrder order = cancelledOrderService.updateCancelledOrder(id, updatedOrder);
-        return order != null ?
-                ResponseEntity.ok(order) :
-                ResponseEntity.notFound().build();
+        if (order != null) {
+            return ResponseEntity.ok(order);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
+    // DELETE /cancelled_orders/{id} - Delete a cancelled order
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         boolean deleted = cancelledOrderService.deleteCancelledOrder(id);
-        return deleted ?
-                ResponseEntity.noContent().build() :
-                ResponseEntity.notFound().build();
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

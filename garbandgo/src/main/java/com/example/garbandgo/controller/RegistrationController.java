@@ -1,5 +1,6 @@
 package com.example.garbandgo.controller;
 
+import com.example.garbandgo.entities.Role;
 import com.example.garbandgo.entities.User;
 import com.example.garbandgo.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,10 @@ public class RegistrationController {
     @PostMapping
     public String processRegistration(@ModelAttribute("user") User user, Model model) {
         try {
-            userService.registerUser(user, "USER");
+            Role userRole = new Role();
+            userRole.setId(2);
+            user.setRole(userRole);
+            userService.registerUser(user);
             return "redirect:/login";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());

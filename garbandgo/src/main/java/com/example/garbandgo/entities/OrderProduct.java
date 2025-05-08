@@ -24,7 +24,7 @@ public class OrderProduct implements Serializable {
     @JoinColumn(name = "product", nullable = false)
     private Product product;
 
-    @Column(name = "qunatity", nullable = false)
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
     @Column(name = "price", nullable = false)

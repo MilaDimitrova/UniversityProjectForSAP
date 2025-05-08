@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/profilePage.css}">
     <title>Login</title>
 </head>
@@ -24,18 +23,16 @@
 <div class="login">
     <form th:action="@{/login}" method="post">
         <h2>Log In</h2>
-
-        <label for="username">Email:</label><br>
-        <input type="text" id="username" name="username" placeholder="Enter your email"><br><br>
-
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" placeholder="Enter your username"><br><br>
 
         <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required /><br><br>
+        <input type="password" id="password" name="password"><br><br>
 
         <button type="submit">Log in</button>
 
         <div th:if="${param.error}">
-            <p style="color: red;">Invalid email or password. Please try again.</p>
+            <p style="color: red;">Invalid username or password. Please try again.</p>
         </div>
 
         <a th:href="@{/forgot-password}"><p>Forgotten password?</p></a>

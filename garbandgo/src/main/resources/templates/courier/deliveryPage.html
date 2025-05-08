@@ -17,9 +17,7 @@
             <li><a th:href="@{/restaurants/}">Our restaurants</a></li>
             <li><a th:href="@{/aboutUs}">About us</a></li>
             <li><a th:href="@{/contact}">Contacts</a></li>
-            <th:block th:replace="fragments/header :: header"></th:block>
-
-
+            <li><a th:href="@{/profile}">Profile</a></li>
         </ul>
     </nav>
 </header>
@@ -70,9 +68,6 @@
             <section id="orders" class="dashboard-section" style="display: none;">
                 <h1>Orders</h1>
                 <p>Your active and past orders will appear here.</p>
-                <form th:action="@{/orders/index}" method ="get">
-                    <button type="order">Go to orders</button>
-                </form>
             </section>
 
             <section id="delivery" class="dashboard-section" style="display: none;">

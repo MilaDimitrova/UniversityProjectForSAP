@@ -7,11 +7,6 @@
 </head>
 <body>
 <h1>Your Shopping Cart</h1>
-
-<!-- Feedback -->
-<div id="promoMessage" style="font-weight: bold; margin-bottom: 10px;"></div>
-
-<!-- Cart Table -->
 <table border="1">
     <thead>
     <tr>
@@ -27,7 +22,8 @@
         <td th:text="${item.product.name}">Product Name</td>
         <td th:text="${item.quantity}">Quantity</td>
         <td th:text="${item.product.price}">Price</td>
-        <td th:text="${#numbers.formatDecimal(item.product.price * item.quantity, 1, 'POINT', 2, 'NONE')}">Subtotal</td>
+        <!-- За по-опростено тестване, използваме директно умножение -->
+        <td th:text="${item.product.price * item.quantity}">Subtotal</td>
         <td>
             <form th:action="@{'/cart/remove/' + ${item.product.id}}" method="post">
                 <button type="submit">Remove</button>
@@ -36,87 +32,6 @@
     </tr>
     </tbody>
 </table>
-
-<!-- Promo Code -->
-<div style="margin-top: 20px; max-width: 400px;">
-    <label for="promoCode">Promo Code:</label>
-    <input type="text" id="promoCode" name="promoCode" placeholder="Enter code"
-           style="padding: 5px; border-radius: 5px; border: 1px solid #ccc;" />
-    <button type="button" id="applyPromoBtn"
-            style="margin-left: 10px; background-color: #f56700; color: white; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer;">
-        Apply
-    </button>
-    <div id="promoFeedback" style="margin-top: 5px;"></div>
-</div>
-
-<!-- Summary -->
-<div style="margin-top: 20px; max-width: 400px;">
-    <p><strong>Total before discount:</strong> <span id="totalBefore" th:text="${totalPrice}">0.00</span> BGN</p>
-    <p id="discountLine" style="display: none;">
-        <strong>Discount:</strong> -<span id="discountValue">0.00</span> BGN
-    </p>
-    <p id="totalAfterLine" style="display: none;">
-        <strong>Total after discount:</strong> <span id="totalAfter">0.00</span> BGN
-    </p>
-</div>
-
-<!-- Checkout -->
-<form th:action="@{/cart/checkout}" method="post" style="margin-top: 15px;">
-    <input type="hidden" name="promoCode" id="hiddenPromoCode" />
-    <button type="submit"
-            style="background-color: #f0a500; color: white; padding: 10px 20px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer;">
-        Confirm Order
-    </button>
-</form>
-
-<!-- Continue shopping -->
-<div style="margin-top: 20px;">
-    <a href="/products/shop" style="text-decoration: none; color: #333; font-weight: bold;">⬅ Continue Shopping</a>
-</div>
-
-<!-- JavaScript -->
-<script>
-    document.getElementById("applyPromoBtn").addEventListener("click", function () {
-        const code = document.getElementById("promoCode").value.trim();
-        const message = document.getElementById("promoMessage");
-        const totalBefore = parseFloat(document.getElementById("totalBefore").innerText);
-
-        if (!code) {
-            message.style.color = "red";
-            message.textContent = "Please enter a promo code.";
-            return;
-        }
-
-        fetch(`/api/promocode/validate?code=${encodeURIComponent(code)}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.valid) {
-                    const discount = (data.discount / 100) * totalBefore;
-                    const totalAfter = totalBefore - discount;
-
-                    document.getElementById("discountValue").innerText = discount.toFixed(2);
-                    document.getElementById("totalAfter").innerText = totalAfter.toFixed(2);
-                    document.getElementById("discountLine").style.display = "block";
-                    document.getElementById("totalAfterLine").style.display = "block";
-                    document.getElementById("hiddenPromoCode").value = code;
-
-                    message.style.color = "green";
-                    message.textContent = `✅ Promo code applied: ${data.discount}% off`;
-                } else {
-                    document.getElementById("discountLine").style.display = "none";
-                    document.getElementById("totalAfterLine").style.display = "none";
-                    document.getElementById("hiddenPromoCode").value = "";
-
-                    message.style.color = "red";
-                    message.textContent = "❌ Invalid or expired promo code.";
-                }
-            })
-            .catch(() => {
-                message.style.color = "red";
-                message.textContent = "Error validating promo code.";
-            });
-    });
-</script>
-
+<a href="/products/shop">Continue Shopping</a>
 </body>
 </html>

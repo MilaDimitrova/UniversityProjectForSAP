@@ -25,12 +25,12 @@ public class ShoppingCart {
         items.removeIf(item -> item.getProduct().getId().equals(productId));
     }
 
-
+    // Изчистване на количката
     public void clear() {
         items.clear();
     }
 
-
+    // Обща сума на количката
     public double getTotalPrice() {
         return items.stream()
                 .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())

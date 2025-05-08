@@ -16,7 +16,7 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-
+    // GET /roles/register – показва формата за регистрация (пример: регистрация на потребител с роля)
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         User user = new User();
@@ -25,20 +25,20 @@ public class RoleController {
         return "users/register";
     }
 
-
+    // GET /roles – може да върне някакъв index/начална страница за ролите
     @GetMapping
     public String index() {
         return "index";
     }
 
-
+    // GET /roles/list – показва списък с роли
     @GetMapping("/list")
     public String listRoles(Model model) {
         model.addAttribute("role", roleService.getRolesRepository());
         return "role";
     }
 
-
+    // POST /roles/add – обработва формата за добавяне на нова роля
     @PostMapping("/add")
     public String addRoles(@ModelAttribute Role role) {
         roleService.saveRoles(role);
