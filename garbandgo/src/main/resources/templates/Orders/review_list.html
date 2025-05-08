@@ -115,7 +115,6 @@
     </nav>
 </header>
 
-
 <a href="/orders" class="back-button">⬅ Back to Orders</a>
 
 <section>
@@ -123,15 +122,13 @@
 
     <div class="review-container">
         <div th:each="review : ${reviews}" class="review-card">
-            <h3 th:text="'Order #' + ${review.orderId}">Order ID</h3>
-
+            <h3 th:text="'Order #' + ${review.orderId.id}">Order ID</h3>
 
             <p th:if="${review.review != null}" class="rating-stars">
                 <span th:each="i : ${#numbers.sequence(1, 5)}"
                       th:text="${i <= review.review ? '★' : '☆'}">★</span>
             </p>
             <p th:unless="${review.review != null}" class="rating-stars">No rating</p>
-
 
             <p th:text="${review.reviewText != null ? review.reviewText : 'No comment'}">This place is awesome!</p>
 
