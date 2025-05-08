@@ -1,5 +1,3 @@
-/* Заглавие */
-
 @import url("mainCSS.css");
 main h1 {
     font-family: 'Original Surfer', sans-serif;
@@ -8,7 +6,6 @@ main h1 {
     color: black;
 }
 
-/* Секция с ресторанти */
 section {
     padding: 20px;
     background-color: #E6AF2E;
@@ -59,8 +56,6 @@ section button {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-
-/* Абонаментна форма */
 .subscription {
     margin: 20px auto;
     padding: 40px;
@@ -112,7 +107,7 @@ section button {
     transform: scale(0.95);
 }
 
-/* Footer */
+
 footer {
     background: #333;
     color: white;

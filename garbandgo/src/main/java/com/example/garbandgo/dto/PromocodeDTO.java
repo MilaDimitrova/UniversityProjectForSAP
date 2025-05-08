@@ -1,12 +1,8 @@
 package com.example.garbandgo.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class PromocodeDTO implements Serializable {

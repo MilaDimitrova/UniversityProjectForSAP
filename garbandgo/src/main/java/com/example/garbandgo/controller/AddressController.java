@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@RequestMapping("/addresses")  // Updated base path to make it unique
+@RequestMapping("/addresses")
 public class AddressController {
 
     private final AddressService addressService;
@@ -19,18 +19,18 @@ public class AddressController {
 
     @GetMapping
     public String index() {
-        return "index";  // Path: /addresses
+        return "index";
     }
 
-    @GetMapping("/list")  // Updated mapping for listing addresses
+    @GetMapping("/list")
     public String listAddress(Model model) {
         model.addAttribute("address", addressService.getAddressRepository());
-        return "address";  // Path: /addresses/list
+        return "address";
     }
 
-    @PostMapping("/add")  // Updated mapping for adding an address
+    @PostMapping("/add")
     public String addAddress(@ModelAttribute Address address) {
         addressService.saveAddress(address);
-        return "redirect:/addresses/list";  // Redirects to /addresses/list
+        return "redirect:/addresses/list";
     }
 }

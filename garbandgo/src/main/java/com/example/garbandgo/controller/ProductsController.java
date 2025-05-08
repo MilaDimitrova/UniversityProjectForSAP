@@ -30,7 +30,7 @@ public class ProductsController {
         this.productCategoryService = productCategoryService;
     }
 
-    // Управление на продукти за конкретен ресторант
+
     @GetMapping("/manage/{restaurantId}")
     public String manageProducts(@PathVariable Integer restaurantId, Model model) {
         List<Product> products = productsService.findProductsByRestaurantId(restaurantId);
@@ -123,6 +123,6 @@ public class ProductsController {
         model.addAttribute("restaurant", restaurant);
         model.addAttribute("products", products);
 
-        return "products/shopByRestaurant"; // създай отделен Thymeleaf шаблон ако искаш за конкретен ресторант
+        return "products/shopByRestaurant";
     }
 }
