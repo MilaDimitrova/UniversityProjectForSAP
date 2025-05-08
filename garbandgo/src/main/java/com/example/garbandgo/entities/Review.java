@@ -1,7 +1,6 @@
 package com.example.garbandgo.entities;
 
 import jakarta.persistence.*;
-import com.example.garbandgo.entities.Order;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -11,21 +10,21 @@ import java.time.Instant;
 })
 public class Review implements Serializable {
     private static final long serialVersionUID = -5733929068960573848L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Integer id;
 
     private String reviewText;
 
     private Integer review;
 
-    private Order orderId;
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order orderId;  // Много към едно връзка с Order (не променяме Order ентити)
 
     private Instant dateCreated;
 
-    @Convert(disableConversion = true)
-    @Column(name = "date_created", nullable = false)
     public Instant getDateCreated() {
         return dateCreated;
     }
@@ -34,7 +33,6 @@ public class Review implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    @Column(name = "order_id", nullable = false)
     public Order getOrderId() {
         return orderId;
     }
@@ -43,7 +41,6 @@ public class Review implements Serializable {
         this.orderId = orderId;
     }
 
-    @Column(name = "review", nullable = false)
     public Integer getReview() {
         return review;
     }
@@ -52,8 +49,6 @@ public class Review implements Serializable {
         this.review = review;
     }
 
-    @Lob
-    @Column(name = "review_text", nullable = false)
     public String getReviewText() {
         return reviewText;
     }

@@ -1,7 +1,9 @@
 package com.example.garbandgo.controller;
 
 import com.example.garbandgo.entities.Review;
+import com.example.garbandgo.entities.Order;
 import com.example.garbandgo.service.ReviewService;
+import com.example.garbandgo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,16 +19,21 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
+    @Autowired
+    private OrderService orderService;
+
     @GetMapping
     public String getAllReviews(Model model) {
         List<Review> reviews = reviewService.getAllReviews();
         model.addAttribute("reviews", reviews);
-        model.addAttribute("review", new Review()); // ➕ Добавено
+        model.addAttribute("review", new Review());
         return "Orders/review_list";
     }
 
     @GetMapping("/create")
     public String showCreateReviewForm(Model model) {
+        List<Order> orders = orderService.getAllOrders();
+        model.addAttribute("orders", orders);
         model.addAttribute("review", new Review());
         return "Orders/review_form";
     }
@@ -41,8 +48,14 @@ public class ReviewController {
     @GetMapping("/edit/{id}")
     public String showEditReviewForm(@PathVariable Integer id, Model model) {
         Review review = reviewService.getReviewById(id);
-        model.addAttribute("review", review);
-        return "Orders/review_form";
+        if (review != null) {
+            List<Order> orders = orderService.getAllOrders();
+            model.addAttribute("orders", orders);
+            model.addAttribute("review", review);
+            return "Orders/review_form";
+        } else {
+            return "redirect:/reviews";
+        }
     }
 
     @PostMapping("/edit/{id}")
