@@ -166,7 +166,6 @@
         </tbody>
     </table>
 </section>
-
 <footer>
     <div class="footer-logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
@@ -176,9 +175,7 @@
             <h4>Links</h4>
             <ul>
                 <li><a th:href="@{/aboutUs}">About us</a></li>
-                <li><a th:href="@{/contact}">Contact us</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">FAQs</a></li>
+
             </ul>
         </div>
         <div class="social">
@@ -192,9 +189,10 @@
         <div class="policies">
             <h4>Policies</h4>
             <ul>
-                <li><a href="#">Terms and Conditions</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Cookie Policy</a></li>
+                <li><a th:href="@{/termsAndConditions}">Terms and conditions</a></li>
+                <li><a th:href="@{/privacyPolicy}">Privacy Policy</a></li>
+                <li><a th:href="@{/cookiePolicy}">Cookie Policy</a></li>
+
             </ul>
         </div>
     </div>

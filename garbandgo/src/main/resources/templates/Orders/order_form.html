@@ -108,8 +108,38 @@
     <div class="form-buttons">
         <a th:href="@{/orders/index}" class="button back-button">⬅ Back</a>
         <button type="submit">💾 Save</button>
+
     </div>
 </form>
-
+<footer>
+    <div class="footer-logo">
+        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
+    </div>
+    <div class="footer-data">
+        <div class="links">
+            <h4>Links</h4>
+            <ul>
+                <li><a th:href="@{/aboutUs}">About us</a></li>
+                <li><a th:href="@{/contact}">Contacts</a></li>
+            </ul>
+        </div>
+        <div class="social">
+            <h4>Social</h4>
+            <ul>
+                <li><a href="https://facebook.com">Facebook</a></li>
+                <li><a href="https://instagram.com">Instagram</a></li>
+                <li><a href="https://linkedin.com">LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="policies">
+            <h4>Policies</h4>
+            <ul>
+                <li><a th:href="@{/termsAndConditions}">Terms and conditions</a></li>
+                <li><a th:href="@{/privacyPolicy}">Privacy Policy</a></li>
+                <li><a th:href="@{/cookiePolicy}">Cookie Policy</a></li>
+            </ul>
+       </div>
+  </div>
+</footer>
 </body>
 </html>

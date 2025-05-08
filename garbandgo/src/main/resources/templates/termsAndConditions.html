@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
+    <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/mainCSS.css}">
-    <title>Grab and go - Restaurants</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions | Grab & Go</title>
 </head>
 <body>
+
 <header>
     <div class="logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
@@ -16,22 +18,42 @@
             <li><a href="/restaurants/">Our restaurants</a></li>
             <li><a href="/aboutUs">About us</a></li>
             <li><a href="/contact">Contacts</a></li>
-            <th:block th:replace="fragments/header :: header"></th:block>
-
+            <li><a href="/profile">Profile</a></li>
         </ul>
     </nav>
 </header>
+
 <section>
-    <h2>Our restaurants</h2>
+    <h1>Terms and Conditions</h1>
+    <p>Welcome to Grab & Go! Before using our services, please read the following terms carefully.</p>
+
+    <h2>1. Introduction</h2>
+    <p>These Terms and Conditions govern your use of Grab & Go. By accessing our website, you agree to abide by these terms.</p>
+
+    <h2>2. User Responsibilities</h2>
     <ul>
-        <li th:each="restaurant : ${restaurants}">
-            <h3>
-                <a th:text="${restaurant.restaurant}" th:href="@{/restaurants/{id}(id=${restaurant.id})}"></a>
-            </h3>
-        <img th:src="${restaurant.logo}" alt="Restaurant">
-        </li>
+        <li>You must provide accurate information when registering an account.</li>
+        <li>You must not use our services for unlawful purposes.</li>
+        <li>Misuse, hacking, or fraudulent activities will result in termination of access.</li>
     </ul>
+
+    <h2>3. Orders and Payments</h2>
+    <ul>
+        <li>All orders placed are subject to availability.</li>
+        <li>Payments must be made securely using our provided methods.</li>
+        <li>Refunds will be handled according to our refund policy.</li>
+    </ul>
+
+    <h2>4. Privacy Policy</h2>
+    <p>We collect and store customer data responsibly. To understand how we protect your privacy, please refer to our <a th:href="@{/privacyPolicy}">Privacy Policy</a>.</p>
+
+    <h2>5. Changes to Terms</h2>
+    <p>We reserve the right to modify these terms at any time. Continued use of the website signifies acceptance of updates.</p>
+
+    <h2>6. Contact Information</h2>
+    <p>If you have any questions regarding these Terms and Conditions, please <a href="/contact">contact us</a>.</p>
 </section>
+
 <footer>
     <div class="footer-logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
@@ -62,5 +84,6 @@
         </div>
     </div>
 </footer>
+
 </body>
 </html>

@@ -130,7 +130,7 @@
                                 <form th:action="@{'/orders/cancel/' + ${order.id}}" method="post">
                                     <button type="submit" class="button cancel"
                                             th:disabled="${order.status == 'DELIVERED'}">❌ Cancel</button>
-                                </form>
+                              </form>
 
                                 <form th:action="@{'/orders/deliver/' + ${order.id}}" method="post">
                                     <button type="submit" class="button"
@@ -142,6 +142,7 @@
                     </tbody>
                 </table>
             </section>
+
         </div>
     </div>
 </main>

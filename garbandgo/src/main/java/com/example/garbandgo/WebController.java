@@ -31,5 +31,16 @@ public class WebController {
         return "rootPage";
     }
 
-
+    @GetMapping("/termsAndConditions")
+    public String termsPage() {
+        return "termsAndConditions";
+    }
+    @GetMapping("/cookiePolicy")
+    public String cookiesPage() {
+        return "cookiePolicy";
+    }
+    @GetMapping("/privacyPolicy")
+    public String privacyPage() {
+        return "privacyPolicy";
+    }
 }
