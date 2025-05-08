@@ -2,56 +2,71 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
-    <title>Grab and go - Orders</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grab and Go - Orders</title>
     <style>
+        html, body { height: 100%; margin: 0; padding: 0; }
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+        }
+        main { flex: 1; }
+        .content { padding: 30px; }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #333;
+        }
         .button {
-            padding: 6px 12px;
+            padding: 8px 14px;
             margin: 2px;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
             font-size: 14px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
-
-        .button:hover {
-            background-color: #45a049;
+        .button:hover { background-color: #3e8e41; }
+        .button.cancel { background-color: #e53935; }
+        .button.cancel:hover { background-color: #c62828; }
+        .button[disabled] {
+            background-color: #bdbdbd !important;
+            cursor: not-allowed;
+            box-shadow: none;
         }
-
-        .button.cancel {
-            background-color: #f44336;
+        .top-button {
+            margin-bottom: 20px;
+            text-align: right;
         }
-
-        .button.cancel:hover {
-            background-color: #d32f2f;
-        }
-
-        .top-buttons {
-            margin-top: 15px;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-
         th, td {
-            padding: 12px;
+            padding: 14px;
             text-align: center;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #e0e0e0;
         }
-
         th {
-            background-color: #f2f2f2;
+            background-color: #f0f0f0;
+            font-weight: 600;
+            color: #333;
         }
-
-        h2 {
-            margin-bottom: 10px;
-        }
+        td { color: #444; }
+        tr:last-child td { border-bottom: none; }
+        .dashboard-section { margin-top: 40px; }
     </style>
 </head>
 <body>
@@ -62,83 +77,76 @@
     </div>
     <nav>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/restaurants">Our restaurants</a></li>
-            <li><a href="/aboutUs">About us</a></li>
-            <li><a href="/contact">Contacts</a></li>
-            <li><a href="/profile">Profile</a></li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/restaurants/}">Our restaurants</a></li>
+            <li><a th:href="@{/aboutUs}">About us</a></li>
+            <li><a th:href="@{/contact}">Contacts</a></li>
+            <th:block th:replace="fragments/header :: header"></th:block>
         </ul>
     </nav>
 </header>
 
-<section>
-    <h2>All Orders</h2>
+<main>
+    <div class="content">
+        <div class="main-content">
+            <section id="orders" class="dashboard-section">
+                <div class="top-button">
+                    <a th:href="@{/cancelled_orders}" class="button cancel">❌ View Cancelled Orders</a>
+                </div>
 
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Date</th>
-            <th>Price</th>
-            <th>Status</th>
-            <th>Promo code</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${orders == null or #lists.isEmpty(orders)}">
-            <td colspan="6">No orders found.</td>
-        </tr>
-        <tr th:each="order : ${orders}">
-            <td th:text="${order.id}">1</td>
-            <td th:text="${order.orderDate}">2025-04-21</td>
-            <td th:text="${order.totalPrice}">100.00</td>
-            <td th:text="${order.status}">Confirmed</td>
-            <td th:text="${order.promocode}">SPRING2025</td>
-            <td>
-                <a th:href="@{/cancelled_orders}" class="button cancel">❌ Cancel Order</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                <h2>All Orders</h2>
 
-    <div class="top-buttons">
-        <a th:href="@{/order_products}" class="button">➕ Add New Order</a>
-    </div>
-</section>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Products</th>
+                        <th>Date</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${orders == null or #lists.isEmpty(orders)}">
+                        <td colspan="6">No orders found.</td>
+                    </tr>
+                    <tr th:each="order : ${orders}" th:if="${order.status != 'CANCELLED'}">
+                        <td th:text="${order.id}">1</td>
+                        <td>
+                            <a th:href="@{'/order_products/index?orderId=' + ${order.id}}" class="button">🛒 View</a>
+                        </td>
+                        <td th:text="${order.orderDate != null ? #temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm') : 'N/A'}">2025-04-21</td>
+                        <td th:text="${order.totalPrice}">100.00</td>
+                        <td>
+                            <span th:switch="${order.status}">
+                                <span th:case="'DELIVERED'" style="color: green;">🟢 Delivered</span>
+                                <span th:case="'PENDING'" style="color: orange;">🟡 Pending</span>
+                                <span th:case="*">⚪ Unknown</span>
+                            </span>
+                        </td>
+                        <td>
+                            <div style="display:inline-flex; flex-wrap: wrap; gap: 4px;">
+                                <form th:action="@{'/orders/cancel/' + ${order.id}}" method="post">
+                                    <button type="submit" class="button cancel"
+                                            th:disabled="${order.status == 'DELIVERED'}">❌ Cancel</button>
+                              </form>
 
-<footer>
-    <div class="footer-logo">
-        <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
-    </div>
-    <div class="footer-data">
-        <div class="links">
-            <h4>Links</h4>
-            <ul>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Frequently asked questions</a></li>
-            </ul>
-        </div>
-        <div class="social">
-            <h4>Social</h4>
-            <ul>
-                <li><a href="facebook.com">Facebook</a></li>
-                <li><a href="instagram.com">Instagram</a></li>
-                <li><a href="linkedin.com">LinkedIn</a></li>
-            </ul>
-        </div>
-        <div class="policies">
-            <h4>Policies</h4>
-            <ul>
-                <li><a href="#">Terms and conditions</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Cookie Policy</a></li>
-            </ul>
+                                <form th:action="@{'/orders/deliver/' + ${order.id}}" method="post">
+                                    <button type="submit" class="button"
+                                            th:disabled="${order.status == 'DELIVERED'}">✅ Delivered</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+
         </div>
     </div>
-</footer>
+</main>
 
+<script th:src="@{/js/dashboard.js}"></script>
 </body>
 </html>

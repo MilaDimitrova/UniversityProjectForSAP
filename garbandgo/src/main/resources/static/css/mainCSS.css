@@ -91,7 +91,6 @@ section a,  section button, section input[type=submit] {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Footer */
 footer {
     background: #333;
     color: white;
@@ -145,4 +144,8 @@ section a, section form input[type=submit], section button {
 section form {
     display: inline-block;
     margin: 0;
+}
+
+li {
+    list-style: none !important;
 }

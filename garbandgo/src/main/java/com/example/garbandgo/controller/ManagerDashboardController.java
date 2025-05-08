@@ -60,7 +60,15 @@ public class ManagerDashboardController {
                              @RequestParam String email,
                              @RequestParam String password,
                              @RequestParam String phone) {
-        userService.registerCourier(username, email, password, phone);
-        return "redirect:/manager/managerPage?courierAdded";
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPhone(phone);
+
+        userService.registerUser(user, "COURIER");
+
+        return "redirect:/manager/rootPage?courierAdded";
     }
+
 }

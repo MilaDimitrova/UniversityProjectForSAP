@@ -2,66 +2,144 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/ourRestaurants.css}">
-    <title>Grab and go - Cancelled Orders</title>
+    <title>Grab and Go - Cancelled Orders</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo span {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 500;
+        }
+
         .button-back {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            padding: 8px 14px;
+            display: inline-block;
+            margin: 20px 40px;
+            padding: 10px 18px;
             background-color: #4CAF50;
             color: white;
-            border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.3s ease;
         }
 
         .button-back:hover {
-            background-color: #45a049;
-        }
-
-        .center-rating {
-            text-align: center;
-            margin-top: 100px;
-        }
-
-        .rating-button {
-            padding: 10px 20px;
-            background-color: #2196F3;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 16px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .rating-button:hover {
-            background-color: #1976D2;
+            background-color: #388e3c;
         }
 
         h2 {
             text-align: center;
-            margin-top: 80px;
-            margin-bottom: 40px;
+            margin: 40px 0 20px;
+            color: #333;
+            font-size: 28px;
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto 60px;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            color: #333;
+            font-weight: 600;
+        }
+
+        td {
+            color: #555;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        footer {
+            margin-top: auto;
+            padding-top: 30px;
+        }
+
+        .footer-data {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-data > div {
+            flex: 1;
+            min-width: 180px;
+            margin: 10px 0;
+        }
+
+        .footer-data h4 {
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .footer-data ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-data ul li a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-data ul li a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
+
 <header>
     <div class="logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
     </div>
     <nav>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/restaurants">Our restaurants</a></li>
-            <li><a href="/aboutUs">About us</a></li>
-            <li><a href="/contact">Contacts</a></li>
-            <li><a href="/profile">Profile</a></li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/restaurants}">Our restaurants</a></li>
+            <li><a th:href="@{/aboutUs}">About us</a></li>
+            <li><a th:href="@{/contact}">Contacts</a></li>
+            <th:block th:replace="fragments/header :: header"></th:block>
         </ul>
     </nav>
 </header>
@@ -69,14 +147,25 @@
 <a th:href="@{/orders}" class="button-back">⬅️ Back to Orders</a>
 
 <section>
-    <h2>Your order has been cancelled</h2>
+    <h2>Cancelled Orders Today</h2>
 
-    <div class="center-rating">
-        <p>Please rate us</p>
-        <a th:href="@{/reviews}" class="rating-button">⭐ Rate Order</a>
-    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Cancelled Date</th>
+            <th>Cancelled Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cancelledOrder : ${cancelledOrders}">
+            <td th:text="${cancelledOrder.order.id}">Order ID</td>
+            <td th:text="${#temporals.format(cancelledOrder.canceledAt, 'yyyy-MM-dd')}">Date</td>
+            <td th:text="${#temporals.format(cancelledOrder.canceledAt, 'HH:mm:ss')}">Time</td>
+        </tr>
+        </tbody>
+    </table>
 </section>
-
 <footer>
     <div class="footer-logo">
         <span>Grab</span><span class="highlight">&amp;</span><span class="highlightSecond">go</span>
@@ -85,10 +174,8 @@
         <div class="links">
             <h4>Links</h4>
             <ul>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Frequently asked questions</a></li>
+                <li><a th:href="@{/aboutUs}">About us</a></li>
+
             </ul>
         </div>
         <div class="social">
@@ -102,12 +189,14 @@
         <div class="policies">
             <h4>Policies</h4>
             <ul>
-                <li><a href="#">Terms and conditions</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Cookie Policy</a></li>
+                <li><a th:href="@{/termsAndConditions}">Terms and conditions</a></li>
+                <li><a th:href="@{/privacyPolicy}">Privacy Policy</a></li>
+                <li><a th:href="@{/cookiePolicy}">Cookie Policy</a></li>
+
             </ul>
         </div>
     </div>
 </footer>
+
 </body>
 </html>

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@RequestMapping("/countries")  // Unique base path
+@RequestMapping("/countries")
 public class CountryController {
     private final CountryService countryService;
 

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -18,7 +20,8 @@ public class OrderController {
 
     @GetMapping("/index")
     public String index(Model model) {
-        List<Order> orders = orderService.getAllOrders();
+        LocalDate today = LocalDate.now();
+        List<Order> orders = orderService.getOrdersCreatedAfter(today.atStartOfDay());
         model.addAttribute("orders", orders);
         return "Orders/order_list";
     }
@@ -31,11 +34,14 @@ public class OrderController {
     @GetMapping("/add")
     public String showForm(Model model) {
         model.addAttribute("order", new Order());
-        return "Orders/order_form"; // <-- поправено име на директорията
+        return "Orders/order_form";
     }
 
     @PostMapping
     public String save(@ModelAttribute("order") Order order) {
+        order.setOrderDate(LocalDateTime.now());
+        order.setCancelled(new byte[]{0});
+        order.setStatus("PENDING");
         orderService.saveOrder(order);
         return "redirect:/orders/index";
     }
@@ -45,7 +51,7 @@ public class OrderController {
         Order order = orderService.getOrderById(id).orElse(null);
         if (order != null) {
             model.addAttribute("order", order);
-            return "Orders/order_form"; // <-- поправено име на директорията
+            return "Orders/order_form";
         }
         return "redirect:/orders/index";
     }
@@ -53,6 +59,18 @@ public class OrderController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         orderService.deleteOrder(id);
+        return "redirect:/orders/index";
+    }
+
+    @PostMapping("/cancel/{id}")
+    public String cancelOrder(@PathVariable("id") int id) {
+        orderService.cancelOrder(id);
+        return "redirect:/orders/index";
+    }
+
+    @PostMapping("/deliver/{id}")
+    public String markAsDelivered(@PathVariable("id") int id) {
+        orderService.markAsDelivered(id); // вече без UserDetails
         return "redirect:/orders/index";
     }
 }
