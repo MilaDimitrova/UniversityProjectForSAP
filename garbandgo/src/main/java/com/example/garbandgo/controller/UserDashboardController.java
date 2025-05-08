@@ -27,7 +27,6 @@ public class UserDashboardController {
         this.orderService = orderService;
     }
 
-    // Показване на таблото за управление
     @GetMapping("/userPage")
     public String userDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         User user = userRepository.findByEmail(userDetails.getUsername())
@@ -40,7 +39,6 @@ public class UserDashboardController {
         return "user/userPage";
     }
 
-    // Преглед на конкретна поръчка с продукти
     @GetMapping("/order/{id}")
     public String viewUserOrder(@PathVariable("id") Integer id,
                                 @AuthenticationPrincipal UserDetails userDetails,
@@ -52,11 +50,11 @@ public class UserDashboardController {
         }
 
         model.addAttribute("order", order);
-        model.addAttribute("orderProducts", order.getItems()); // getItems() дава достъп до продуктите
-        return "user/order_view"; // очаква се да има order_view.html
+        model.addAttribute("orderProducts", order.getItems());
+        return "user/order_view";
     }
 
-    // Обновяване на потребителския профил
+
     @PostMapping("/update")
     public String updateProfile(@ModelAttribute("user") User updatedUser,
                                 @AuthenticationPrincipal UserDetails userDetails) {

@@ -127,13 +127,11 @@
                         </td>
                         <td>
                             <div style="display:inline-flex; flex-wrap: wrap; gap: 4px;">
-                                <!-- Cancel button (POST) -->
                                 <form th:action="@{'/orders/cancel/' + ${order.id}}" method="post">
                                     <button type="submit" class="button cancel"
                                             th:disabled="${order.status == 'DELIVERED'}">❌ Cancel</button>
                                 </form>
 
-                                <!-- Deliver button (POST) -->
                                 <form th:action="@{'/orders/deliver/' + ${order.id}}" method="post">
                                     <button type="submit" class="button"
                                             th:disabled="${order.status == 'DELIVERED'}">✅ Delivered</button>

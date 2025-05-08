@@ -18,7 +18,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    // Показва списъка с поръчки, направени от днес
     @GetMapping("/index")
     public String index(Model model) {
         LocalDate today = LocalDate.now();

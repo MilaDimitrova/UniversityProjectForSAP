@@ -53,7 +53,6 @@ public class OrderProductService {
         return false;
     }
 
-    // ✅ Нов метод: извлича артикулите от дадена поръчка
     public List<OrderProduct> getByOrderId(Integer orderId) {
         return orderProductRepository.findByOrderId(orderId);
     }

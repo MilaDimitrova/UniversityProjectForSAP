@@ -144,8 +144,8 @@ public class CartController {
         order.setOrderDate(now);
         order.setCancelled(new byte[]{0});
         order.setStatus("PENDING");
-        order.setTotalPrice(shoppingCart.getTotalPrice() - discount);
-        order.setAdditionalDiscount(discount);
+        order.setTotalPrice(shoppingCart.getTotalPrice());
+        order.setAdditionalDiscount(0.0);
         order.setDueToDelivery(now.plusMinutes(30));
         order.setPackedAt(now.plusMinutes(10));
         order.setDeliveredAt(now.plusMinutes(40));

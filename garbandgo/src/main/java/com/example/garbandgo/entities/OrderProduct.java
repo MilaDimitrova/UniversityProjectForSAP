@@ -30,7 +30,6 @@ public class OrderProduct implements Serializable {
     @Column(name = "price", nullable = false)
     private Double price;
 
-    // Getters и Setters
 
     public Integer getId() {
         return id;

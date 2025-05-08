@@ -22,7 +22,6 @@ public class CancelledOrderController {
 
     @GetMapping("/index")
     public String index(Model model) {
-        // Начало и край на текущия ден
         LocalDateTime startOfDay = LocalDate.now().atStartOfDay();
         LocalDateTime endOfDay = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
 

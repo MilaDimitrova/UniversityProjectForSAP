@@ -61,7 +61,6 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderProduct> items = new ArrayList<>();
 
-    // Getters and Setters
 
     public Integer getId() {
         return id;
