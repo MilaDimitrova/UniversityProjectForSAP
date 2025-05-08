@@ -26,12 +26,26 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+<<<<<<< Updated upstream
                         .requestMatchers("/css/**", "/images/**", "/", "/aboutUs", "/contact", "/register", "/login").permitAll()
                         .requestMatchers("/restaurants/**", "/products/shop/**", "/cart/**").hasAnyRole("USER", "ADMIN", "MANAGER", "REST_OWNER")
                         .requestMatchers("/products/manage/**", "/products/add/**", "/products/edit/**", "/products/delete/**").hasAnyRole("ADMIN", "MANAGER", "REST_OWNER")
                         .requestMatchers("/restaurants/edit/**", "/restaurants/delete/**").hasAnyRole("ADMIN", "MANAGER", "REST_OWNER")
                         .requestMatchers("/orders/**").hasRole("COURIER")
                         .requestMatchers("/promocodes/**").hasAnyRole("ADMIN", "MANAGER")
+=======
+                        .requestMatchers("/", "/aboutUs", "/contact", "/register", "/login", "/css/**", "/images/**", "/js/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/products/**", "/restaurants/**").permitAll()
+                        .requestMatchers("/user/**", "/cart/**", "/products/shop/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/cart/checkout").hasRole("USER")
+                        .requestMatchers("/manager/**","/orders/**", "/products/manage/**", "/products/add/**", "/products/edit/**", "/products/delete/**").hasRole("MANAGER")
+                        .requestMatchers("/rest_owner/**").hasRole("REST_OWNER")
+                        .requestMatchers("/admin/**", "/promocodes/**").hasRole("ADMIN")
+                        .requestMatchers("/products/manage/**", "/products/add/**", "/products/edit/**", "/products/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/restaurants/edit/**", "/restaurants/delete/**").hasAnyRole("ADMIN", "MANAGER", "REST_OWNER")
+                        .requestMatchers("/orders/**").hasRole("ADMIN")
+                        .requestMatchers("/courier/**", "/orders/**").hasRole("COURIER")
+>>>>>>> Stashed changes
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
